@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    /* Define your light mode colors */
+    --background-color: #c6b8a6;
+    --text-color: #000000;
+}
+
+[data-theme="dark"] {
+    /* Define your dark mode colors */
+    --background-color: #000000;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+}
+html, body { height: 100%; }
+body { margin: 0; }
+
