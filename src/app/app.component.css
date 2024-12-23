@@ -9,3 +9,17 @@
 h1 {
   font-weight: 300;
 }
+.typing {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cursor {
+  border-right: 2px solid black;
+  animation: blink-caret 0.5s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}

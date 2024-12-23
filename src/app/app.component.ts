@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../core/navbar/navbar.component';
 
@@ -9,8 +9,27 @@ import { NavbarComponent } from '../core/navbar/navbar.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'ashley';
+export class AppComponent implements OnInit {
+  title = 'Ashley Garcia';
+  displayedText = '';
+  private index = 0;
+  showCursor = true;
+
+  ngOnInit() {
+    this.type();
+  }
+
+  private type() {
+    if (this.index < this.title.length) {
+      this.displayedText += this.title.charAt(this.index);
+      this.index++;
+      setTimeout(() => this.type(), 100); // Adjust typing speed here
+    } else {
+      setTimeout(() => {
+        this.showCursor = false;
+      }, 500);
+    }
+  }
 
   constructor() {
     // Set the theme to light

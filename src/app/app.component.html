@@ -1,6 +1,9 @@
 <main class="main">
   <div class="content">
-    <h1>Ashley Garcia</h1>
+    <h1>
+      <span class="typing">{{ displayedText }}</span>
+      <span class="cursor" *ngIf="showCursor"></span>
+    </h1>
   </div>
 </main>
 
