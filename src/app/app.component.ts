@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => this.type(), 100); // Adjust typing speed here
     } else {
       setTimeout(() => {
-        this.showCursor = false;
+        this.showCursor = true;
       }, 500);
     }
   }
