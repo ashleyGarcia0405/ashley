@@ -4,11 +4,12 @@ import { NavbarComponent } from '../core/navbar/navbar.component';
 import { AboutComponent } from '../components/about/about.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { ProjectsComponent } from '../components/projects/projects.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, AboutComponent, NgxPageScrollCoreModule, ProjectsComponent],
+  imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
