@@ -1,11 +1,11 @@
 :root {
-    /* Define your light mode colors */
+    /* light mode colors */
     --background-color: #c6b8a6;
     --text-color: #000000;
 }
 
 [data-theme="dark"] {
-    /* Define your dark mode colors */
+    /* dark mode colors */
     --background-color: #000000;
     --text-color: #ffffff;
 }
@@ -15,7 +15,21 @@ body {
     color: var(--text-color);
     font-family: "Inter", sans-serif;
     font-weight: 300;
+    height: 100%;
 }
-html, body { height: 100%; }
+
+.scroll-container {
+    margin-top: 50px; /* To avoid overlapping with the fixed navbar */
+    background-color: var(--background-color); /* Set your uniform background */
+    overflow-y: auto;
+}
+  
+section {
+    /* padding: 100px; */
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+html, body { height: 100%; background-color: var(--background-color); }
 body { margin: 0; }
 

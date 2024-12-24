@@ -1,4 +1,4 @@
-<main class="main">
+<!-- <main class="main-app">
   <div class="content">
     <h1>
       <span class="typing">{{ displayedTitle }}</span>
@@ -11,6 +11,33 @@
   </div>
 </main>
 
-<app-navbar></app-navbar>
+<app-about></app-about>
 
+<app-navbar></app-navbar>
+<router-outlet /> -->
+
+<main class="main-app">
+  <div class="scroll-container">
+    <div class="content-intro">
+      <h1>
+        <span class="typing">{{ displayedTitle }}</span>
+        <span class="cursor" *ngIf="showCursor && !typingParagraph"></span>
+      </h1>
+      <p>
+        <span class="typing">{{ displayedParagraph }}</span>
+        <span class="cursor" *ngIf="showCursor && typingParagraph"></span>
+      </p>
+    </div>
+    <hr class="divider" />
+    <section id="about">
+      <app-about></app-about>
+    </section>
+    <hr class="divider" />
+    <section id="projects">
+      <app-projects></app-projects>
+    </section>
+  </div>
+</main>
+
+<app-navbar></app-navbar>
 <router-outlet />

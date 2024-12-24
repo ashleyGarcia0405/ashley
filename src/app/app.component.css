@@ -1,15 +1,25 @@
-.main {
+.main-app {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 75vh;
   text-align: center;
-  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--background-color);
 }
 
-.content {
-  display: inline-block;
+.content-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  height: 70vh;
+  box-sizing: border-box;
 }
+
 
 .typing {
   font-family: Inter, sans-serif;
@@ -35,7 +45,10 @@ h1 {
   font-weight: 400;
 }
 
-/* p {
-  font-size: 1rem;
-  margin-top: 0;
-} */
+
+.divider {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 20px auto;
+  width: 75%;
+}
