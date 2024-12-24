@@ -19,9 +19,10 @@ body {
 }
 
 .scroll-container {
-    margin-top: 50px; /* To avoid overlapping with the fixed navbar */
+    /* margin-top: 50px; To avoid overlapping with the fixed navbar */
     background-color: var(--background-color); /* Set your uniform background */
     overflow-y: auto;
+    z-index: 1;
 }
   
 section {
