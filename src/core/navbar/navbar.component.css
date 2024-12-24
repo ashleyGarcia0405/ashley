@@ -13,6 +13,8 @@ nav {
     border-radius: 3rem;
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
+    -webkit-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga" 1;
 }
 
 nav a {
