@@ -11,22 +11,41 @@ import { NavbarComponent } from '../core/navbar/navbar.component';
 })
 export class AppComponent implements OnInit {
   title = 'Ashley Garcia';
-  displayedText = '';
-  private index = 0;
+  paragraph = `Hi! I'm a junior studying Computer Science and Applied Mathematics at Columbia University. 
+    I'm a builder and I love making cool/interactive digital experiences. 
+    Outside of work and school, I sail with Columbia Sailing, play puzzle games, and make niche playlists on Spotify.`;
+  displayedTitle = '';
+  displayedParagraph = '';
+  private titleIndex = 0;
+  private paragraphIndex = 0;
   showCursor = true;
+  typingParagraph = false;
 
   ngOnInit() {
-    this.type();
+    this.typeTitle();
   }
 
-  private type() {
-    if (this.index < this.title.length) {
-      this.displayedText += this.title.charAt(this.index);
-      this.index++;
-      setTimeout(() => this.type(), 100); // Adjust typing speed here
+  private typeTitle() {
+    if (this.titleIndex < this.title.length) {
+      this.displayedTitle += this.title.charAt(this.titleIndex);
+      this.titleIndex++;
+      setTimeout(() => this.typeTitle(), 100);
     } else {
       setTimeout(() => {
-        this.showCursor = true;
+        this.typingParagraph = true;
+        this.typeParagraph();
+      }, 500);
+    }
+  }
+
+  private typeParagraph() {
+    if (this.paragraphIndex < this.paragraph.length) {
+      this.displayedParagraph += this.paragraph.charAt(this.paragraphIndex);
+      this.paragraphIndex++;
+      setTimeout(() => this.typeParagraph(), 50);
+    } else {
+      setTimeout(() => {
+        this.showCursor = false;
       }, 500);
     }
   }
