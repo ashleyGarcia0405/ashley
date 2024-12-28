@@ -8,7 +8,8 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     bottom: 2rem;
-    display: flex;
+    display: block;
+    height: auto;
     gap: 0.8rem;
     border-radius: 3rem;
     -webkit-backdrop-filter: blur(15px);
