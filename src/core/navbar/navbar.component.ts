@@ -14,6 +14,7 @@ export class NavbarComponent {
   activeNav: string = "#";
 
   setActiveNav(nav: string) {
+    console.log('Setting active nav to:', nav);
     this.activeNav = nav;
   }
 }
