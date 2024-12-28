@@ -5,11 +5,15 @@ import { AboutComponent } from '../components/about/about.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { ProjectsComponent } from '../components/projects/projects.component';
 import { CommonModule } from '@angular/common';
+import { WorkComponent } from '../components/work/work.component';
+import { ContactComponent } from '../components/contact/contact.component';
+import { BlogComponent } from '../components/blog/blog.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule],
+  imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule, WorkComponent, 
+    ContactComponent, BlogComponent, ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

@@ -11,12 +11,12 @@ nav {
     display: flex;
     gap: 0.8rem;
     border-radius: 3rem;
-    /* -webkit-backdrop-filter: blur(15px); */
-    /* backdrop-filter: blur(15px); */
-    /* -webkit-font-feature-settings: "liga" 1;
-    font-feature-settings: "liga" 1; */
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    -webkit-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga" 1;
 }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 nav a {
     background: transparent;
     padding: 0.9rem;
