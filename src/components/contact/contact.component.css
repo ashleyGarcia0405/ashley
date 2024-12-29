@@ -1,0 +1,10 @@
+.main-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    height: 70vh;
+    box-sizing: border-box;
+}

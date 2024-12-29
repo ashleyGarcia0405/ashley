@@ -1,9 +1,10 @@
 .main-about {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
     text-align: center;
     padding: 2rem;
-    background-color: var(--background-color);
+    height: 70vh;
+    box-sizing: border-box;
 }
