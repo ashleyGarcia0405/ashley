@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
-export class BlogComponent {
+export class BlogComponent implements OnInit {
   blogPosts = [
     {
       id: '1',
@@ -37,5 +38,9 @@ export class BlogComponent {
 
   toggleExpand(post:any) {
     post.expanded = !post.expanded;
+  }
+
+  ngOnInit(): void {
+    console.log(this.blogPosts); 
   }
 }
