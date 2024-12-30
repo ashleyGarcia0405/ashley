@@ -46,3 +46,9 @@
   margin: 20px auto;
   width: 75%;
 }
+
+@media (max-width: 768px) {
+  hr {
+      width: 70%;
+  }
+}
