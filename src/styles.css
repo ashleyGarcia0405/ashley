@@ -23,10 +23,6 @@ body {
     background-color: var(--background-color); /* Set your uniform background */
     overflow-y: auto;
     z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
   
 section {
