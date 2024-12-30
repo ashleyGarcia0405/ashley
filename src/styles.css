@@ -26,8 +26,8 @@ body {
 }
   
 section {
-    padding: 100px;
-    min-height: 90vh;
+    /* padding: 100px; */
+    /* min-height: 90vh; */
     background-color: var(--background-color);
 }
 
