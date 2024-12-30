@@ -1,3 +1,16 @@
 <main class="main-blog">
-    <p>blog works!</p>
+    <div class="gallery-container">
+        <div class="gallery-item"
+            *ngFor="let post of blogPosts"
+            (click)="toggleExpand(post)"
+            [class.expanded]="post.expanded">
+            <div class="item-header">
+                <h3>{{ post.title }}</h3>
+            </div>
+            <p *ngIf="!post.expanded">{{ post.summary }}</p>
+            <div *ngIf="post.expanded" class="expanded-content">
+                <p>{{ post.content }}</p>
+            </div>
+        </div>
+    </div>
 </main>
