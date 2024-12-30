@@ -27,7 +27,7 @@ body {
   
 section {
     /* padding: 100px; */
-    /* min-height: 90vh; */
+    min-height: 90vh;
     overflow-y: auto;
     background-color: var(--background-color);
 }
