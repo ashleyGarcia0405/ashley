@@ -37,6 +37,11 @@ h1 {
     font-weight: 400;
 }
 
+p {
+    font-family: Inter, sans-serif;
+    font-weight: 300;
+}
+
 html, body { height: 100%; background-color: var(--background-color); }
 body { margin: 0; }
 
