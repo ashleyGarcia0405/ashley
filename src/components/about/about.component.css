@@ -5,6 +5,7 @@
     align-items: justify;
     text-align: center;
     padding: 2rem;
-    height: 75vh;
+    height: 70vh;
     box-sizing: border-box;
+    max-width: 80vw;
 }
