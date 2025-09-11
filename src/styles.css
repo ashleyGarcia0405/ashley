@@ -1,13 +1,45 @@
 :root {
-    /* light mode colors */
+    /* Original light theme with beige */
     --background-color: #aea9a2;
     --text-color: #000000;
+    --border-color: #000000;
+    --hover-background: #f0f0f0;
+    --card-background: transparent;
+    --button-text: #000000;
+    --accent-color: #0969da;
+    --secondary-background: #f6f8fa;
+    
+    /* Default syntax colors (will be overridden in dark mode) */
+    --keyword-color: #666;
+    --string-color: #555;
+    --comment-color: #6b6b6b;
+    --function-color: #000;
+    --variable-color: #000;
+    --operator-color: #555;
+    --error-color: #f44747;
+    --link-color: #666;
 }
 
 [data-theme="dark"] {
-    /* dark mode colors */
-    --background-color: #000000;
-    --text-color: #ffffff;
+    /* VS Code dark theme colors */
+    --background-color: #1e1e1e;
+    --text-color: #cccccc;
+    --border-color: #3c3c3c;
+    --hover-background: #2d2d30;
+    --card-background: #252526;
+    --button-text: #cccccc;
+    --accent-color: #007acc;
+    --secondary-background: #252526;
+    
+    /* VS Code syntax highlighting colors for creative use */
+    --keyword-color: #569cd6;
+    --string-color: #ce9178;
+    --comment-color: #6a9955;
+    --function-color: #dcdcaa;
+    --variable-color: #9cdcfe;
+    --operator-color: #d4d4d4;
+    --error-color: #f44747;
+    --link-color: #007acc;
 }
 
 body {

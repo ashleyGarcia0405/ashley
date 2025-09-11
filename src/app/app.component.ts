@@ -8,12 +8,13 @@ import { CommonModule } from '@angular/common';
 import { WorkComponent } from '../components/work/work.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { BlogComponent } from '../components/blog/blog.component';
+import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule, WorkComponent, 
-    ContactComponent, BlogComponent, ],
+    ContactComponent, BlogComponent, DarkModeToggleComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -57,7 +58,8 @@ export class AppComponent implements OnInit {
   }
 
   constructor() {
-    // Set the theme to light
-    document.documentElement.setAttribute('data-theme', 'light');
+    // Initialize theme from localStorage or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }
 }

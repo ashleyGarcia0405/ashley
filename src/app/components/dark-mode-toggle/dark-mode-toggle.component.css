@@ -1,0 +1,58 @@
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: auto;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  padding: 0 12px;
+  min-width: 90px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-background);
+}
+
+.theme-toggle:focus {
+  outline: 1px solid var(--accent-color);
+  outline-offset: 1px;
+}
+
+.toggle-text {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    height: 28px;
+    top: 15px;
+    right: 15px;
+    font-size: 0.8rem;
+    padding: 0 8px;
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    height: 26px;
+    top: 10px;
+    right: 10px;
+    font-size: 0.75rem;
+    padding: 0 6px;
+    min-width: 70px;
+  }
+}

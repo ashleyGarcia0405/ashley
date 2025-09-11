@@ -16,10 +16,12 @@
     font-weight: normal;
     margin-bottom: 1.5rem;
     text-align: center;
+    color: var(--keyword-color);
 }
 
 .main-about p {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
+    color: var(--string-color);
 }
