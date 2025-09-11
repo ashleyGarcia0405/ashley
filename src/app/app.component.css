@@ -14,12 +14,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
   padding: 2rem;
   height: 70vh;
   box-sizing: border-box;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
+.content-intro h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.content-intro p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
 
 .typing {
   font-family: Inter, sans-serif;

@@ -19,9 +19,7 @@ import { BlogComponent } from '../components/blog/blog.component';
 })
 export class AppComponent implements OnInit {
   title = 'Ashley Garcia';
-  paragraph = `Hi! I'm a junior studying Computer Science and Applied Mathematics at Columbia University. 
-    I'm a builder and I love making cool/interactive digital experiences. 
-    Outside of work and school, I sail with Columbia Sailing, play puzzle games, and make niche playlists on Spotify.`;
+  paragraph = `Hi! I'm a senior studying Computer Science and Applied Maths at Columbia University.\nI'm a builder and I love making cool/interactive digital experiences. Outside of work and school, I sail with Columbia Sailing and make niche playlists on Spotify.`;
   displayedTitle = '';
   displayedParagraph = '';
   private titleIndex = 0;
@@ -37,12 +35,12 @@ export class AppComponent implements OnInit {
     if (this.titleIndex < this.title.length) {
       this.displayedTitle += this.title.charAt(this.titleIndex);
       this.titleIndex++;
-      setTimeout(() => this.typeTitle(), 100);
+      setTimeout(() => this.typeTitle(), 30);
     } else {
       setTimeout(() => {
         this.typingParagraph = true;
         this.typeParagraph();
-      }, 500);
+      }, 200);
     }
   }
 
@@ -50,11 +48,11 @@ export class AppComponent implements OnInit {
     if (this.paragraphIndex < this.paragraph.length) {
       this.displayedParagraph += this.paragraph.charAt(this.paragraphIndex);
       this.paragraphIndex++;
-      setTimeout(() => this.typeParagraph(), 50);
+      setTimeout(() => this.typeParagraph(), 20);
     } else {
       setTimeout(() => {
         this.showCursor = false;
-      }, 500);
+      }, 200);
     }
   }
 

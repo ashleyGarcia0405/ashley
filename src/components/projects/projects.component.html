@@ -1,87 +1,44 @@
 <main class="main-projects">
-    <div class="carousel-container">
-        <div class="carousel" #carousel>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project1.jpg" alt="Project 1">
-                    <div class="project-info">
-                        <h3>Project 1</h3>
-                        <p>Description of project 1</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+    <h1>Projects</h1>
+    <div class="carousel-wrapper">
+        <button class="carousel-btn prev" (click)="scrollLeft()">❮</button>
+        <div class="projects-container" #projectsContainer>
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>Description of project 1 that might be very long and needs to be truncated properly</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project2.jpg" alt="Project 2">
-                    <div class="project-info">
-                        <h3>Project 2</h3>
-                        <p>Description of project 2</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>Description of project 2</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project3.jpg" alt="Project 3">
-                    <div class="project-info">
-                        <h3>Project 3</h3>
-                        <p>Description of project 3</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>Description of project 3</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project4.jpg" alt="Project 4">
-                    <div class="project-info">
-                        <h3>Project 4</h3>
-                        <p>Description of project 4</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 4</h3>
+                <p>Description of project 4</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project5.jpg" alt="Project 5">
-                    <div class="project-info">
-                        <h3>Project 5</h3>
-                        <p>Description of project 5</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 5</h3>
+                <p>Description of project 5</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project6.jpg" alt="Project 6">
-                    <div class="project-info">
-                        <h3>Project 6</h3>
-                        <p>Description of project 6</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 6</h3>
+                <p>Description of project 6</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="carousel-item">
-                <div class="project-card">
-                    <img src="assets/project7.jpg" alt="Project 7">
-                    <div class="project-info">
-                        <h3>Project 7</h3>
-                        <p>Description of project 7</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
+            <div class="project-card">
+                <h3>Project 7</h3>
+                <p>Description of project 7</p>
+                <a href="#" class="project-link">View Project</a>
             </div>
         </div>
-        <button class="carousel-button prev" (click)="prevSlide()">❮</button>
-        <button class="carousel-button next" (click)="nextSlide()">❯</button>
-        <div class="carousel-dots">
-            <span class="dot" (click)="goToSlide(0)"></span>
-            <span class="dot" (click)="goToSlide(1)"></span>
-            <span class="dot" (click)="goToSlide(2)"></span>
-            <span class="dot" (click)="goToSlide(3)"></span>
-            <span class="dot" (click)="goToSlide(4)"></span>
-            <span class="dot" (click)="goToSlide(5)"></span>
-            <span class="dot" (click)="goToSlide(6)"></span>
-        </div>
+        <button class="carousel-btn next" (click)="scrollRight()">❯</button>
     </div>
 </main>
