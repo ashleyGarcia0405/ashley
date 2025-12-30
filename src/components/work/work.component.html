@@ -1,3 +1,21 @@
 <main class="main-work">
-    <p>work works!</p>
+    <h1>Work Experience</h1>
+    <div class="timeline">
+        <div class="timeline-item" *ngFor="let exp of experiences">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="experience-header">
+                    <h3 class="job-title">{{ exp.title }}</h3>
+                    <span class="date-range">{{ exp.startDate }} - {{ exp.endDate }}</span>
+                </div>
+                <div class="company-info">
+                    <span class="company">{{ exp.company }}</span>
+                    <span class="location">{{ exp.location }}</span>
+                </div>
+                <ul class="responsibilities">
+                    <li *ngFor="let item of exp.description">{{ item }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </main>
