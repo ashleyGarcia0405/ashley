@@ -47,6 +47,10 @@
     flex-shrink: 0;
 }
 
+[data-theme="dark"] .carousel-btn {
+    color: var(--comment-color);
+}
+
 .carousel-btn:hover {
     background: var(--hover-background);
 }

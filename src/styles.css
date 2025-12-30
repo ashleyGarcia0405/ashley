@@ -10,7 +10,7 @@
     --secondary-background: #f6f8fa;
     
     /* Default syntax colors (will be overridden in dark mode) */
-    --keyword-color: #666;
+    --keyword-color: #000;
     --string-color: #555;
     --comment-color: #6b6b6b;
     --function-color: #000;

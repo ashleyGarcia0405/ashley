@@ -121,6 +121,10 @@
     transform: rotate(90deg);
 }
 
+[data-theme="dark"] .blog-scroll-btn {
+    color: var(--comment-color);
+}
+
 .blog-scroll-btn.up {
     transform: rotate(-90deg);
 }
