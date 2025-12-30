@@ -42,6 +42,18 @@ export class WorkComponent {
       ]
     },
     {
+      title: 'Software Engineer Intern',
+      company: 'Asakana',
+      location: 'New York, NY',
+      startDate: 'May 2025',
+      endDate: 'Aug 2025',
+      description: [
+        'Architected and developed full-stack MVP for B2B seafood marketplace using Next.js 15 (React 18, TypeScript), MongoDB, and SendGrid, connecting suppliers with buyers through automated order and quote workflows',
+        'Built scalable backend with 15+ RESTful API endpoints using Next.js API routes, implementing role-based access control and supplier-buyer relationship management with MongoDB connection pooling',
+        'Designed and implemented database schema with 6 core collections supporting multi-tenant architecture'
+      ],
+    },
+    {
       title: 'Research Assistant',
       company: 'Lamont-Doherty Earth Observatory',
       location: 'New York, NY',
