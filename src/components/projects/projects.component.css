@@ -102,7 +102,7 @@
 }
 
 .project-card p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1.4;
     margin: 0 0 1rem 0;
     flex: 1;
@@ -112,6 +112,7 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     color: var(--string-color);
+    text-align: left;
 }
 
 .project-link {
