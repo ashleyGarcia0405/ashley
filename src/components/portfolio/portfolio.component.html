@@ -3,7 +3,64 @@
     <h1>Portfolio</h1>
     <a routerLink="/" class="back-link">back to home</a>
   </div>
-  <div class="portfolio-content">
-    <p>Coming soon...</p>
+
+  <div class="projects-container">
+    <article class="project-card" *ngFor="let project of projects">
+      <div class="project-content">
+        <div class="image-carousel">
+          <div class="carousel-container">
+            <img
+              [src]="project.images[project.currentImageIndex]"
+              [alt]="project.title + ' image ' + (project.currentImageIndex + 1)"
+              class="carousel-image"
+            />
+            <button
+              class="carousel-btn prev"
+              (click)="prevImage(project)"
+              *ngIf="project.images.length > 1"
+              aria-label="Previous image"
+            >
+              <span class="arrow">&larr;</span>
+            </button>
+            <button
+              class="carousel-btn next"
+              (click)="nextImage(project)"
+              *ngIf="project.images.length > 1"
+              aria-label="Next image"
+            >
+              <span class="arrow">&rarr;</span>
+            </button>
+          </div>
+          <div class="carousel-indicators" *ngIf="project.images.length > 1">
+            <button
+              *ngFor="let img of project.images; let i = index"
+              class="indicator"
+              [class.active]="i === project.currentImageIndex"
+              (click)="goToImage(project, i)"
+              [attr.aria-label]="'Go to image ' + (i + 1)"
+            ></button>
+          </div>
+        </div>
+
+        <div class="project-info">
+          <h2 class="project-title">{{ project.title }}</h2>
+
+          <div class="project-description">
+            <p class="short-description" *ngIf="!project.isExpanded">
+              {{ project.shortDescription }}
+            </p>
+            <div class="full-description" *ngIf="project.isExpanded">
+              <p *ngFor="let paragraph of project.fullDescription.split('\n\n')">
+                {{ paragraph }}
+              </p>
+            </div>
+          </div>
+
+          <button class="expand-btn" (click)="toggleExpand(project)">
+            {{ project.isExpanded ? 'show less' : 'read more' }}
+          </button>
+        </div>
+      </div>
+    </article>
   </div>
 </main>
