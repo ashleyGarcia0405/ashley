@@ -1,5 +1,5 @@
 <app-dark-mode-toggle></app-dark-mode-toggle>
-<main class="main-app">
+<main class="main-app" *ngIf="!isPortfolioPage">
   <div class="scroll-container">
     <div class="content-intro">
       <h1>
@@ -33,5 +33,5 @@
     </section>
   </div>
 </main>
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!isPortfolioPage"></app-navbar>
 <router-outlet />

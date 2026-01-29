@@ -1,3 +1,6 @@
-<button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
-  <span class="toggle-text">{{ isDarkMode ? 'dark mode' : 'light mode' }}</span>
-</button>
+<div class="header-actions">
+  <a routerLink="/portfolio" class="header-link">portfolio</a>
+  <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+    <span class="toggle-text">{{ isDarkMode ? 'dark mode' : 'light mode' }}</span>
+  </button>
+</div>

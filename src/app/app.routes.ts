@@ -5,11 +5,13 @@ import { BlogComponent } from '../components/blog/blog.component';
 import { AppComponent } from './app.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { WorkComponent } from '../components/work/work.component';
+import { PortfolioComponent } from '../components/portfolio/portfolio.component';
 
 export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'work', component: WorkComponent}
+  { path: 'work', component: WorkComponent },
+  { path: 'portfolio', component: PortfolioComponent }
 ];
