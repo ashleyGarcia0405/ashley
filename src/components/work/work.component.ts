@@ -38,7 +38,7 @@ export class WorkComponent {
       endDate: 'Aug 2025',
       description: [
         'Built distributed content availability audit system using Java microservices with gRPC APIs, processing entity mappings across 12+ geographic regions through mulitloader patterns and cache integration for real-time content validation to support 6+ engineering teams within Spotify',
-        'Designed fault tolerant regional audit infrastructure with BigTable persistence, and Kubernetes deployments, handling concurrent multi-region queries with custom exception handling and service mesh integration for $99.9\\%$ uptime',
+        'Designed fault tolerant regional audit infrastructure with BigTable persistence, and Kubernetes deployments, handling concurrent multi-region queries with custom exception handling and service mesh integration for 99.9% uptime',
       ]
     },
     {
