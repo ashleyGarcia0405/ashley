@@ -41,7 +41,7 @@ export class BlogComponent implements OnInit {
     {
       id: '3',
       title: 'Why Setting Up a Dev Environment Still Sucks',
-      summary: 'Even now, getting from “blank laptop” to “working system” is way harder than it should be. This is about the hidden knowledge CS students accumulate over years and how tooling still assumes you already know what you’re doing. Some thoughts from building AutoStack and watching non-CS friends struggle through setup.',
+      summary: 'Even now, getting from “blank laptop” to “working system” is way harder than it should be. Here I talk about the practical knowledge CS students accumulate over years and how tooling still assumes you already know what you’re doing. Some thoughts from building AutoStack and watching non-CS friends struggle through setup.',
       date: 'Feb 2, 2026',
       readingTime: 15,
       githubUrl: '#',
@@ -50,7 +50,7 @@ export class BlogComponent implements OnInit {
     {
       id: '4',
       title: 'Version Control for Agentic Workflows',
-      summary: 'Version control assumes a human writing deterministic code. That breaks down fast once agents start generating, editing, and refactoring constantly. Some thoughts on why current tools feel wrong for agentic workflows and what better primitives might look like.',
+      summary: 'Version control assumes a human writing deterministic code. That breaks down fast once agents start generating, editing, and refactoring constantly. Current tools feel wrong for agentic workflows and here I believe there are better primitives.',
       date: 'Feb 2, 2026',
       readingTime: 30,
       githubUrl: '#',
@@ -59,7 +59,7 @@ export class BlogComponent implements OnInit {
     {
       id: '5',
       title: 'Product Before Code',
-      summary: 'Building is cheap now. Thinking isn’t. This is about how easy it is to jump straight into code—and how often that skips the hard part of identifying the problem. Some reflections on hackathons, PM work, and why “just ship it” isn’t always the flex it sounds like.',
+      summary: 'Building is cheap now. Thinking isn’t. It\'s so easy to jump into code but often that skips the hard part of identifying the problem. Some reflections on hackathons, PM work, and why “just ship it” isn’t always the flex it sounds like.',
       date: 'Feb 2, 2026',
       readingTime: 8,
       githubUrl: '#',
@@ -68,7 +68,7 @@ export class BlogComponent implements OnInit {
     {
       id: '6',
       title: 'AI as Leverage, Not a Crutch',
-      summary: 'Thoughts on using AI to speed up the dumb, repetitive parts of building without outsourcing actual thinking. This is about where AI helps (glue code, UI, data labeling) and where it absolutely shouldn’t (architecture, tradeoffs, product decisions). Mostly pulled from building with AI before the tooling was polished and realizing speed only matters if you know what you’re aiming at.',
+      summary: 'How I use AI to speed up the dumb, repetitive parts of building without outsourcing actual thinking. Mostly pulled from building with AI before the tooling was polished and realizing speed only matters if you know what you’re aiming at.',
       date: 'Feb 2, 2026',
       readingTime: 10,
       githubUrl: '#',
