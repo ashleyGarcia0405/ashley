@@ -22,66 +22,66 @@ export class BlogComponent implements OnInit {
   blogPosts: BlogPost[] = [
     {
       id: '1',
-      title: 'Building My Personal Website',
-      summary: 'A deep dive into the design decisions, tech stack, and development process behind this portfolio site. From choosing Angular to implementing clean, minimalist styling, this post covers the entire journey of creating a modern web presence.',
-      date: 'Sep 10, 2024',
-      readingTime: 5,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'building-personal-website.md'
+      title: 'What Do People Mean When They Say “AI OS”?',
+      summary: 'I keep hearing “AI OS” and it feels hand-wavy. This post is me trying to pin it down: what would an AI layer actually own? State? Memory? Permissions? Execution? Inspired by CLI tools, agent workflows, and the question of how much control you should ever hand off.',
+      date: 'Feb 2, 2026',
+      readingTime: 10,
+      githubUrl: '#',
+      markdownFile: 'ai-os.md'
     },
     {
       id: '2',
-      title: 'Thoughts on Modern Web Development',
-      summary: 'Exploring the current landscape of web development, from framework choices to development philosophies.',
-      date: 'Sep 5, 2024',
+      title: 'In Defense of the Hack Job',
+      summary: 'A case for messy, duct-taped projects. Some of the most useful things I’ve built were objectively a mess—but they taught me how APIs break, how systems fail, and how fast you can learn when you don’t overthink structure too early. Clean code is nice. Learning fast is nicer.',
+      date: 'Feb 2, 2026',
       readingTime: 7,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'modern-web-development.md'
+      githubUrl: '#',
+      markdownFile: 'hack-jobs.md'
     },
     {
       id: '3',
-      title: 'From Academic to Applied: My CS Journey',
-      summary: 'Reflecting on the transition from theoretical computer science coursework to building practical applications.',
-      date: 'Aug 28, 2024',
-      readingTime: 4,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'academic-to-applied.md'
+      title: 'Why Setting Up a Dev Environment Still Sucks',
+      summary: 'Even now, getting from “blank laptop” to “working system” is way harder than it should be. This is about the hidden knowledge CS students accumulate over years and how tooling still assumes you already know what you’re doing. Some thoughts from building AutoStack and watching non-CS friends struggle through setup.',
+      date: 'Feb 2, 2026',
+      readingTime: 15,
+      githubUrl: '#',
+      markdownFile: 'dev-ergonomics.md'
     },
     {
       id: '4',
-      title: 'Learning TypeScript the Hard Way',
-      summary: 'My experience diving deep into TypeScript after years of JavaScript development.',
-      date: 'Aug 20, 2024',
-      readingTime: 6,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'learning-typescript.md'
+      title: 'Version Control for Agentic Workflows',
+      summary: 'Version control assumes a human writing deterministic code. That breaks down fast once agents start generating, editing, and refactoring constantly. Some thoughts on why current tools feel wrong for agentic workflows and what better primitives might look like.',
+      date: 'Feb 2, 2026',
+      readingTime: 30,
+      githubUrl: '#',
+      markdownFile: 'new-git.md'
     },
     {
       id: '5',
-      title: 'Database Design Patterns',
-      summary: 'Exploring common database design patterns and when to use them in real-world applications.',
-      date: 'Aug 15, 2024',
+      title: 'Product Before Code',
+      summary: 'Building is cheap now. Thinking isn’t. This is about how easy it is to jump straight into code—and how often that skips the hard part of identifying the problem. Some reflections on hackathons, PM work, and why “just ship it” isn’t always the flex it sounds like.',
+      date: 'Feb 2, 2026',
       readingTime: 8,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'database-patterns.md'
+      githubUrl: '#',
+      markdownFile: 'product-before-code.md'
     },
     {
       id: '6',
-      title: 'APIs and You: A Beginner\'s Guide',
-      summary: 'Understanding REST APIs, GraphQL, and how to choose the right approach for your project.',
-      date: 'Aug 10, 2024',
-      readingTime: 5,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'apis-beginners-guide.md'
+      title: 'AI as Leverage, Not a Crutch',
+      summary: 'Thoughts on using AI to speed up the dumb, repetitive parts of building without outsourcing actual thinking. This is about where AI helps (glue code, UI, data labeling) and where it absolutely shouldn’t (architecture, tradeoffs, product decisions). Mostly pulled from building with AI before the tooling was polished and realizing speed only matters if you know what you’re aiming at.',
+      date: 'Feb 2, 2026',
+      readingTime: 10,
+      githubUrl: '#',
+      markdownFile: 'ai-leverage.md'
     },
     {
       id: '7',
-      title: 'CSS Grid vs Flexbox: When to Use What',
-      summary: 'A practical comparison of CSS Grid and Flexbox with real-world examples.',
-      date: 'Aug 5, 2024',
+      title: 'Letting Software Spend Your Money',
+      summary: 'We’re getting really close to letting agents actually buy things for us. That’s exciting and also kind of terrifying. This post is me thinking through what suddenly matters once software can spend real money: identity, permissions, limits, and what happens when something goes wrong. If an agent screws up, who eats the cost? The user, the platform, or nobody because we didn’t think about it early enough?',
+      date: 'Feb 2, 2026',
       readingTime: 4,
-      githubUrl: 'https://github.com/yourusername/blog',
-      markdownFile: 'css-grid-vs-flexbox.md'
+      githubUrl: '#',
+      markdownFile: 'agents-spending-money.md'
     }
   ];
 
@@ -112,7 +112,7 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     // Sort posts by date (newest first)
     this.blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    
+
     // Set featured post as the most recent, others as the rest
     if (this.blogPosts.length > 0) {
       this.featuredPost = this.blogPosts[0];
