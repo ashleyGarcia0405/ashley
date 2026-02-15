@@ -39,6 +39,26 @@ The boat itself is built directly onto a protoboard. The hull is made from two s
 I didn’t include a centerboard or a rudder, partly because of limited materials and partly because I didn’t feel like the piece needed to be “complete” in a traditional sense. Instead, the shape of the hull does something cool: when placed on snow, the boat actually sleds downhill.
 Placing a sailboat in the snow wasn’t planned, but it became one of my favorite parts of the project. It’s a boat that comes from a warmer place in my head, built out of electronics, moving across a cold, unfamiliar landscape. Even without wind or water, it still travels. `,
       isExpanded: false
+    },
+    {
+      id: 2,
+      title: 'Christmas Trinket',
+      images: [
+        '/portfolio/IMG_7417.jpeg',
+        '/portfolio/IMG_7416.jpeg',
+        '/portfolio/IMG_7420.jpeg',
+        `/portfolio/IMG_7418.jpeg`,
+      ],
+      currentImageIndex: 0,
+      shortDescription: `I designed and milled a 555 timer LED flasher PCB in the shape of a Christmas tree, taking it from KiCAD layout through CNC milling and hand soldering. This was an intentional experiment outside of my usual visual interests, and while the process was valuable, I wasn't especially attached to the final piece creatively.`,
+      fullDescription: `The Christmas tree shape was a deliberate choice to push myself outside of the sailing and ocean-related themes I tend to doodle about. I wanted to see what it felt like to design something that didn't come from a personal obsession, but instead from a more playful, seasonal idea.
+
+The layout process in KiCAD was the most time-consuming part. The tree silhouette forced awkward routing decisions. Converting the files and milling the board on the CNC went smoothly, and watching the tree outline and copper traces appear physically and not just on KiCAD was so crazy.
+
+Assembly is where things broke down. Between shaky hands, my glasses getting repaired, using the wrong soldering iron tip (too thick), and pads that were much smaller than I'm used to, soldering got extremely messy. I made unreliable joints, I was connecting tracks that were definitely not supposed to get connected, and I lost confidence in the electrical integrity of the board. In the end, the LED never lit up. That failure was frustrating, but also a very direct lesson in how unforgiving hardware fabrication is.
+
+Creatively, I didn't end up feeling very attached to the final piece, and I think that's partly because the theme didn't connect to something I care deeply about. I did really like that I got to break into a different medium for expression (I've always wanted to mill my own PCB) and it made me more aware that I'm most engaged when the concept connects to my own interests, not just when the shape is visually fun. `,
+      isExpanded: false
     }
   ];
 
