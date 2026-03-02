@@ -9,15 +9,29 @@
       <div class="project-content">
         <div class="image-carousel">
           <div class="carousel-container">
-            <img
-              [src]="project.images[project.currentImageIndex]"
-              [alt]="project.title + ' image ' + (project.currentImageIndex + 1)"
-              class="carousel-image"
-            />
+            <ng-container *ngIf="project.media.length > 0">
+              <ng-container [ngSwitch]="project.media[project.currentImageIndex].type">
+                <img
+                  *ngSwitchCase="'image'"
+                  [src]="project.media[project.currentImageIndex].src"
+                  [alt]="project.title + ' image ' + (project.currentImageIndex + 1)"
+                  class="carousel-image"
+                />
+                <video
+                  *ngSwitchCase="'video'"
+                  class="carousel-image"
+                  controls
+                  playsinline
+                >
+                  <source [src]="project.media[project.currentImageIndex].src" type="video/quicktime" />
+                  <source [src]="project.media[project.currentImageIndex].src" type="video/mp4" />
+                </video>
+              </ng-container>
+            </ng-container>
             <button
               class="carousel-btn prev"
               (click)="prevImage(project)"
-              *ngIf="project.images.length > 1"
+              *ngIf="project.media.length > 1"
               aria-label="Previous image"
             >
               <span class="arrow">&larr;</span>
@@ -25,19 +39,19 @@
             <button
               class="carousel-btn next"
               (click)="nextImage(project)"
-              *ngIf="project.images.length > 1"
+              *ngIf="project.media.length > 1"
               aria-label="Next image"
             >
               <span class="arrow">&rarr;</span>
             </button>
           </div>
-          <div class="carousel-indicators" *ngIf="project.images.length > 1">
+          <div class="carousel-indicators" *ngIf="project.media.length > 1">
             <button
-              *ngFor="let img of project.images; let i = index"
+              *ngFor="let item of project.media; let i = index"
               class="indicator"
               [class.active]="i === project.currentImageIndex"
               (click)="goToImage(project, i)"
-              [attr.aria-label]="'Go to image ' + (i + 1)"
+              [attr.aria-label]="'Go to item ' + (i + 1)"
             ></button>
           </div>
         </div>

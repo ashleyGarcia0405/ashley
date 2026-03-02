@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private checkRoute(url: string) {
-    this.isPortfolioPage = url === '/portfolio';
+    this.isPortfolioPage = url === '/portfolio' || url.startsWith('/blog/');
   }
 
   private typeTitle() {
