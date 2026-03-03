@@ -10,11 +10,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dark-mode-toggle.component.css'
 })
 export class DarkModeToggleComponent implements OnInit {
-  isDarkMode = false;
+  isDarkMode = true;
 
   ngOnInit() {
     const savedTheme = localStorage.getItem('theme');
-    this.isDarkMode = savedTheme === 'dark';
+    this.isDarkMode = savedTheme !== 'light';
     this.applyTheme();
   }
 
