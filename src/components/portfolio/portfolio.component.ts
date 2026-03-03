@@ -72,7 +72,6 @@ Creatively, I didn't end up feeling very attached to the final piece, and I thin
         { type: 'image', src: '/portfolio/IMG_8151.jpeg' },
         { type: 'video', src: '/portfolio/IMG_8159.MOV' },
         { type: 'video', src: '/portfolio/IMG_8161.MOV' },
-        { type: 'image', src: '/portfolio/IMG_8169.jpeg' },
         { type: 'image', src: '/portfolio/IMG_8174.jpeg' },
         { type: 'image', src: '/portfolio/IMG_8184.jpeg' },
         { type: 'video', src: '/portfolio/IMG_8188.MOV' },

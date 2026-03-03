@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -6,7 +6,8 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './blog-post-layout.component.html',
-  styleUrls: ['./blog-post-layout.component.css']
+  styleUrls: ['./blog-post-layout.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BlogPostLayoutComponent {
   @Input() title!: string;

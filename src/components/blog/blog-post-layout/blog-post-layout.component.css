@@ -18,20 +18,20 @@
 }
 
 .back-link:hover {
-  color: var(--keyword-color);
+  opacity: 0.75;
 }
 
 .post-title {
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--function-color);
+  color: var(--keyword-color);
   margin: 0 0 0.75rem 0;
   line-height: 1.3;
 }
 
 .post-meta {
   font-size: 0.85rem;
-  color: var(--comment-color);
+  color: var(--string-color);
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -44,7 +44,9 @@
 .post-body {
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--string-color);
+  color: var(--operator-color);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
 }
 
 .post-body p {
@@ -59,7 +61,7 @@
 }
 
 .post-body h3 {
-  color: var(--variable-color);
+  color: var(--keyword-color);
   font-size: 1.05rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
@@ -69,11 +71,6 @@
   color: var(--link-color);
 }
 
-.post-body img {
-  max-width: 100%;
-  margin: 1.5rem 0;
-  display: block;
-}
 
 .post-body iframe {
   width: 100%;
