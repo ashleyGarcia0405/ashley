@@ -131,7 +131,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>Correcting this would require introducing angular constraints or nonlinear interpolation bounded by a no-go zone. That would complicate the state model.</p>
 
-      <p>I chose to accept this simplification. The piece is a structural diagram, not a hydrodynamic simulator.</p>
+      <p>I chose to accept this simplification.</p>
 
       <h2>Technical architecture</h2>
 
