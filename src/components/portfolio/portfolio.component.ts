@@ -79,8 +79,8 @@ Creatively, I didn't end up feeling very attached to the final piece, and I thin
         { type: 'image', src: '/portfolio/IMG_8192.jpeg' },
       ],
       currentImageIndex: 0,
-      shortDescription: 'blah blah',
-      fullDescription: 'blah blah',
+      shortDescription: 'Look at my blog post!',
+      fullDescription: 'Look at my blog post!',
       isExpanded: false
     }
   ];
