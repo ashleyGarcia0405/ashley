@@ -72,7 +72,7 @@ export class BlogComponent implements OnInit {
     },
     {id: '8',
       title: 'The Shape of Pressure',
-      summary: 'Coming soon.',
+      summary: 'Dirty air, linear interpolation, and one known oopsie where the boats briefly sail head-to-wind: a breakdown of The Shape of Pressure, a generative animation running on an ESP32 TTGO T-Display. Three boats, one squeeze, 135 pixels of vertical resolution to say something real about team racing geometry.',
       date: 'Mar 2, 2026',
       readingTime: 5,
       slug: 'shape-of-pressure'
