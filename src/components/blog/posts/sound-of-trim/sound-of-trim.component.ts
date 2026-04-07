@@ -11,9 +11,9 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       height: 500px;
       object-fit: cover;
       object-position: center;
-      margin: 1.5rem 0;
       display: block;
       border-radius: 4px;
+      margin: 1.5rem 0;
     }
     .img-small-sot {
       width: 40%;
@@ -30,22 +30,23 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
     }
     .image-row-sot .img-sot {
       flex: 1;
+      min-width: 0;
       width: 0;
       height: 500px;
       margin: 0;
     }
     .video-sot {
       width: 100%;
-      height: 500px;
-      object-fit: cover;
-      margin: 1.5rem 0;
+      height: auto;
       display: block;
       border-radius: 4px;
+      margin: 1.5rem 0;
     }
     .image-row-sot .video-sot {
       flex: 1;
+      min-width: 0;
       width: 0;
-      height: 500px;
+      height: auto;
       margin: 0;
     }
     .image-caption-sot {
@@ -68,9 +69,9 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>At a basic level, it's a capacitive touch controller. But more specifically, it's an attempt to reconstruct the sensory logic of being on a small sailboat—fluttering sail, line tension, wind in your ears, hull noise, wake.</p>
 
-      <div class="image-row-sop">
+      <div class="image-row-sot">
         <img src="/portfolio/IMG_0283.jpeg" class="img-sot" />
-        <img src="/portfolio/IMG_0273.jpeg" class="img-sot" />
+        <img src="/portfolio/IMG_0272.jpeg" class="img-sot" />
       </div>
 
       <h2>Why this object</h2>
@@ -105,8 +106,10 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>I also used two-touch combinations elsewhere in the system so the interface would feel more like an instrument and less like five isolated triggers. A single touch brings in one sensation; combinations create more loaded states.</p>
 
-      <video class="video-sop" playsinline controls>
-        <source src="/portfolio/IMG_0285.MOV" type="video/quicktime" />
+      <video class="video-sot" playsinline controls>
+        <source src="/portfolio/IMG_0285.MOV" type="video/mp4" />
+      </video>
+      <video class="video-sot" playsinline controls>
         <source src="/portfolio/IMG_0286.MOV" type="video/mp4" />
       </video>
 
@@ -124,9 +127,11 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>The ESP32 and breadboard live underneath the boat inside a small dock-like base that acts as both an enclosure and a cable management system.</p>
 
-      <div class="image-row-sop">
+      <div class="image-row-sot">
         <img src="/portfolio/IMG_0276.jpeg" class="img-sot" />
         <img src="/portfolio/IMG_0278.jpeg" class="img-sot" />
+      </div>
+      <div class="image-row-sot">
         <img src="/portfolio/IMG_0279.jpeg" class="img-sot" />
         <img src="/portfolio/IMG_0274.jpeg" class="img-sot" />
       </div>

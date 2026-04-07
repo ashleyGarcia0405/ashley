@@ -19,6 +19,7 @@ export const routes: Routes = [
   { path: 'blog/ai-leverage', loadComponent: () => import('../components/blog/posts/ai-leverage/ai-leverage.component').then(m => m.AiLeverageComponent) },
   { path: 'blog/agents-spending-money', loadComponent: () => import('../components/blog/posts/agents-spending-money/agents-spending-money.component').then(m => m.AgentsSpendingMoneyComponent) },
   { path: 'blog/shape-of-pressure', loadComponent: () => import('../components/blog/posts/shape-of-pressure/shape-of-pressure.component').then(m => m.ShapeOfPressureComponent) },
+  { path: 'blog/sound-of-trim', loadComponent: () => import('../components/blog/posts/sound-of-trim/sound-of-trim.component').then(m => m.SoundOfTrimComponent) },
   { path: 'contact', component: ContactComponent },
   { path: 'work', component: WorkComponent },
   { path: 'portfolio', component: PortfolioComponent }

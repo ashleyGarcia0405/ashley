@@ -84,6 +84,13 @@ export class BlogComponent implements OnInit {
       date: 'Feb 2, 2026',
       readingTime: 4,
       slug: 'agents-spending-money'
+    },
+    {id: '9',
+      title: 'The Sound of Trim',
+      summary: 'Coming Soon',
+      date: 'April 7, 2026',
+      readingTime: 6,
+      slug: 'sound-of-trim'
     }
   ];
 
