@@ -87,7 +87,7 @@ export class BlogComponent implements OnInit {
     },
     {id: '9',
       title: 'The Sound of Trim',
-      summary: 'Coming Soon',
+      summary: 'A touch-sensitive sailing instrument built on a model boat: five copper tape regions, an ESP32, and a lot of calibration. Each part of the boat controls a different layer of sailing sound—sail flutter, line tension, wind, hull, wake. Some thoughts on why the interface needed to already mean something before the electronics were added.',
       date: 'April 7, 2026',
       readingTime: 6,
       slug: 'sound-of-trim'
