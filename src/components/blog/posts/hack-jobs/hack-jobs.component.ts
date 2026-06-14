@@ -8,11 +8,24 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
   template: `
     <app-blog-post-layout
       title="In Defense of the Hack Job"
-      date="Feb 2, 2026"
-      [readingTime]="7"
+      date="Jan 21, 2026"
+      [readingTime]="3"
     >
-      <!-- Write your post content here. Plain HTML, YouTube iframes, images — anything goes. -->
-      <p>Coming soon.</p>
+      <p>The first version of Aesthetic Mapping (a project I worked on at HackMIT) wasn't clean in any meaningful sense. We were building a system that tried to take a Pinterest board, extract a kind of visual "vibe" using a multimodal model, and then map that to clothing items in a small, loosely structured product dataset. The idea seemed pretty straightforward in theory, but we had a couple of setbacks and it resulted in a very messy system. That and we were trying to vibecode with an early iteration of Cursor AI (09/2024). API keys were scattered across files, passed around inconsistently depending on which script you were running.</p>
+
+      <p>The most frustrating times to debug were when things didn't fail outright. The same input image could produce outputs that felt plausibly correct, even when they contradicted each other. One run would describe something as "minimalist streetwear," another would lean toward "soft vintage," and both would make it all the way through to the recommendation layer. There wasn't a clear point where the system broke; instead, it exposed how unstable the idea of a clean abstraction was in the first place.</p>
+
+      <p>At the time, it felt like we were cutting corners just to get something working. Looking back, that project ended up being one of the more useful things I've built because it made it difficult to ignore how the system actually behaved.</p>
+
+      <p>A "hack job" gets dismissed as sloppy or rushed, but that framing misses that it's a way of building when the shape of the problem isn't fully understood yet and when any attempt at clean structure would mostly be guesswork.</p>
+
+      <p>There's a tendency to treat clean code as the default goal, something you should be aiming for from the beginning. That makes sense in systems where the requirements are stable and the constraints are well understood. But in earlier stages, especially when you're dealing with new tools or unclear problem spaces, cleanliness can become a kind of performance. You end up writing code that looks correct without having enough interaction with the system to know whether the underlying assumptions hold.</p>
+
+      <p>That doesn't mean hack jobs scale, or that they should. At some point, the same qualities that make them useful become liabilities. Once patterns stabilize, once you have real users relying on the system, once the cost of failure increases, the lack of structure becomes harder to justify. You need clearer interfaces, more predictable behavior, and a system that other people can reason about without reconstructing your mental model from scratch.</p>
+
+      <p>The shift is less about abandoning the hack job than about recognizing when its job is done. Early on, it helps you discover the system—where it bends, where it breaks, where your intuitions were wrong. Later, you start to formalize those discoveries into something more stable.</p>
+
+      <p>Most of the projects I've learned the most from wouldn't survive a serious code review in their original form. They were inconsistent, fragile, and occasionally held together by decisions that only made sense in the moment. But they forced a level of interaction with the system that cleaner versions wouldn't have demanded.</p>
     </app-blog-post-layout>
   `
 })

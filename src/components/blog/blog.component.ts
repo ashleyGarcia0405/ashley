@@ -34,8 +34,8 @@ export class BlogComponent implements OnInit {
       id: '2',
       title: 'In Defense of the Hack Job',
       summary: `A case for messy, duct-taped projects. Some of the most useful things I've built were objectively a mess—but they taught me how APIs break, how systems fail, and how fast you can learn when you don't overthink structure too early. Clean code is nice. Learning fast is nicer.`,
-      date: 'Feb 2, 2026',
-      readingTime: 7,
+      date: 'Jan 21, 2026',
+      readingTime: 3,
       slug: 'hack-jobs'
     },
     {
