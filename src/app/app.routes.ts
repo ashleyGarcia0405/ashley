@@ -22,5 +22,6 @@ export const routes: Routes = [
   { path: 'blog/sound-of-trim', loadComponent: () => import('../components/blog/posts/sound-of-trim/sound-of-trim.component').then(m => m.SoundOfTrimComponent) },
   { path: 'contact', component: ContactComponent },
   { path: 'work', component: WorkComponent },
-  { path: 'portfolio', component: PortfolioComponent }
+  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'research', loadComponent: () => import('../components/research/research.component').then(m => m.ResearchComponent) }
 ];

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { WorkComponent } from '../components/work/work.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { BlogComponent } from '../components/blog/blog.component';
+import { ResearchPreviewComponent } from '../components/research-preview/research-preview.component';
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -16,7 +17,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule, WorkComponent,
-    ContactComponent, BlogComponent, DarkModeToggleComponent],
+    ContactComponent, BlogComponent, ResearchPreviewComponent, DarkModeToggleComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private checkRoute(url: string) {
-    this.isPortfolioPage = url === '/portfolio' || url.startsWith('/blog/');
+    this.isPortfolioPage = url === '/portfolio' || url.startsWith('/blog/') || url === '/research';
   }
 
   private typeTitle() {

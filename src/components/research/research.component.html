@@ -1,0 +1,147 @@
+<div class="research-hub">
+
+  <header class="hub-header">
+    <button class="back-btn" (click)="goHome()">← home</button>
+  </header>
+
+  <div class="hub-title-block">
+    <h1>Learning Log</h1>
+    <p class="hub-description">
+      I started with one paper and now I have forty-three tabs open. This is where I keep
+      track of what I'm reading, what I'm building, and what keeps pulling me back.
+    </p>
+    <span class="last-updated">last updated {{ logEntries[0].date }}</span>
+  </div>
+
+  <div class="hub-info-grid">
+    <div class="hub-block">
+      <div class="block-header">background</div>
+      <ul class="coursework-list">
+        <li *ngFor="let course of coursework">{{ course }}</li>
+      </ul>
+    </div>
+
+    <div class="hub-block">
+      <div class="block-header">status</div>
+      <div class="status-table">
+        <div class="status-row">
+          <span class="status-key">track</span>
+          <span class="status-badge deciding">deciding</span>
+        </div>
+        <div class="status-row">
+          <span class="status-key">phase</span>
+          <span class="status-value">starting out</span>
+        </div>
+        <div class="status-row">
+          <span class="status-key">started</span>
+          <span class="status-value">Jun 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">study tracks</div>
+    <div class="tracks-grid">
+      <div class="track-card">
+        <div class="track-header">
+          <span class="track-id">A</span>
+          <div class="track-title-area">
+            <h3>ML Systems & Performance</h3>
+            <span class="track-status-badge considering">considering</span>
+          </div>
+        </div>
+        <p class="track-description">
+          GPU internals, transformer optimization, mixed precision training,
+          distributed data parallelism, scaling laws, LoRA. The engineering path
+          toward understanding how large models are actually built and trained.
+        </p>
+        <div class="track-phases">
+          <span class="phase-tag">backprop + optimization</span>
+          <span class="phase-tag">transformers</span>
+          <span class="phase-tag">GPU-native</span>
+          <span class="phase-tag">distributed training</span>
+          <span class="phase-tag">scaling laws</span>
+          <span class="phase-tag">flagship project</span>
+        </div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-header">
+          <span class="track-id">B</span>
+          <div class="track-title-area">
+            <h3>Reinforcement Learning</h3>
+            <span class="track-status-badge considering">considering</span>
+          </div>
+        </div>
+        <p class="track-description">
+          MDPs, policy gradients, PPO from scratch, RLHF, reward modeling,
+          scalable oversight, goal misgeneralization. The theory path toward
+          understanding how AI behavior is shaped — the thing I actually want to work on.
+        </p>
+        <div class="track-phases">
+          <span class="phase-tag">MDPs + Q-learning</span>
+          <span class="phase-tag">policy gradients</span>
+          <span class="phase-tag">PPO</span>
+          <span class="phase-tag">RLHF pipeline</span>
+          <span class="phase-tag">reward modeling</span>
+          <span class="phase-tag">scalable oversight</span>
+          <span class="phase-tag">flagship project</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">log</div>
+    <div class="log-list">
+      <div class="log-entry" *ngFor="let entry of logEntries">
+        <span class="log-date">{{ entry.date }}</span>
+        <p class="log-content">{{ entry.content }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">papers</div>
+    <div class="papers-list">
+      <a class="paper-row"
+         *ngFor="let paper of papers"
+         [href]="paper.url"
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="paper-main">
+          <span class="paper-status" [ngClass]="'status-' + paper.status">{{ paper.status }}</span>
+          <span class="paper-title">{{ paper.title }}</span>
+          <span class="paper-meta">{{ paper.authors }} · {{ paper.year }}</span>
+        </div>
+        <div class="paper-tags">
+          <span class="tag" *ngFor="let tag of paper.tags">{{ tag }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">projects</div>
+    <div class="empty-state" *ngIf="projects.length === 0">
+      <p>Nothing here yet. Come back when I've started building.</p>
+    </div>
+    <div class="projects-list" *ngIf="projects.length > 0">
+      <div class="project-card" *ngFor="let project of projects">
+        <div class="project-header">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <span class="project-status-badge" [ngClass]="'proj-' + project.status">{{ project.status }}</span>
+        </div>
+        <p class="project-description">{{ project.description }}</p>
+        <div class="project-tags">
+          <span class="tag" *ngFor="let tag of project.tags">{{ tag }}</span>
+        </div>
+        <a *ngIf="project.url" [href]="project.url" target="_blank" rel="noopener noreferrer" class="project-link">
+          view →
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

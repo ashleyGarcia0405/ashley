@@ -1,0 +1,22 @@
+<main class="main-research-preview">
+  <div class="preview-header">
+    <h1>Research</h1>
+    <p class="preview-subtitle">Reading the papers. Writing the code. Figuring out how this actually works.</p>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview-block">
+      <span class="block-label">currently</span>
+      <p class="block-content">{{ currentFocus }}</p>
+    </div>
+
+    <div class="preview-block">
+      <span class="block-label">latest update · {{ latestLog.date }}</span>
+      <p class="block-content">{{ latestLog.content }}</p>
+    </div>
+  </div>
+
+  <div class="preview-footer">
+    <button class="hub-link" (click)="enterHub()">Follow the journey →</button>
+  </div>
+</main>
