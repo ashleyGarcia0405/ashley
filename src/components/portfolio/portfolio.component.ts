@@ -31,9 +31,9 @@ export class PortfolioComponent {
       id: 1,
       title: 'Frostbiting',
       media: [
-        { type: 'image', src: '/portfolio/IMG_6709.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_6704.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_6697.jpeg' }
+        { type: 'image', src: '/portfolio/IMG_6709.webp' },
+        { type: 'image', src: '/portfolio/IMG_6704.webp' },
+        { type: 'image', src: '/portfolio/IMG_6697.webp' }
       ],
       currentImageIndex: 0,
       shortDescription: 'A small vessel built from circuitry, exploring motion outside its intended medium.',
@@ -49,10 +49,10 @@ Placing a sailboat in the snow wasn't planned, but it became one of my favorite 
       id: 2,
       title: 'Christmas Trinket',
       media: [
-        { type: 'image', src: '/portfolio/IMG_7417.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_7416.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_7420.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_7418.jpeg' },
+        { type: 'image', src: '/portfolio/IMG_7417.webp' },
+        { type: 'image', src: '/portfolio/IMG_7416.webp' },
+        { type: 'image', src: '/portfolio/IMG_7420.webp' },
+        { type: 'image', src: '/portfolio/IMG_7418.webp' },
       ],
       currentImageIndex: 0,
       shortDescription: `I designed and milled a 555 timer LED flasher PCB in the shape of a Christmas tree, taking it from KiCAD layout through CNC milling and hand soldering. This was an intentional experiment outside of my usual visual interests, and while the process was valuable, I wasn't especially attached to the final piece creatively.`,
@@ -69,14 +69,14 @@ Creatively, I didn't end up feeling very attached to the final piece, and I thin
       id: 3,
       title: 'The Shape of Pressure',
       media: [
-        { type: 'image', src: '/portfolio/IMG_8151.jpeg' },
+        { type: 'image', src: '/portfolio/IMG_8151.webp' },
         { type: 'video', src: '/portfolio/IMG_8159.MOV' },
         { type: 'video', src: '/portfolio/IMG_8161.MOV' },
-        { type: 'image', src: '/portfolio/IMG_8174.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_8184.jpeg' },
+        { type: 'image', src: '/portfolio/IMG_8174.webp' },
+        { type: 'image', src: '/portfolio/IMG_8184.webp' },
         { type: 'video', src: '/portfolio/IMG_8188.MOV' },
-        { type: 'image', src: '/portfolio/IMG_8191.jpeg' },
-        { type: 'image', src: '/portfolio/IMG_8192.jpeg' },
+        { type: 'image', src: '/portfolio/IMG_8191.webp' },
+        { type: 'image', src: '/portfolio/IMG_8192.webp' },
       ],
       currentImageIndex: 0,
       shortDescription: 'Look at my blog post!',
@@ -101,12 +101,7 @@ Creatively, I didn't end up feeling very attached to the final piece, and I thin
     project.currentImageIndex = index;
   }
 
-  toggleExpand(project: Project, cardEl?: HTMLElement): void {
+  toggleExpand(project: Project): void {
     project.isExpanded = !project.isExpanded;
-    if (project.isExpanded && cardEl) {
-      setTimeout(() => {
-        cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    }
   }
 }

@@ -5,7 +5,7 @@
   </div>
 
   <div class="projects-container">
-    <article class="project-card" #card *ngFor="let project of projectsReversed">
+    <article class="project-card" *ngFor="let project of projectsReversed">
       <div class="project-content">
         <div class="image-carousel">
           <div class="carousel-container">
@@ -16,6 +16,7 @@
                   [src]="project.media[project.currentImageIndex].src"
                   [alt]="project.title + ' image ' + (project.currentImageIndex + 1)"
                   class="carousel-image"
+                  loading="lazy"
                 />
                 <video
                   *ngSwitchCase="'video'"
@@ -70,7 +71,7 @@
             </div>
           </div>
 
-          <button class="expand-btn" (click)="toggleExpand(project, card)">
+          <button class="expand-btn" (click)="toggleExpand(project)">
             {{ project.isExpanded ? 'show less' : 'read more' }}
           </button>
         </div>
