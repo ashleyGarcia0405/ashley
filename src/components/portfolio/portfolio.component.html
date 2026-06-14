@@ -5,7 +5,7 @@
   </div>
 
   <div class="projects-container">
-    <article class="project-card" *ngFor="let project of projectsReversed">
+    <article class="project-card" #card *ngFor="let project of projectsReversed">
       <div class="project-content">
         <div class="image-carousel">
           <div class="carousel-container">
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <button class="expand-btn" (click)="toggleExpand(project)">
+          <button class="expand-btn" (click)="toggleExpand(project, card)">
             {{ project.isExpanded ? 'show less' : 'read more' }}
           </button>
         </div>

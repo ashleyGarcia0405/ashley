@@ -101,7 +101,12 @@ Creatively, I didn't end up feeling very attached to the final piece, and I thin
     project.currentImageIndex = index;
   }
 
-  toggleExpand(project: Project): void {
+  toggleExpand(project: Project, cardEl?: HTMLElement): void {
     project.isExpanded = !project.isExpanded;
+    if (project.isExpanded && cardEl) {
+      setTimeout(() => {
+        cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
   }
 }
