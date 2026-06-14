@@ -1,0 +1,41 @@
+<main class="main-blog-preview">
+    <div class="blog-header">
+        <h1>Blog</h1>
+        <p class="blog-description">Thoughts on tech, learning, and building things</p>
+    </div>
+
+    <div class="bento-grid">
+        <article class="featured-card" *ngIf="featuredPost" (click)="openPost(featuredPost)">
+            <div class="card-top">
+                <span class="post-number">01</span>
+                <div class="post-meta">
+                    <span class="post-date">{{ featuredPost.date }}</span>
+                    <span class="post-divider">·</span>
+                    <span class="post-reading-time">{{ featuredPost.readingTime }} min read</span>
+                </div>
+            </div>
+            <h2 class="featured-title">{{ featuredPost.title }}</h2>
+            <p class="featured-summary">{{ featuredPost.summary }}</p>
+            <span class="read-more">Continue reading →</span>
+        </article>
+
+        <div class="side-cards">
+            <article class="side-card" *ngFor="let post of sidePosts; let i = index" (click)="openPost(post)">
+                <div class="card-top">
+                    <span class="post-number">{{ (i + 2).toString().padStart(2, '0') }}</span>
+                    <div class="post-meta">
+                        <span class="post-date">{{ post.date }}</span>
+                        <span class="post-divider">·</span>
+                        <span class="post-reading-time">{{ post.readingTime }} min read</span>
+                    </div>
+                </div>
+                <h3 class="side-title">{{ post.title }}</h3>
+                <span class="read-more">Read →</span>
+            </article>
+        </div>
+    </div>
+
+    <div class="blog-footer">
+        <button class="view-all" (click)="viewAll()">View all posts →</button>
+    </div>
+</main>

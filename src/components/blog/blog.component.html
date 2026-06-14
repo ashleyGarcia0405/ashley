@@ -1,46 +1,24 @@
-<main class="main-blog">
-    <div class="blog-header">
+<div class="blog-page">
+    <header class="blog-page-header">
+        <button class="back-btn" (click)="goHome()">← home</button>
+    </header>
+
+    <div class="blog-title-block">
         <h1>Blog</h1>
-        <p class="blog-description">Thoughts on tech, learning, and building things</p>
+        <p class="blog-subtitle">Thoughts on tech, learning, and building things</p>
     </div>
-    
-    <div class="blog-grid">
-        <!-- Featured Post -->
-        <div class="featured-section">
-            <h3 class="featured-headline">Featured</h3>
-            <article class="featured-post" *ngIf="featuredPost" (click)="openPost(featuredPost)">
-                <div class="featured-header">
-                    <h2 class="featured-title">{{ featuredPost.title }}</h2>
-                    <div class="post-meta">
-                        <span class="post-date">{{ featuredPost.date }}</span>
-                        <span class="post-divider">·</span>
-                        <span class="post-reading-time">{{ featuredPost.readingTime }} min read</span>
-                    </div>
-                </div>
-                <p class="featured-summary">{{ featuredPost.summary }}</p>
-                <div class="post-footer">
-                    <span class="read-more">Continue reading →</span>
-                </div>
-            </article>
-        </div>
-        
-        <!-- Other Posts -->
-        <div class="other-posts-wrapper">
-            <div class="other-posts" #otherPostsContainer>
-                <article class="blog-post" *ngFor="let post of otherPosts" (click)="openPost(post)">
-                    <h3 class="post-title">{{ post.title }}</h3>
-                    <div class="post-meta">
-                        <span class="post-date">{{ post.date }}</span>
-                        <span class="post-divider">·</span>
-                        <span class="post-reading-time">{{ post.readingTime }} min read</span>
-                    </div>
-                    <p class="post-summary">{{ post.summary }}</p>
-                    <div class="post-footer">
-                        <span class="read-more">Read →</span>
-                    </div>
-                </article>
+
+    <div class="blog-list">
+        <article class="blog-post" *ngFor="let post of blogPosts; let i = index" (click)="openPost(post)">
+            <span class="post-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="post-meta">
+                <span class="post-date">{{ post.date }}</span>
+                <span class="post-divider">·</span>
+                <span class="post-reading-time">{{ post.readingTime }} min read</span>
             </div>
-            <button class="blog-scroll-btn down" (click)="scrollDown()">❯</button>
-        </div>
+            <p class="post-summary">{{ post.summary }}</p>
+            <span class="read-more">Read →</span>
+        </article>
     </div>
-</main>
+</div>

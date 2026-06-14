@@ -4,28 +4,31 @@ import { Router } from '@angular/router';
 import { BLOG_POSTS, BlogPost } from '../../data/blog-posts';
 
 @Component({
-  selector: 'app-blog',
+  selector: 'app-blog-preview',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  templateUrl: './blog-preview.component.html',
+  styleUrls: ['./blog-preview.component.css']
 })
-export class BlogComponent implements OnInit {
+export class BlogPreviewComponent implements OnInit {
   constructor(private router: Router) {}
 
-  blogPosts: BlogPost[] = [];
+  featuredPost: BlogPost | null = null;
+  sidePosts: BlogPost[] = [];
 
   openPost(post: BlogPost): void {
     this.router.navigate(['/blog', post.slug]);
   }
 
-  goHome(): void {
-    this.router.navigate(['/']);
+  viewAll(): void {
+    this.router.navigate(['/blog']);
   }
 
   ngOnInit(): void {
-    this.blogPosts = [...BLOG_POSTS].sort(
+    const sorted = [...BLOG_POSTS].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
+    this.featuredPost = sorted[0];
+    this.sidePosts = sorted.slice(1, 3);
   }
 }

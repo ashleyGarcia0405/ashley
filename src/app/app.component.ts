@@ -7,7 +7,7 @@ import { ProjectsComponent } from '../components/projects/projects.component';
 import { CommonModule } from '@angular/common';
 import { WorkComponent } from '../components/work/work.component';
 import { ContactComponent } from '../components/contact/contact.component';
-import { BlogComponent } from '../components/blog/blog.component';
+import { BlogPreviewComponent } from '../components/blog-preview/blog-preview.component';
 import { ResearchPreviewComponent } from '../components/research-preview/research-preview.component';
 import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, AboutComponent, ProjectsComponent, CommonModule, WorkComponent,
-    ContactComponent, BlogComponent, ResearchPreviewComponent, DarkModeToggleComponent],
+    ContactComponent, BlogPreviewComponent, ResearchPreviewComponent, DarkModeToggleComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private checkRoute(url: string) {
-    this.isPortfolioPage = url === '/portfolio' || url.startsWith('/blog/') || url === '/research';
+    this.isPortfolioPage = url === '/portfolio' || url === '/blog' || url.startsWith('/blog/') || url === '/research';
   }
 
   private typeTitle() {
