@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: 'blog/agents-spending-money', loadComponent: () => import('../components/blog/posts/agents-spending-money/agents-spending-money.component').then(m => m.AgentsSpendingMoneyComponent) },
   { path: 'blog/shape-of-pressure', loadComponent: () => import('../components/blog/posts/shape-of-pressure/shape-of-pressure.component').then(m => m.ShapeOfPressureComponent) },
   { path: 'blog/sound-of-trim', loadComponent: () => import('../components/blog/posts/sound-of-trim/sound-of-trim.component').then(m => m.SoundOfTrimComponent) },
+  { path: 'blog/wemu', loadComponent: () => import('../components/blog/posts/wemu/wemu.component').then(m => m.WemuComponent) },
   { path: 'contact', component: ContactComponent },
   { path: 'work', component: WorkComponent },
   { path: 'portfolio', component: PortfolioComponent },

@@ -79,5 +79,13 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'April 7, 2026',
     readingTime: 6,
     slug: 'sound-of-trim'
+  },
+  {
+    id: '10',
+    title: 'WeMu',
+    summary: 'A UWB-based theremin for two pairs of performers. Instead of hand-to-antenna distance, the instrument is the distance between people. Two pairs of dancers, two ranging modules, one shared sound.',
+    date: 'June 16, 2026',
+    readingTime: 7,
+    slug: 'wemu'
   }
 ];
