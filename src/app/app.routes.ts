@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'blog/ai-os', loadComponent: () => import('../components/blog/posts/ai-os/ai-os.component').then(m => m.AiOsComponent) },
   { path: 'blog/hack-jobs', loadComponent: () => import('../components/blog/posts/hack-jobs/hack-jobs.component').then(m => m.HackJobsComponent) },
-  { path: 'blog/dev-ergonomics', loadComponent: () => import('../components/blog/posts/dev-ergonomics/dev-ergonomics.component').then(m => m.DevErgonomicsComponent) },
+  { path: 'blog/setup-gap', loadComponent: () => import('../components/blog/posts/setup-gap/setup-gap.component').then(m => m.SetupGapComponent) },
   { path: 'blog/new-git', loadComponent: () => import('../components/blog/posts/new-git/new-git.component').then(m => m.NewGitComponent) },
 { path: 'blog/agents-spending-money', loadComponent: () => import('../components/blog/posts/agents-spending-money/agents-spending-money.component').then(m => m.AgentsSpendingMoneyComponent) },
   { path: 'blog/shape-of-pressure', loadComponent: () => import('../components/blog/posts/shape-of-pressure/shape-of-pressure.component').then(m => m.ShapeOfPressureComponent) },

@@ -29,8 +29,8 @@ export const BLOG_POSTS: BlogPost[] = [
     title: 'Why Setting Up a Dev Environment Still Sucks',
     summary: `Even now, getting from "blank laptop" to "working system" is way harder than it should be. Here I talk about the practical knowledge CS students accumulate over years and how tooling still assumes you already know what you're doing.`,
     date: 'Feb 2, 2026',
-    readingTime: 15,
-    slug: 'dev-ergonomics'
+    readingTime: 6,
+    slug: 'setup-gap'
   },
   {
     id: '4',
