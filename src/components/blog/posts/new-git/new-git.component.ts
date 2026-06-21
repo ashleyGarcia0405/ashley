@@ -97,7 +97,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <h2>Identity, trust, and governance</h2>
 
-      <p>Integrating with standards like MCP identity or Verified AI Agent (RFC 9421): every commit becomes <code>{agent_pubkey, signature, trust_score}</code>. Humans and orgs configure specific rules.</p>
+      <p>Integrating with standards like MCP identity or Verified AI Agent (RFC 9421): every commit becomes <code>&#123;agent_pubkey, signature, trust_score&#125;</code>. Humans and orgs configure specific rules.</p>
 
       <p>Track merge success, rollback frequency, and test stability per agent. Display trust scores in UI (e.g., Agent42: 93% merge reliability).</p>
 

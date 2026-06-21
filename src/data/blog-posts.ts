@@ -41,22 +41,6 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'new-git'
   },
   {
-    id: '5',
-    title: 'Product Before Code',
-    summary: 'Building is cheap now. Thinking isn\'t. It\'s so easy to jump into code but often that skips the hard part of identifying the problem. Some reflections on hackathons, PM work, and why "just ship it" isn\'t always the flex it sounds like.',
-    date: 'Feb 2, 2026',
-    readingTime: 8,
-    slug: 'product-before-code'
-  },
-  {
-    id: '6',
-    title: 'AI as Leverage, Not a Crutch',
-    summary: `How I use AI to speed up the dumb, repetitive parts of building without outsourcing actual thinking. Mostly pulled from building with AI before the tooling was polished and realizing speed only matters if you know what you're aiming at.`,
-    date: 'Feb 2, 2026',
-    readingTime: 10,
-    slug: 'ai-leverage'
-  },
-  {
     id: '8',
     title: 'The Shape of Pressure',
     summary: 'Dirty air, linear interpolation, and one known oopsie where the boats briefly sail head-to-wind: a breakdown of The Shape of Pressure, a generative animation running on an ESP32 TTGO T-Display.',
