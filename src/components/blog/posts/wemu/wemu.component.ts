@@ -83,10 +83,10 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
   template: `
     <app-blog-post-layout
       title="WeMu"
-      date="June 16, 2026"
-      [readingTime]="7"
+      date="Jan 14, 2026"
+      [readingTime]="5"
     >
-      <img src="/portfolio/IMG_3642.webp" class="img-wemu" style="height: 375px" alt="WeMu wearable" />
+      gi
 
       <p>The theremin is one of the oldest electronic instruments, invented by Leon Theremin in 1920. It has two antennas—a vertical rod and a horizontal loop—and the player never touches either of them. Instead, it works by heterodyning: two radio-frequency oscillators, both running around 170 kHz, are mixed together. One is fixed and the other shifts frequency based on the capacitance between the vertical antenna and the player's hand. You end up hearing the difference between those two frequencies. Move your hand closer, the variable oscillator drifts further from the fixed one, the beat frequency rises, the pitch goes up. The horizontal loop controls volume the same way through a separate amplitude circuit.</p>
 

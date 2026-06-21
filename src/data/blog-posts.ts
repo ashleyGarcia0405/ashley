@@ -20,7 +20,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: '2',
     title: 'In Defense of the Hack Job',
     summary: `A case for messy, duct-taped projects. Some of the most useful things I've built were objectively a mess—but they taught me how APIs break, how systems fail, and how fast you can learn when you don't overthink structure too early. Clean code is nice. Learning fast is nicer.`,
-    date: 'Jan 21, 2026',
+    date: 'Jan 2, 2026',
     readingTime: 3,
     slug: 'hack-jobs'
   },
@@ -84,8 +84,8 @@ export const BLOG_POSTS: BlogPost[] = [
     id: '10',
     title: 'WeMu',
     summary: 'A UWB-based theremin for two pairs of performers. Instead of hand-to-antenna distance, the instrument is the distance between people. Two pairs of dancers, two ranging modules, one shared sound.',
-    date: 'June 16, 2026',
-    readingTime: 7,
+    date: 'Jan 14, 2026',
+    readingTime: 5,
     slug: 'wemu'
   }
 ];

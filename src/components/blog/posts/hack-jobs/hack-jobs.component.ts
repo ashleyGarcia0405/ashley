@@ -8,7 +8,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
   template: `
     <app-blog-post-layout
       title="In Defense of the Hack Job"
-      date="Jan 21, 2026"
+      date="Jan 2, 2026"
       [readingTime]="3"
     >
       <p>The first version of Aesthetic Mapping (a project I worked on at HackMIT) wasn't clean in any meaningful sense. We were building a system that tried to take a Pinterest board, extract a kind of visual "vibe" using a multimodal model, and then map that to clothing items in a small, loosely structured product dataset. The idea seemed pretty straightforward in theory, but we had a couple of setbacks and it resulted in a very messy system. That and we were trying to vibecode with an early iteration of Cursor AI (09/2024). API keys were scattered across files, passed around inconsistently depending on which script you were running.</p>
