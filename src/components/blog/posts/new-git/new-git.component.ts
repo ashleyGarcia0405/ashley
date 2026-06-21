@@ -81,7 +81,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <ul>
         <li><strong>AST-aware commits:</strong> parse code into abstract syntax trees using LSP servers so commits capture intent, not text deltas.</li>
         <li><strong>Semantic diffs:</strong> replace <code>git diff</code> with tree-level comparison. Output like "Refactored login handler: extracted <code>validate_token()</code>".</li>
-        <li><strong>Intent-based history:</strong> each commit is an event <code>{intent, agent_id, context_hash}</code>.</li>
+        <li><strong>Intent-based history:</strong> each commit is an event <code>&#123;intent, agent_id, context_hash&#125;</code>.</li>
       </ul>
 
       <h3>Multi-dimensional commits</h3>
