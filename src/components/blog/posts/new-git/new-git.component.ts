@@ -8,7 +8,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
   template: `
     <app-blog-post-layout
       title="Version Control for Agentic Workflows"
-      date="Feb 2, 2026"
+      date="Jan 14, 2026"
       [readingTime]="30"
     >
       <p><em>Note: This is more of a research brainstorm — I was exploring this with a couple of friends and will probably revisit it properly at some point.</em></p>

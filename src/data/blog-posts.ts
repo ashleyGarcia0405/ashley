@@ -36,7 +36,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: '4',
     title: 'Version Control for Agentic Workflows',
     summary: 'Version control assumes a human writing deterministic code. That breaks down fast once agents start generating, editing, and refactoring constantly. Current tools feel wrong for agentic workflows and here I believe there are better primitives.',
-    date: 'Feb 2, 2026',
+    date: 'Jan 14, 2026',
     readingTime: 30,
     slug: 'new-git'
   },
@@ -68,8 +68,8 @@ export const BLOG_POSTS: BlogPost[] = [
     id: '10',
     title: 'WeMu',
     summary: 'A UWB-based theremin for two pairs of performers. Instead of hand-to-antenna distance, the instrument is the distance between people. Two pairs of dancers, two ranging modules, one shared sound.',
-    date: 'Jan 14, 2026',
-    readingTime: 5,
+    date: 'June 16, 2026',
+    readingTime: 7,
     slug: 'wemu'
   }
 ];
