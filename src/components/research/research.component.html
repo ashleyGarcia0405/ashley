@@ -10,7 +10,7 @@
       I started with one paper and now I have forty-three tabs open. This is where I keep
       track of what I'm reading, what I'm building, and what keeps pulling me back.
     </p>
-    <span class="last-updated">last updated {{ logEntries[0].date }}</span>
+    <span class="last-updated">last updated {{ sortedLogEntries[0].date }}</span>
   </div>
 
   <div class="hub-info-grid">
@@ -22,82 +22,54 @@
     </div>
 
     <div class="hub-block">
-      <div class="block-header">status</div>
-      <div class="status-table">
-        <div class="status-row">
-          <span class="status-key">track</span>
-          <span class="status-badge deciding">deciding</span>
-        </div>
-        <div class="status-row">
-          <span class="status-key">phase</span>
-          <span class="status-value">starting out</span>
-        </div>
-        <div class="status-row">
-          <span class="status-key">started</span>
-          <span class="status-value">Jun 2026</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hub-section">
-    <div class="section-label">study tracks</div>
-    <div class="tracks-grid">
-      <div class="track-card">
-        <div class="track-header">
-          <span class="track-id">A</span>
-          <div class="track-title-area">
-            <h3>ML Systems & Performance</h3>
-            <span class="track-status-badge considering">considering</span>
-          </div>
-        </div>
-        <p class="track-description">
-          GPU internals, transformer optimization, mixed precision training,
-          distributed data parallelism, scaling laws, LoRA. The engineering path
-          toward understanding how large models are actually built and trained.
-        </p>
-        <div class="track-phases">
-          <span class="phase-tag">backprop + optimization</span>
-          <span class="phase-tag">transformers</span>
-          <span class="phase-tag">GPU-native</span>
-          <span class="phase-tag">distributed training</span>
-          <span class="phase-tag">scaling laws</span>
-          <span class="phase-tag">flagship project</span>
-        </div>
-      </div>
-
-      <div class="track-card">
-        <div class="track-header">
-          <span class="track-id">B</span>
-          <div class="track-title-area">
-            <h3>Reinforcement Learning</h3>
-            <span class="track-status-badge considering">considering</span>
-          </div>
-        </div>
-        <p class="track-description">
-          MDPs, policy gradients, PPO from scratch, RLHF, reward modeling,
-          scalable oversight, goal misgeneralization. The theory path toward
-          understanding how AI behavior is shaped — the thing I actually want to work on.
-        </p>
-        <div class="track-phases">
-          <span class="phase-tag">MDPs + Q-learning</span>
-          <span class="phase-tag">policy gradients</span>
-          <span class="phase-tag">PPO</span>
-          <span class="phase-tag">RLHF pipeline</span>
-          <span class="phase-tag">reward modeling</span>
-          <span class="phase-tag">scalable oversight</span>
-          <span class="phase-tag">flagship project</span>
-        </div>
-      </div>
+      <div class="block-header">open questions</div>
+      <ul class="open-questions-list">
+        <li *ngFor="let q of openQuestions">{{ q }}</li>
+      </ul>
     </div>
   </div>
 
   <div class="hub-section">
     <div class="section-label">log</div>
     <div class="log-list">
-      <div class="log-entry" *ngFor="let entry of logEntries">
+      <div class="log-entry" *ngFor="let entry of sortedLogEntries">
         <span class="log-date">{{ entry.date }}</span>
         <p class="log-content">{{ entry.content }}</p>
+        <p class="log-summary" *ngIf="entry.summary">{{ entry.summary }}</p>
+        <div class="log-reading" *ngIf="entry.reading && entry.reading.length">
+          <span class="log-reading-label">reading</span>
+          <ul class="log-reading-list">
+            <li *ngFor="let item of entry.reading">
+              <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+              <span *ngIf="!item.url">{{ item.title }}</span>
+              <span class="reading-reflection" *ngIf="item.reflection"> — {{ item.reflection }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">concepts</div>
+    <div class="concepts-list">
+      <div class="concept-row" *ngFor="let concept of concepts">
+        <div class="concept-main">
+          <span class="concept-status" [ngClass]="'concept-' + concept.status">{{ concept.status }}</span>
+          <span class="concept-term">{{ concept.term }}</span>
+        </div>
+        <p class="concept-note">{{ concept.note }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-section">
+    <div class="section-label">experiments</div>
+    <div class="experiments-list">
+      <div class="experiment-row" *ngFor="let exp of experiments">
+        <span class="experiment-date">{{ exp.date }}</span>
+        <p class="experiment-what">{{ exp.what }}</p>
+        <p class="experiment-result">→ {{ exp.result }}</p>
       </div>
     </div>
   </div>
