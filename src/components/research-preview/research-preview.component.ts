@@ -15,9 +15,8 @@ export class ResearchPreviewComponent {
   currentFocus = 'Backprop fundamentals. Deleting implementations and rewriting them from memory until it sticks.';
 
   latestLog = {
-    date: 'Jun 14, 2026',
-    content: 'Just starting. Deciding between an ML Systems track (GPU internals, distributed training, transformer optimization) and an RL track (MDPs, PPO, RLHF, \n' +
-      '         -reward modeling). Both paths converge on understanding how AI behavior is trained and shaped. Leaning RL.'
+    date: 'Jun 22, 2026',
+    content: 'Reviewed backpropagation fundamentals + undergrad stuff I worked on. Implemented a toy backprop pass from scratch in numpy. Still want to spend more time on vanishing gradients before moving forward.'
   };
 
   enterHub() {
