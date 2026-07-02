@@ -4,6 +4,11 @@
         <button class="carousel-btn prev" (click)="scrollLeft()">❮</button>
         <div class="projects-container" #projectsContainer>
             <div class="project-card">
+              <h3>Regulatory Arbitrage Scanner</h3>
+              <p>A pipeline that watches new filings from the Federal Register, FDA, SEC, and EUR-Lex and runs each one through an agentic Claude loop that researches on its own — checking precedent, market structure, and regulatory history — before producing a three-layer analysis: what the rule actually changes, the market gap it opens, and 2–4 startup hypotheses that only work because the rule exists. Each hypothesis then gets adversarially stress-tested: Claude extracts the moat claims, searches for counter-evidence, and scores how long the opportunity window realistically stays open. I've been circling VC-adjacent work and I'm genuinely interested in how legal frameworks around AI end up reshaping the startup space, so this was a convenient excuse to build something that reads regulatory filings the way an analyst would, and see whether "new rule → new market gap" holds up as a pattern instead of a one-off insight.</p>
+              <a href="https://github.com/ashleyGarcia0405/regulatory-arbitrage-scanner" class="project-link">View Project</a>
+            </div>
+            <div class="project-card">
                 <h3>Prism</h3>
                 <p>Prism is a differential privacy platform I built with Rails 8, PostgreSQL, and Python's differential privacy libraries to enable secure analysis of sensitive datasets. The system manages privacy budgets, validates queries for safety, and supports multiple cryptographic backends including DP, MPC, and homomorphic encryption. Added collaborative data rooms for multi-party computation scenarios, full audit logging, and a Python executor that adds calibrated noise to query results while maintaining formal privacy guarantees.</p>
                 <a href="https://github.com/ashleyGarcia0405/prism" class="project-link">View Project</a>
