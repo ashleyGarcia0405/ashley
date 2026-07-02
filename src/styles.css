@@ -1,23 +1,23 @@
 :root {
-    /* Original light theme with beige */
-    --background-color: #aea9a2;
-    --text-color: #000000;
-    --border-color: #000000;
-    --hover-background: #f0f0f0;
+    /* Pink theme */
+    --background-color: #fff5f9;
+    --text-color: #99004d;
+    --border-color: #99004d;
+    --hover-background: #ffe0ec;
     --card-background: transparent;
-    --button-text: #000000;
-    --accent-color: #0969da;
-    --secondary-background: #f6f8fa;
-    
-    /* Default syntax colors (will be overridden in dark mode) */
-    --keyword-color: #000;
-    --string-color: #555;
-    --comment-color: #6b6b6b;
-    --function-color: #000;
-    --variable-color: #000;
-    --operator-color: #555;
+    --button-text: #99004d;
+    --accent-color: #c2185b;
+    --secondary-background: #fff9fb;
+
+    /* Pink syntax colors (will be overridden in dark mode) */
+    --keyword-color: #99004d;
+    --string-color: #ad1457;
+    --comment-color: #c2185b;
+    --function-color: #99004d;
+    --variable-color: #99004d;
+    --operator-color: #ad1457;
     --error-color: #f44747;
-    --link-color: #666;
+    --link-color: #99004d;
 }
 
 [data-theme="dark"] {

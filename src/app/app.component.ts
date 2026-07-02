@@ -23,7 +23,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Ashley Garcia';
-  paragraph = `Hi! I'm a senior studying Computer Science and Applied Maths at Columbia University.\nI'm a builder and I love making cool/interactive digital experiences. Outside of work and school, I sail with Columbia Sailing and make niche playlists on Spotify.`;
+  paragraph = `Hi! I graduated from Columbia University with a B.S. in Computer Science.\nI am currently interested in AI alignment research. I'm also a builder at heart and I love making cool/interactive digital experiences.\nIn my free time, I sail (just for fun now, not competitively anymore), make niche playlists on Spotify for my friends, and read up on tech/IP case law.`;
   displayedTitle = '';
   displayedParagraph = '';
   private titleIndex = 0;
