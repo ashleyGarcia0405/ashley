@@ -69,16 +69,15 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <p>The piece isolates one structural idea: coordinated deceleration as a method of control.</p>
 
       <div class="image-row-sop">
-        <img src="/portfolio/IMG_8192.jpeg" class="img-sop" alt="Setup" />
-        <img src="/portfolio/IMG_8191.jpeg" class="img-sop" alt="Squeeze" />
+        <img src="/blog/IMG_8192.webp" class="img-sop" alt="Setup" />
+        <img src="/blog/IMG_8191.webp" class="img-sop" alt="Squeeze" />
       </div>
 
       <p>This image shows the squeeze phase, where the dirty-air ring appears around M2 and the two outer boats converge.</p>
 
       <h2>Why this maneuver</h2>
       <video class="video-sop" playsinline controls>
-        <source src="/portfolio/IMG_8188.MOV" type="video/quicktime" />
-        <source src="/portfolio/IMG_8188.MOV" type="video/mp4" />
+        <source src="/blog/IMG_8188.mp4" type="video/mp4" />
       </video>
       <p>An aside: I have extremely shaky hands, so I tend to be a horrible videographer, I'm sorry.</p>
 
@@ -167,7 +166,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
 
       <h2>Installation context</h2>
-      <img src="/portfolio/IMG_8184.jpeg" class="img-sop" alt="Module #1" />
+      <img src="/blog/IMG_8184.webp" class="img-sop" alt="Module #1" />
 
       <p>The piece was installed in the Vagelos Computational Science Center at Barnard as part of a distributed embedded installation. Multiple ESP32 modules were suspended along a wall, each running a different generative system.</p>
 
@@ -183,18 +182,16 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>My module rotated more than some of the others - like a LOT more LOL. The suspension allowed small degrees of freedom, and the screen would pivot (or really rapidly rotate in my case) while the animation looped. I think I made a joke at some point about how it's as fidgety and restless as me.</p>
       <video class="video-sop" playsinline controls>
-        <source src="/portfolio/IMG_8159.MOV" type="video/quicktime" />
-        <source src="/portfolio/IMG_8159.MOV" type="video/mp4" />
+        <source src="/blog/IMG_8159.mp4" type="video/mp4" />
       </video>
 
       <p>The lighting was also adjusted with the help of Prof. Santolucito and Miles. Overhead lights were partially covered with paper to reduce glare and create a more controlled viewing environment. It had a cool studio effect.</p>
       <div class="image-row-sop">
-        <img class="img-sop" src="/portfolio/IMG_8174.jpeg">
+        <img class="img-sop" src="/blog/IMG_8174.webp">
         <video class="video-sop" playsinline controls>
-          <source src="/portfolio/IMG_8161.MOV" type="video/quicktime" />
-          <source src="/portfolio/IMG_8161.MOV" type="video/mp4" />
+          <source src="/blog/IMG_8161.mp4" type="video/mp4" />
         </video>
-        <img class="img-sop" src="/portfolio/IMG_8151.jpeg">
+        <img class="img-sop" src="/blog/IMG_8151.webp">
       </div>
 
       <h2>Closing</h2>

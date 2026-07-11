@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { DarkModeToggleComponent } from './dark-mode-toggle.component';
 
@@ -8,7 +9,8 @@ describe('DarkModeToggleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DarkModeToggleComponent]
+      imports: [DarkModeToggleComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

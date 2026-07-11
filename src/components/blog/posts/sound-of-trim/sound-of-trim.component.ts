@@ -70,8 +70,8 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <p>At a basic level, it's a capacitive touch controller. But more specifically, it's an attempt to reconstruct the sensory logic of being on a small sailboat—fluttering sail, line tension, wind in your ears, hull noise, wake.</p>
 
       <div class="image-row-sot">
-        <img src="/portfolio/IMG_0283.jpeg" class="img-sot" />
-        <img src="/portfolio/IMG_0272.jpeg" class="img-sot" />
+        <img src="/blog/IMG_0283.webp" class="img-sot" />
+        <img src="/blog/IMG_0272.webp" class="img-sot" />
       </div>
 
       <h2>Why this object</h2>
@@ -107,10 +107,10 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <p>I also used two-touch combinations elsewhere in the system so the interface would feel more like an instrument and less like five isolated triggers. A single touch brings in one sensation; combinations create more loaded states.</p>
 
       <video class="video-sot" playsinline controls>
-        <source src="/portfolio/IMG_0285.MOV" type="video/mp4" />
+        <source src="/blog/IMG_0285.mp4" type="video/mp4" />
       </video>
       <video class="video-sot" playsinline controls>
-        <source src="/portfolio/IMG_0286.MOV" type="video/mp4" />
+        <source src="/blog/IMG_0286.mp4" type="video/mp4" />
       </video>
 
       <h2>Sound design</h2>
@@ -128,12 +128,12 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <p>The ESP32 and breadboard live underneath the boat inside a small dock-like base that acts as both an enclosure and a cable management system.</p>
 
       <div class="image-row-sot">
-        <img src="/portfolio/IMG_0276.jpeg" class="img-sot" />
-        <img src="/portfolio/IMG_0278.jpeg" class="img-sot" />
+        <img src="/blog/IMG_0276.webp" class="img-sot" />
+        <img src="/blog/IMG_0278.webp" class="img-sot" />
       </div>
       <div class="image-row-sot">
-        <img src="/portfolio/IMG_0279.jpeg" class="img-sot" />
-        <img src="/portfolio/IMG_0274.jpeg" class="img-sot" />
+        <img src="/blog/IMG_0279.webp" class="img-sot" />
+        <img src="/blog/IMG_0274.webp" class="img-sot" />
       </div>
 
       <p>Some of the routing was a bit improvised. The wire connected to the main sail copper pad partially tore loose while I was trying to thread it through the ring at the top of the mast. I ended up re-securing it with electrical tape, which lost its stickiness, and then eventually with a small amount of duct tape.</p>

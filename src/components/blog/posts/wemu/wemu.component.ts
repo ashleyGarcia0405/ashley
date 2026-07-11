@@ -86,7 +86,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       date="June 16, 2026"
       [readingTime]="7"
     >
-      <img src="/portfolio/IMG_3642.webp" class="img-wemu" style="height: 375px" alt="WeMu wearable" />
+      <img src="/blog/IMG_3642.webp" class="img-wemu" style="height: 375px" alt="WeMu wearable" />
 
       <p>The theremin is one of the oldest electronic instruments, invented by Leon Theremin in 1920. It has two antennas—a vertical rod and a horizontal loop—and the player never touches either of them. Instead, it works by heterodyning: two radio-frequency oscillators, both running around 170 kHz, are mixed together. One is fixed and the other shifts frequency based on the capacitance between the vertical antenna and the player's hand. You end up hearing the difference between those two frequencies. Move your hand closer, the variable oscillator drifts further from the fixed one, the beat frequency rises, the pitch goes up. The horizontal loop controls volume the same way through a separate amplitude circuit.</p>
 
@@ -115,7 +115,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
 
       <p>The wearable was its own problem. The original plan was a rigid 3D-printed armband, something structural that held the CDK and ESP32 firmly in place. We scrapped it pretty quickly once we realized five days wasn't enough time to model and print that on top of all our other tasks (grad week included). Lamees came up with the idea of 3D printing a flexible fabric-like material instead—something that could wrap around an arm and move with it. She iterated through several prototypes.</p>
 
-      <img src="/portfolio/IMG_0583.webp" class="img-wemu" alt="3D-printed flexible wearable prototype" />
+      <img src="/blog/IMG_0583.webp" class="img-wemu" alt="3D-printed flexible wearable prototype" />
 
       <h2>UWB and its failure modes</h2>
 
@@ -146,7 +146,7 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <h2>Exhibit Setup + Performance</h2>
 
       <div class="image-row-wemu portrait-pair">
-        <img src="/portfolio/82B602C6.webp" class="img-wemu" alt="Exhibit setup" />
+        <img src="/blog/82B602C6.webp" class="img-wemu" alt="Exhibit setup" />
         <iframe
           class="embed-short embed-wemu"
           src="https://www.youtube.com/embed/p1m2c7ulEe0"
@@ -158,8 +158,8 @@ import { BlogPostLayoutComponent } from '../../blog-post-layout/blog-post-layout
       <p class="image-caption-wemu">Debugging in the Studio</p>
 
       <div class="image-row-wemu">
-        <img src="/portfolio/98ACCBEA.webp" class="img-wemu" alt="Setting up the lights" />
-        <img src="/portfolio/DB413B33.webp" class="img-wemu" alt="Setting up the lights" />
+        <img src="/blog/98ACCBEA.webp" class="img-wemu" alt="Setting up the lights" />
+        <img src="/blog/DB413B33.webp" class="img-wemu" alt="Setting up the lights" />
       </div>
       <p class="image-caption-wemu">Setting up the light</p>
 

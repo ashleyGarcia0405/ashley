@@ -42,26 +42,20 @@
     --link-color: #007acc;
 }
 
-body {
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
     background-color: var(--background-color);
+}
+
+body {
     color: var(--text-color);
     font-family: "Inter", sans-serif;
     font-weight: 300;
-    height: 100%;
-}
-
-.scroll-container {
-    margin-top: 50px; 
-    background-color: var(--background-color); /* Set your uniform background */
-    overflow-y: auto;
-    z-index: 1;
-}
-  
-section {
-    /* padding: 100px; */
-    /* min-height: 75vh; */
-    overflow-y: auto;
-    background-color: var(--background-color);
 }
 
 h1 {
@@ -71,13 +65,5 @@ h1 {
 }
 
 p {
-    font-family: Inter, sans-serif;
     font-weight: 300;
 }
-
-html, body { height: 100%; background-color: var(--background-color); }
-body { margin: 0; }
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
