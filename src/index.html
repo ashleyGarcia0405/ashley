@@ -6,10 +6,13 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Ashley Garcia's public workspace — projects, research, and writing.">
+  <link rel="icon" type="image/svg+xml" href="flags.svg">
   <link rel="icon" type="image/png" href="logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    try {
+      document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <app-root></app-root>

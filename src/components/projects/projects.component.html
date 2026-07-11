@@ -1,49 +1,40 @@
 <main class="main-projects">
     <h1>Projects</h1>
-    <div class="carousel-wrapper">
-        <button class="carousel-btn prev" (click)="scrollLeft()">❮</button>
-        <div class="projects-container" #projectsContainer>
-            <div class="project-card">
-              <h3>Regulatory Arbitrage Scanner</h3>
-              <p>A pipeline that watches new filings from the Federal Register, FDA, SEC, and EUR-Lex and runs each one through an agentic Claude loop that researches on its own — checking precedent, market structure, and regulatory history — before producing a three-layer analysis: what the rule actually changes, the market gap it opens, and 2–4 startup hypotheses that only work because the rule exists. Each hypothesis then gets adversarially stress-tested: Claude extracts the moat claims, searches for counter-evidence, and scores how long the opportunity window realistically stays open. I've been circling VC-adjacent work and I'm genuinely interested in how legal frameworks around AI end up reshaping the startup space, so this was a convenient excuse to build something that reads regulatory filings the way an analyst would, and see whether "new rule → new market gap" holds up as a pattern instead of a one-off insight.</p>
-              <a href="https://github.com/ashleyGarcia0405/regulatory-arbitrage-scanner" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Prism</h3>
-                <p>Prism is a differential privacy platform I built with Rails 8, PostgreSQL, and Python's differential privacy libraries to enable secure analysis of sensitive datasets. The system manages privacy budgets, validates queries for safety, and supports multiple cryptographic backends including DP, MPC, and homomorphic encryption. Added collaborative data rooms for multi-party computation scenarios, full audit logging, and a Python executor that adds calibrated noise to query results while maintaining formal privacy guarantees.</p>
-                <a href="https://github.com/ashleyGarcia0405/prism" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Core Fellowship Platform</h3>
-                <p>This platform brings applications, interviews, and placement decisions into one shared system, eliminating spreadsheets, scattered forms, and manual tracking. Interview feedback and preferences are recorded in real time, giving organizers a live view of the entire applicant pool and where each candidate stands. A guided matching tool then helps leadership quickly pair students with startups based on skills and preferences, while built-in messaging handles notifications and next steps automatically.</p>
-                <a href="https://github.com/ashleyGarcia0405/core-fellowship-platform" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Autostack</h3>
-                <p>A command-line assistant designed to automate environment setup by understanding what you’re trying to build and provisioning the tools you need. I once helped a friend (pre-med) set up a bio research workstation from scratch without access to the accumulated tooling most developers/CS students take for granted, and I thought it would be cool to have a tool scan local directories, infer missing dependencies, and generate step-by-step instructions or shell scripts to install languages, libraries, and tooling. This was about 2 years ago before Claude Code became public, so the project was an early experiment in AI-assisted developer ergonomics—and I’m currently revisiting and rebuilding it with better abstractions and stronger automation, informed by how the space has evolved over the last two years.</p>
-                <a href="https://github.com/ashleyGarcia0405/AutoStack" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-              <h3>Aesthetic Mapping</h3>
-              <p>An AI-driven fashion recommendation project I made with my friends at HackMIT that maps visual “vibes” from images to clothing items. The system analyzes an input image across structured dimensions using a multimodal LLM pipeline, then matches those attributes against a curated product database to surface aligned recommendations. The project was  a bit of a hack job (API keys EVERYWHERE lol) but it was an early use of AI-integrated development environments back in 2023, so it was pretty cool to figure out tooling.</p>
-              <a href="https://github.com/gigialc/aesthetic-mapping" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Gossip Girl</h3>
-                <p>A deliberately terrible web app built at a Bad Ideas Hackathon hosted by <a href="https://thetechbros.io/" class="project-link">The Tech Bros</a>, where the goal was to design the worst apps possible. The application listens to live conversations in the browser, extracts dramatic or out-of-context snippets, and generates Gossip-Girl-style tweets via the OpenAI API. The project was intentionally invasive, unserious, and ethically questionable by design; it was a satire of surveillance tech, viral content pipelines, and how easily “ambient data” can be repackaged into performative drama.</p>
-                <a href="https://github.com/ashleyGarcia0405/gossipgirl" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Muselink</h3>
-                <p>MuseLink is a distributed full-stack platform built as part of a Cloud Computing course to explore deploying services across multiple cloud providers. The application connects musicians with venues and individuals looking to book live performances, giving artists a way to showcase their work and sell their services directly. The system was architected as a set of independently deployed services, with frontend and backend components hosted across different cloud environments to study tradeoffs in latency, reliability, and operational complexity.</p>
-                <a href="https://github.com/users/djuarez2652/projects/2" class="project-link">View Project</a>
-            </div>
-<!--            <div class="project-card">-->
-<!--                <h3>Project 7</h3>-->
-<!--                <p>Description of project 7</p>-->
-<!--                <a href="#" class="project-link">View Project</a>-->
-<!--            </div>-->
-        </div>
-        <button class="carousel-btn next" (click)="scrollRight()">❯</button>
+    <div class="projects-list">
+        <article class="project-item">
+            <h3>Regulatory Arbitrage Scanner</h3>
+            <p>A pipeline that watches new filings from the Federal Register, FDA, SEC, and EUR-Lex and runs each one through an agentic Claude loop that researches on its own — checking precedent, market structure, and regulatory history — before producing a three-layer analysis: what the rule actually changes, the market gap it opens, and 2–4 startup hypotheses that only work because the rule exists. Each hypothesis then gets adversarially stress-tested: Claude extracts the moat claims, searches for counter-evidence, and scores how long the opportunity window realistically stays open. I've been circling VC-adjacent work and I'm genuinely interested in how legal frameworks around AI end up reshaping the startup space, so this was a convenient excuse to build something that reads regulatory filings the way an analyst would, and see whether "new rule → new market gap" holds up as a pattern instead of a one-off insight.</p>
+            <a href="https://github.com/ashleyGarcia0405/regulatory-arbitrage-scanner" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Prism</h3>
+            <p>Prism is a differential privacy platform I built with Rails 8, PostgreSQL, and Python's differential privacy libraries to enable secure analysis of sensitive datasets. The system manages privacy budgets, validates queries for safety, and supports multiple cryptographic backends including DP, MPC, and homomorphic encryption. Added collaborative data rooms for multi-party computation scenarios, full audit logging, and a Python executor that adds calibrated noise to query results while maintaining formal privacy guarantees.</p>
+            <a href="https://github.com/ashleyGarcia0405/prism" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Core Fellowship Platform</h3>
+            <p>This platform brings applications, interviews, and placement decisions into one shared system, eliminating spreadsheets, scattered forms, and manual tracking. Interview feedback and preferences are recorded in real time, giving organizers a live view of the entire applicant pool and where each candidate stands. A guided matching tool then helps leadership quickly pair students with startups based on skills and preferences, while built-in messaging handles notifications and next steps automatically.</p>
+            <a href="https://github.com/ashleyGarcia0405/core-fellowship-platform" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Autostack</h3>
+            <p>A command-line assistant designed to automate environment setup by understanding what you’re trying to build and provisioning the tools you need. I once helped a friend (pre-med) set up a bio research workstation from scratch without access to the accumulated tooling most developers/CS students take for granted, and I thought it would be cool to have a tool scan local directories, infer missing dependencies, and generate step-by-step instructions or shell scripts to install languages, libraries, and tooling. This was about 2 years ago before Claude Code became public, so the project was an early experiment in AI-assisted developer ergonomics—and I’m currently revisiting and rebuilding it with better abstractions and stronger automation, informed by how the space has evolved over the last two years.</p>
+            <a href="https://github.com/ashleyGarcia0405/AutoStack" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Aesthetic Mapping</h3>
+            <p>An AI-driven fashion recommendation project I made with my friends at HackMIT that maps visual “vibes” from images to clothing items. The system analyzes an input image across structured dimensions using a multimodal LLM pipeline, then matches those attributes against a curated product database to surface aligned recommendations. The project was  a bit of a hack job (API keys EVERYWHERE lol) but it was an early use of AI-integrated development environments back in 2023, so it was pretty cool to figure out tooling.</p>
+            <a href="https://github.com/gigialc/aesthetic-mapping" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Gossip Girl</h3>
+            <p>A deliberately terrible web app built at a Bad Ideas Hackathon hosted by <a href="https://thetechbros.io/" class="project-link">The Tech Bros</a>, where the goal was to design the worst apps possible. The application listens to live conversations in the browser, extracts dramatic or out-of-context snippets, and generates Gossip-Girl-style tweets via the OpenAI API. The project was intentionally invasive, unserious, and ethically questionable by design; it was a satire of surveillance tech, viral content pipelines, and how easily “ambient data” can be repackaged into performative drama.</p>
+            <a href="https://github.com/ashleyGarcia0405/gossipgirl" class="project-link">View project →</a>
+        </article>
+        <article class="project-item">
+            <h3>Muselink</h3>
+            <p>MuseLink is a distributed full-stack platform built as part of a Cloud Computing course to explore deploying services across multiple cloud providers. The application connects musicians with venues and individuals looking to book live performances, giving artists a way to showcase their work and sell their services directly. The system was architected as a set of independently deployed services, with frontend and backend components hosted across different cloud environments to study tradeoffs in latency, reliability, and operational complexity.</p>
+            <a href="https://github.com/users/djuarez2652/projects/2" class="project-link">View project →</a>
+        </article>
     </div>
 </main>

@@ -54,11 +54,22 @@
     padding-top: 1rem;
 }
 
+.copyright {
+    text-align: center;
+}
+
 .copyright p {
     font-size: 0.7rem;
     color: var(--text-color);
     opacity: 0.4;
     margin: 0;
+}
+
+.copyright .coords {
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    margin-top: 0.3rem;
+    cursor: default;
 }
 
 @media (max-width: 480px) {

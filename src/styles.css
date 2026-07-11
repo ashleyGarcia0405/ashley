@@ -1,23 +1,40 @@
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
 :root {
-    /* Pink theme */
+    --font-mono: 'JetBrains Mono', ui-monospace, 'Consolas', 'Monaco', monospace;
+
+    /* Pink theme.
+       Hierarchy: berry (--text-color) for reading, vivid raspberry
+       (--accent-color/--link-color) for interactive, muted rose
+       (--comment-color) for meta/labels that should recede. */
     --background-color: #fff5f9;
     --text-color: #99004d;
     --border-color: #99004d;
     --hover-background: #ffe0ec;
     --card-background: transparent;
     --button-text: #99004d;
-    --accent-color: #c2185b;
+    --accent-color: #d81b60;
     --secondary-background: #fff9fb;
 
     /* Pink syntax colors (will be overridden in dark mode) */
     --keyword-color: #99004d;
     --string-color: #ad1457;
-    --comment-color: #c2185b;
+    --comment-color: #b25c83;
     --function-color: #99004d;
     --variable-color: #99004d;
     --operator-color: #ad1457;
     --error-color: #f44747;
-    --link-color: #99004d;
+    --link-color: #d81b60;
+
+    /* A·G signal-flag monogram */
+    --flag-primary: #99004d;
+    --flag-light: #ffffff;
+    --flag-stripe: #ffcce0;
 }
 
 [data-theme="dark"] {
@@ -40,6 +57,11 @@
     --operator-color: #d4d4d4;
     --error-color: #f44747;
     --link-color: #007acc;
+
+    /* A·G signal-flag monogram — near-true flag colors from the editor palette */
+    --flag-primary: #007acc;
+    --flag-light: #d4d4d4;
+    --flag-stripe: #dcdcaa;
 }
 
 html {

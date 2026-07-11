@@ -21,6 +21,12 @@
   margin: 0 auto;
 }
 
+.hero-flags {
+  height: 0.75em;
+  width: auto;
+  margin-left: 0.65rem;
+}
+
 .content-intro h1 {
   font-size: 1.5rem;
   font-weight: normal;

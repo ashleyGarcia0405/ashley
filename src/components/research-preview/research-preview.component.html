@@ -1,22 +1,22 @@
 <main class="main-research-preview">
   <div class="preview-header">
-    <h1>Research</h1>
+    <h1>Logbook</h1>
     <p class="preview-subtitle">Following the thread wherever it goes.</p>
   </div>
 
   <div class="preview-grid">
     <div class="preview-block">
-      <span class="block-label">currently</span>
+      <span class="block-label">current heading</span>
       <p class="block-content">{{ currentFocus }}</p>
     </div>
 
     <div class="preview-block">
-      <span class="block-label">latest update · {{ latestLog.date }}</span>
+      <span class="block-label">last entry · {{ latestLog.date }}</span>
       <p class="block-content">{{ latestLog.content }}</p>
     </div>
   </div>
 
   <div class="preview-footer">
-    <button class="hub-link" (click)="enterHub()">Follow the journey →</button>
+    <button class="hub-link" (click)="enterHub()">Open the logbook →</button>
   </div>
 </main>

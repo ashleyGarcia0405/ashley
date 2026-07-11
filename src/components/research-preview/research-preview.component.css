@@ -45,11 +45,12 @@
 }
 
 .block-label {
-  font-size: 0.72rem;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
   letter-spacing: 0.6px;
   color: var(--comment-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .block-content {

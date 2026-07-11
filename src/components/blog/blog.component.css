@@ -70,6 +70,7 @@
 }
 
 .post-number {
+    font-family: var(--font-mono);
     font-size: 0.72rem;
     color: var(--comment-color);
     letter-spacing: 0.5px;
@@ -85,7 +86,8 @@
 }
 
 .post-meta {
-    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     color: var(--comment-color);
     display: flex;
     align-items: center;

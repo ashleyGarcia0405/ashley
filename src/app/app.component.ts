@@ -9,9 +9,4 @@ import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }
-}
+export class AppComponent {}

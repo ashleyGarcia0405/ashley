@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,11 +10,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dark-mode-toggle.component.css'
 })
 export class DarkModeToggleComponent implements OnInit {
-  isDarkMode = true;
+  isDarkMode = false;
+  private readonly isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
-    const savedTheme = localStorage.getItem('theme');
-    this.isDarkMode = savedTheme !== 'light';
+    if (!this.isBrowser) {
+      return;
+    }
+    this.isDarkMode = localStorage.getItem('theme') === 'dark';
     this.applyTheme();
   }
 
