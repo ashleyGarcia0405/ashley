@@ -14,7 +14,7 @@ export class BlogPreviewComponent implements OnInit {
   constructor(private router: Router) {}
 
   featuredPost: BlogPost | null = null;
-  sidePosts: BlogPost[] = [];
+  recentPosts: BlogPost[] = [];
 
   openPost(post: BlogPost): void {
     this.router.navigate(['/blog', post.slug]);
@@ -29,6 +29,6 @@ export class BlogPreviewComponent implements OnInit {
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
     this.featuredPost = sorted[0];
-    this.sidePosts = sorted.slice(1, 3);
+    this.recentPosts = sorted.slice(1, 4);
   }
 }

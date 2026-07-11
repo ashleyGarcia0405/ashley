@@ -1,38 +1,38 @@
 <main class="main-blog-preview">
     <div class="blog-header">
+        <span class="section-tag">// blog</span>
         <h1>Blog</h1>
-        <p class="blog-description">Thoughts on tech, learning, and building things</p>
+        <p class="blog-description">Essays and notes</p>
     </div>
 
-    <div class="bento-grid">
-        <article class="featured-card" *ngIf="featuredPost" (click)="openPost(featuredPost)">
-            <div class="card-top">
-                <span class="post-number">01</span>
-                <div class="post-meta">
-                    <span class="post-date">{{ featuredPost.date }}</span>
-                    <span class="post-divider">·</span>
-                    <span class="post-reading-time">{{ featuredPost.readingTime }} min read</span>
-                </div>
-            </div>
-            <h2 class="featured-title">{{ featuredPost.title }}</h2>
-            <p class="featured-summary">{{ featuredPost.summary }}</p>
-            <span class="read-more">Continue reading →</span>
-        </article>
-
-        <div class="side-cards">
-            <article class="side-card" *ngFor="let post of sidePosts; let i = index" (click)="openPost(post)">
-                <div class="card-top">
-                    <span class="post-number">{{ (i + 2).toString().padStart(2, '0') }}</span>
-                    <div class="post-meta">
-                        <span class="post-date">{{ post.date }}</span>
-                        <span class="post-divider">·</span>
-                        <span class="post-reading-time">{{ post.readingTime }} min read</span>
-                    </div>
-                </div>
-                <h3 class="side-title">{{ post.title }}</h3>
-                <span class="read-more">Read →</span>
-            </article>
+    <article class="featured-spotlight" *ngIf="featuredPost" (click)="openPost(featuredPost)">
+        <div class="spotlight-meta">
+            <span class="meta-label">latest</span>
+            <span class="meta-sep">·</span>
+            <span>{{ featuredPost.date }}</span>
+            <span class="meta-sep">·</span>
+            <span>{{ featuredPost.readingTime }} min read</span>
         </div>
+        <h2 class="spotlight-title">{{ featuredPost.title }}</h2>
+        <p class="spotlight-summary">{{ featuredPost.summary }}</p>
+        <span class="spotlight-cta">Continue reading →</span>
+    </article>
+
+    <div class="post-index" *ngIf="recentPosts.length">
+        <span class="index-label">more from the blog</span>
+        <ul class="index-list">
+            <li *ngFor="let post of recentPosts; let i = index">
+                <button class="index-row" (click)="openPost(post)">
+                    <span class="index-number">{{ (i + 2).toString().padStart(2, '0') }}</span>
+                    <span class="index-title">{{ post.title }}</span>
+                    <span class="index-meta">
+                        <span>{{ post.date }}</span>
+                        <span class="meta-sep">·</span>
+                        <span>{{ post.readingTime }} min</span>
+                    </span>
+                </button>
+            </li>
+        </ul>
     </div>
 
     <div class="blog-footer">
