@@ -56,9 +56,8 @@ export class ResearchComponent {
   constructor(private router: Router) {}
 
   openQuestions = [
-    'Why do some architectures handle vanishing gradients better than others — is it purely structural or does initialization matter as much?',
-    'At what point does understanding the math stop being useful and experimentation takes over?',
-    'How do you actually know when a reward model is learning the right thing vs. overfitting to surface patterns?',
+    'If power gradually stops routing through humans as AI substitutes for labor, consumption, and political participation (with no one actor seizing anything), what would a legal or institutional check even look like, when our checks and balances assume power still needs human cooperation?',
+    'Is sycophancy (a model reinforcing whatever a user already believes because that\'s what RLHF rewards) its own category of democratic harm, distinct from misuse and hallucination, and does it mean weaponizing a model requires no bad actor at all?',
   ];
 
   coursework = [
