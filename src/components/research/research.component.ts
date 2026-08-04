@@ -70,6 +70,60 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 4, 2026',
+      content: 'Read Hamming\'s "You and Your Research" — his talk on what actually separates people who do first-class work from everyone else. The bit on courage got me: once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.',
+      reading: [
+        {
+          title: 'You and Your Research — Richard Hamming',
+          url: 'https://www.cs.virginia.edu/~robins/YouAndYourResearch.html',
+          reflection: '"Luck favors the prepared mind." Also stuck with me: keep your subconscious starved on the one problem so it works on it while you sleep.'
+        }
+      ]
+    },
+    {
+      date: 'Aug 2, 2026',
+      content: 'Finished Empire of AI. Good primer on the history and current state of genai — helped fill in a lot of context I was missing on how we got here.',
+      reading: [
+        {
+          title: 'Empire of AI — Karen Hao',
+          reflection: 'Good context on the history and current state of genai.'
+        }
+      ]
+    },
+    {
+      date: 'Jul 31, 2026',
+      content: 'Read Jacob Steinhardt\'s "Research as a Stochastic Decision Process." Argues you should order tasks by informativeness per unit time rather than by difficulty, and actively try to disprove your own ideas early instead of hoping they work.',
+      reading: [
+        {
+          title: 'Research as a Stochastic Decision Process — Jacob Steinhardt',
+          url: 'https://cs.stanford.edu/~jsteinhardt/ResearchasaStochasticDecisionProcess.html',
+          reflection: 'Liked the idea of de-risking cheaply before committing to a full approach.'
+        }
+      ]
+    },
+    {
+      date: 'Jul 30, 2026',
+      content: 'Read a Quanta piece on why scary AI narratives spread. Argues a lot of the "AI develops survival instinct" stories are marketing dressed up as danger. Real autonomy requires something like an "autopoietic," self-maintaining system with something to lose, which current LLMs don\'t have. Made me more skeptical of doom narratives that skip that distinction.',
+      reading: [
+        {
+          title: 'Why Do We Tell Ourselves Scary Stories About AI? — Quanta Magazine',
+          url: 'https://www.quantamagazine.org/why-do-we-tell-ourselves-scary-stories-about-ai-20260410/',
+          reflection: 'The real risks are misinformation and misplaced trust, not emergent malevolence.'
+        }
+      ]
+    },
+    {
+      date: 'Jul 29, 2026',
+      content: 'Read an essay arguing we\'re misdiagnosing AI\'s threat to democracy. Panic about AI disinformation may do more damage than the disinformation itself, since it lets bad actors dismiss real evidence as fake — the "liar\'s dividend."',
+      reading: [
+        {
+          title: 'Misunderstanding AI\'s Democracy Problem — Nathaniel Persily',
+          url: 'https://www.digitalistpapers.com/essays/misunderstanding-ais-democracy-problem',
+          reflection: 'Panic about AI and disinformation eroding trust in all media may be the bigger threat than the disinformation itself.'
+        }
+      ]
+    },
+    {
       date: 'Jun 22, 2026',
       content: 'Reviewed a couple of my notes from undergrad on ML. Went through some backpropagation fundamentals. Chain rule clicked again pretty fast. Still want to spend more time on vanishing gradients before moving forward.',
       reading: [
