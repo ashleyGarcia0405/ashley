@@ -15,8 +15,8 @@ export class ResearchPreviewComponent {
   currentFocus = 'Backprop fundamentals. Deleting implementations and rewriting them from memory until it sticks.';
 
   latestLog = {
-    date: 'Jun 22, 2026',
-    content: 'Reviewed backpropagation fundamentals + undergrad stuff I worked on. Implemented a toy backprop pass from scratch in numpy. Still want to spend more time on vanishing gradients before moving forward.'
+    date: 'Aug 4, 2026',
+    content: 'Read Hamming\'s "You and Your Research" — his talk on what actually separates people who do first-class work from everyone else. The bit on courage got me: once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.'
   };
 
   enterHub() {
