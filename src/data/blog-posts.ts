@@ -8,14 +8,14 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
-  {
-    id: '1',
-    title: 'What Do People Mean When They Say "AI OS"?',
-    summary: 'I keep hearing "AI OS" and it feels hand-wavy. This post is me trying to pin it down: what would an AI layer actually own? State? Memory? Permissions? Execution? Inspired by CLI tools, agent workflows, and the question of how much control you should ever hand off.',
-    date: 'Feb 2, 2026',
-    readingTime: 10,
-    slug: 'ai-os'
-  },
+  // {
+  //   id: '1',
+  //   title: 'What Do People Mean When They Say "AI OS"?',
+  //   summary: 'I keep hearing "AI OS" and it feels hand-wavy. This post is me trying to pin it down: what would an AI layer actually own? State? Memory? Permissions? Execution? Inspired by CLI tools, agent workflows, and the question of how much control you should ever hand off.',
+  //   date: 'Feb 2, 2026',
+  //   readingTime: 10,
+  //   slug: 'ai-os'
+  // },
   {
     id: '2',
     title: 'In Defense of the Hack Job',
@@ -43,19 +43,19 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: '8',
     title: 'The Shape of Pressure',
-    summary: 'Dirty air, linear interpolation, and one known oopsie where the boats briefly sail head-to-wind: a breakdown of The Shape of Pressure, a generative animation running on an ESP32 TTGO T-Display.',
+    summary: 'A generative animation on an ESP32 TTGO T-Display modeling a team-racing upwind passback: three boats, dirty air, and how a small change in heading controls the whole configuration.',
     date: 'Mar 2, 2026',
     readingTime: 5,
     slug: 'shape-of-pressure'
   },
-  {
-    id: '7',
-    title: 'Letting Software Spend Your Money',
-    summary: 'We\'re getting really close to letting agents actually buy things for us. That\'s exciting and also kind of terrifying. This post is me thinking through what suddenly matters once software can spend real money: identity, permissions, limits, and what happens when something goes wrong.',
-    date: 'Feb 2, 2026',
-    readingTime: 4,
-    slug: 'agents-spending-money'
-  },
+  // {
+  //   id: '7',
+  //   title: 'Letting Software Spend Your Money',
+  //   summary: 'We\'re getting really close to letting agents actually buy things for us. That\'s exciting and also kind of terrifying. This post is me thinking through what suddenly matters once software can spend real money: identity, permissions, limits, and what happens when something goes wrong.',
+  //   date: 'Feb 2, 2026',
+  //   readingTime: 4,
+  //   slug: 'agents-spending-money'
+  // },
   {
     id: '9',
     title: 'The Sound of Trim',
@@ -67,7 +67,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: '10',
     title: 'WeMu',
-    summary: 'A UWB-based theremin for two pairs of performers. Instead of hand-to-antenna distance, the instrument is the distance between people. Two pairs of dancers, two ranging modules, one shared sound.',
+    summary: 'A UWB-based theremin for two pairs of performers. Instead of hand-to-antenna distance, the instrument is the distance between people.',
     date: 'June 16, 2026',
     readingTime: 7,
     slug: 'wemu'
