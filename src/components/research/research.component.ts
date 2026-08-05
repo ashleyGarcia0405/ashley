@@ -70,12 +70,12 @@ export class ResearchComponent {
   logEntries: LogEntry[] = [
     {
       date: 'Aug 4, 2026',
-      content: 'Read Hamming\'s "You and Your Research" — his talk on what actually separates people who do first-class work from everyone else. The bit on courage got me: once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.',
+      content: 'Read Hamming\'s "You and Your Research" — his talk on what separates people who do first-class work from everyone else. I liked his bit on courage - once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.',
       reading: [
         {
           title: 'You and Your Research — Richard Hamming',
           url: 'https://www.cs.virginia.edu/~robins/YouAndYourResearch.html',
-          reflection: '"Luck favors the prepared mind." Also stuck with me: keep your subconscious starved on the one problem so it works on it while you sleep.'
+          reflection: '"Luck favors the prepared mind." I also liked: keep your subconscious starved on the one problem so it works on it while you sleep.'
         }
       ]
     },
