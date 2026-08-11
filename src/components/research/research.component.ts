@@ -69,6 +69,17 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 10, 2026',
+      content: 'Read a bit on AI policy, this paper was one of the first ones I read in this area. I was not expecting it to be an institutional critique, but rather than an attempt to connect technical alignment methods to legal/regulatory levers. Note to self: look more into mechanistic interpretability. While I do think this paper does an decent job in historicizing AI colonial frameworks in terms of breadth, I was disappointed by the lack of rigor.',
+      reading: [
+        {
+          title: 'Decolonial AI: Decolonial Theory as Sociotechnical - Foresight in Artificial Intelligence',
+          url: 'https://arxiv.org/abs/2007.04068',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 4, 2026',
       content: 'Read Hamming\'s "You and Your Research" — his talk on what separates people who do first-class work from everyone else. I liked his bit on courage - once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.',
       reading: [
