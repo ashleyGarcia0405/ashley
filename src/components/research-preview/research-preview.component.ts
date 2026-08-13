@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 export class ResearchPreviewComponent {
   constructor(private router: Router) {}
 
-  currentFocus = 'Backprop fundamentals. Deleting implementations and rewriting them from memory until it sticks.';
+  currentFocus = 'Reading more into AI policy.';
 
   latestLog = {
-    date: 'Aug 4, 2026',
-    content: 'Read Hamming\'s "You and Your Research" — his talk on what actually separates people who do first-class work from everyone else. I liked his bit on courage - once you believe you can do important problems, you can, and if you think you can\'t, you almost surely won\'t.'
+    date: 'Aug 12, 2026',
+    content: 'Read Hassabis\'s proposal for a Frontier AI Standards Body, a FINRA-style public-private SRO that gates a \'Frontier-class\' label behind capability evals. Liked that it\'s an actual mechanism instead of just a warning, tying prestige to responsible behavior. Not sure what it adds over CAISI/AISIC though, need to dig into what those already do before I can tell if this is new or repackaged.'
   };
 
   enterHub() {

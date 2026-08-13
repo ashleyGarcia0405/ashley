@@ -69,6 +69,17 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 12, 2026',
+      content: 'Read Hassabis\'s proposal for a Frontier AI Standards Body, a FINRA-style public-private SRO that gates a \'Frontier-class\' label behind capability evals. Liked that it\'s an actual mechanism instead of just a warning, tying prestige to responsible behavior. Not sure what it adds over CAISI/AISIC though, need to dig into what those already do before I can tell if this is new or repackaged.',
+      reading: [
+        {
+          title: 'A Framework for Frontier AI and the Dawning of a New Age - Demis Hassabis',
+          url: 'https://x.com/demishassabis/article/2076957440109625718',
+          reflection: 'Refer back to this once I\'ve looked more into what CAISI/AISIC actually do.'
+        }
+      ]
+    },
+    {
       date: 'Aug 10, 2026',
       content: 'Read a bit on AI policy, this paper was one of the first ones I read in this area. I was not expecting it to be an institutional critique, but rather than an attempt to connect technical alignment methods to legal/regulatory levers. Note to self: look more into mechanistic interpretability. While I do think this paper does an decent job in historicizing AI colonial frameworks in terms of breadth, I was disappointed by the lack of rigor.',
       reading: [
