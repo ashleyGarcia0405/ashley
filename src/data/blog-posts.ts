@@ -71,5 +71,13 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'June 16, 2026',
     readingTime: 7,
     slug: 'wemu'
+  },
+  {
+    id: '11',
+    title: 'Hooked on Uniswap',
+    summary: 'A paper on the evolution of Uniswap from V1 through V4 — the constant-product AMM, concentrated liquidity, and the hook-based architecture that turned it into a programmable protocol layer. Written for Science of Blockchains with David Chang, Xincheng Zhang, and Nathan Wangidjaja.',
+    date: 'May 7, 2025',
+    readingTime: 35,
+    slug: 'uniswap'
   }
 ];

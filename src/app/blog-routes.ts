@@ -26,6 +26,8 @@ const BLOG_POST_LOADERS: Record<string, () => Promise<Type<unknown>>> = {
     ),
   wemu: () =>
     import('../components/blog/posts/wemu/wemu.component').then((m) => m.WemuComponent),
+  uniswap: () =>
+    import('../components/blog/posts/uniswap/uniswap.component').then((m) => m.UniswapComponent),
 };
 
 export const blogPostRoutes: Routes = BLOG_POSTS.map((post) => ({
