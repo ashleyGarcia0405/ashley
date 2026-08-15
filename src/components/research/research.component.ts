@@ -69,6 +69,17 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 15, 2026',
+      content: 'Read Ege Erdil\'s piece on Moravec\'s paradox, which argues that the gap between the median and the best performers at a task proxies for how little evolutionary optimization it has faced, and therefore how soon AI will automate it. Useful framing for why some tasks feel deceptively easy, though the variance proxy carries more weight than it can hold. His claim that novels, music, and digital art are near-term automation targets seems wrong to me. The median-to-best gap in art is mostly a gap in reception, and art markets are winner-take-all, so he is reading a market structure and calling it an evolutionary fingerprint. High variance can also be a sign of strong selection pressure if the trait is a costly signal, which would invert his whole proxy. Skeptical of the brain comparison too. The genome bottleneck argument holds up on its own since it is just information counting, but the FLOP estimates are conventions, and optimization pressure gets estimated from the same variance it is meant to explain.',
+      reading: [
+        {
+          title: 'Moravec\'s paradox and its implications - Ege Erdil',
+          url: 'https://epoch.ai/gradient-updates/moravec-s-paradox',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 12, 2026',
       content: 'Read Hassabis\'s proposal for a Frontier AI Standards Body, a FINRA-style public-private SRO that gates a \'Frontier-class\' label behind capability evals. Liked that it\'s an actual mechanism instead of just a warning, tying prestige to responsible behavior. Not sure what it adds over CAISI/AISIC though, need to dig into what those already do before I can tell if this is new or repackaged.',
       reading: [
