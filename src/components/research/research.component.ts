@@ -70,7 +70,7 @@ export class ResearchComponent {
   logEntries: LogEntry[] = [
     {
       date: 'Aug 15, 2026',
-      content: 'Read Ege Erdil\'s piece on Moravec\'s paradox, which argues that the gap between the median and the best performers at a task proxies for how little evolutionary optimization it has faced, and therefore how soon AI will automate it. Useful framing for why some tasks feel deceptively easy, though the variance proxy carries more weight than it can hold. His claim that novels, music, and digital art are near-term automation targets seems wrong to me. The median-to-best gap in art is mostly a gap in reception, and art markets are winner-take-all, so he is reading a market structure and calling it an evolutionary fingerprint. High variance can also be a sign of strong selection pressure if the trait is a costly signal, which would invert his whole proxy. Skeptical of the brain comparison too. The genome bottleneck argument holds up on its own since it is just information counting, but the FLOP estimates are conventions, and optimization pressure gets estimated from the same variance it is meant to explain.',
+      content: 'Read Ege Erdil\'s piece on Moravec\'s paradox, which argues that the gap between the median and the best performers at a task proxies for how little evolutionary optimization it has faced, and therefore how soon AI will automate it. Useful framing for why some tasks feel deceptively easy, though the variance proxy carries more weight than it can hold. His claim that novels, music, and digital art are near-term automation targets seems wrong to me. The median-to-best gap in art is mostly a gap in reception, and art markets are winner-take-all, so he is reading a market structure and calling it an evolutionary fingerprint. High variance can also be a sign of strong selection pressure if the trait is a costly signal. Skeptical of the brain comparison too. The genome bottleneck argument is fine (just information counting), but the FLOP estimates are conventions, and optimization pressure gets estimated from the same variance it is meant to explain.',
       reading: [
         {
           title: 'Moravec\'s paradox and its implications - Ege Erdil',
@@ -81,7 +81,7 @@ export class ResearchComponent {
     },
     {
       date: 'Aug 12, 2026',
-      content: 'Read Hassabis\'s proposal for a Frontier AI Standards Body, a FINRA-style public-private SRO that gates a \'Frontier-class\' label behind capability evals. Liked that it\'s an actual mechanism instead of just a warning, tying prestige to responsible behavior. Not sure what it adds over CAISI/AISIC though, need to dig into what those already do before I can tell if this is new or repackaged.',
+      content: 'Read Hassabis\'s proposal for a Frontier AI Standards Body, a FINRA-style public-private SRO that gates a \'Frontier-class\' label behind capability evals. Liked that it\'s an actual mechanism, tying prestige to responsible behavior. Not sure what it adds over CAISI/AISIC though, need to dig into what those already do.',
       reading: [
         {
           title: 'A Framework for Frontier AI and the Dawning of a New Age - Demis Hassabis',
@@ -92,7 +92,7 @@ export class ResearchComponent {
     },
     {
       date: 'Aug 10, 2026',
-      content: 'Read a bit on AI policy, this paper was one of the first ones I read in this area. I was not expecting it to be an institutional critique, but rather than an attempt to connect technical alignment methods to legal/regulatory levers. Note to self: look more into mechanistic interpretability. While I do think this paper does an decent job in historicizing AI colonial frameworks in terms of breadth, I was disappointed by the lack of rigor.',
+      content: 'Read a bit on AI policy, this paper was one of the first ones I read in this area. I was not expecting it to be an institutional critique,I thought it was going to connect technical alignment methods to legal/regulatory levers. Note to self: look more into mechanistic interpretability. While I do think this paper does an decent job in historicizing AI colonial frameworks in terms of breadth, I was disappointed by the lack of vertical rigor.',
       reading: [
         {
           title: 'Decolonial AI: Decolonial Theory as Sociotechnical - Foresight in Artificial Intelligence',
@@ -114,7 +114,7 @@ export class ResearchComponent {
     },
     {
       date: 'Aug 2, 2026',
-      content: 'Finished Empire of AI. Good primer on the history and current state of genai — helped fill in a lot of context I was missing on how we got here.',
+      content: 'Finished Empire of AI. Good primer on the history and current state of genai — helped fill in a lot of context I was missing on the current AI space, cool to read about researchers I follow on X lol.',
       reading: [
         {
           title: 'Empire of AI — Karen Hao',
@@ -135,7 +135,7 @@ export class ResearchComponent {
     },
     {
       date: 'Jul 30, 2026',
-      content: 'Read a Quanta piece on why scary AI narratives spread. Argues a lot of the "AI develops survival instinct" stories are marketing dressed up as danger. Real autonomy requires something like an "autopoietic," self-maintaining system with something to lose, which current LLMs don\'t have. Made me more skeptical of doom narratives that skip that distinction.',
+      content: 'Read a Quanta piece on why scary AI narratives spread. Argues a lot of the "AI develops survival instinct" stories are marketing dressed up as danger. Real autonomy requires something like an "autopoietic," self-maintaining system with something to lose, which current LLMs don\'t have.',
       reading: [
         {
           title: 'Why Do We Tell Ourselves Scary Stories About AI? — Quanta Magazine',
