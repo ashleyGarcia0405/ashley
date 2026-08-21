@@ -69,6 +69,17 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 21, 2026',
+      content: 'Read Cameron Berg\'s essay arguing current evidence puts real (25-35%) probability on frontier models having some form of conscious experience, enough to warrant precaution without certainty. Still working through the case itself, but the overattribution-risk section pulled me toward my own interest in AI and legal personhood. Berg lists false-positive costs as wasted resources, reputational backlash, and parasocial attachment to users; that last one\'s the only human-centered cost in the bunch, and it\'s underweighted. Separate from his calculus, what interests me is legal capture: companies invoking AI "interests" as a liability shield, the way corporations already use legal personhood against human interests, minus the assumption that consciousness has to be the origin story. Decoupling legal status from rights (animal-cruelty-statute style) isn\'t a clean fix either. Those statutes are weakly enforced precisely because no one has standing to bring a claim, so status without standing would just relocate the capture problem, not close it.',
+      reading: [
+        {
+          title: 'The Evidence for AI Consciousness Today - AI Frontiers',
+          url: 'https://ai-frontiers.org/articles/the-evidence-for-ai-consciousness-today',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 15, 2026',
       content: 'Read Ege Erdil\'s piece on Moravec\'s paradox, which argues that the gap between the median and the best performers at a task proxies for how little evolutionary optimization it has faced, and therefore how soon AI will automate it. Useful framing for why some tasks feel deceptively easy, though the variance proxy carries more weight than it can hold. His claim that novels, music, and digital art are near-term automation targets seems wrong to me. The median-to-best gap in art is mostly a gap in reception, and art markets are winner-take-all, so he is reading a market structure and calling it an evolutionary fingerprint. High variance can also be a sign of strong selection pressure if the trait is a costly signal. Skeptical of the brain comparison too. The genome bottleneck argument is fine (just information counting), but the FLOP estimates are conventions, and optimization pressure gets estimated from the same variance it is meant to explain.',
       reading: [
