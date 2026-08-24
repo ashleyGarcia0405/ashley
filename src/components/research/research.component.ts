@@ -56,21 +56,33 @@ export class ResearchComponent {
   constructor(private router: Router) {}
 
   openQuestions = [
-    'If power gradually stops routing through humans as AI substitutes for labor, consumption, and political participation (with no one actor seizing anything), what would a legal or institutional check even look like, when our checks and balances assume power still needs human cooperation?',
-    'Is sycophancy (a model reinforcing whatever a user already believes because that\'s what RLHF rewards) its own category of democratic harm, distinct from misuse and hallucination, and does it mean weaponizing a model requires no bad actor at all?',
-  ];
-
-  coursework = [
-    'Natural Language Processing',
-    'Artificial Intelligence',
-    'Statistical Inference & Probability Theory',
-    'Honors Statistical Machine Learning',
   ];
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 23, 2026',
+      content: '',
+      reading: [
+        {
+          title: 'Machines of Loving Grace - Dario Amodei',
+          url: 'https://darioamodei.com/essay/machines-of-loving-grace',
+          reflection: ''
+        },
+        {
+          title: 'From Words to Worlds: Spatial Intelligence - Fei-Fei Li',
+          url: 'https://drfeifei.substack.com/p/from-words-to-worlds-spatial-intelligence',
+          reflection: ''
+        },
+        {
+          title: 'The Future Worth Building is Human - Thinking Machines',
+          url: 'https://thinkingmachines.ai/blog/the-future-worth-building-is-human/',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 21, 2026',
-      content: 'Read Cameron Berg\'s essay arguing current evidence puts real (25-35%) probability on frontier models having some form of conscious experience, enough to warrant precaution without certainty. Still working through the case itself, but the overattribution-risk section pulled me toward my own interest in AI and legal personhood. Berg lists false-positive costs as wasted resources, reputational backlash, and parasocial attachment to users; that last one\'s the only human-centered cost in the bunch, and it\'s underweighted. Separate from his calculus, what interests me is legal capture: companies invoking AI "interests" as a liability shield, the way corporations already use legal personhood against human interests, minus the assumption that consciousness has to be the origin story. Decoupling legal status from rights (animal-cruelty-statute style) isn\'t a clean fix either. Those statutes are weakly enforced precisely because no one has standing to bring a claim, so status without standing would just relocate the capture problem, not close it.',
+      content: 'Read Cameron Berg\'s essay arguing current evidence puts a (25-35%) probability on frontier models having some form of conscious experience, enough to warrant precaution without certainty. The overattribution-risk section pulled me toward my own interest in AI and legal personhood. Berg lists false-positive costs as wasted resources, reputational backlash, and parasocial attachment to users; the last one\'s the only human-centered cost in the bunch, and I believe it\'s underweighted. There exists a future where companies use AI "interests" as a liability shield, the way corporations already use legal personhood against human interests, minus the assumption that consciousness has to be the origin story. The author makes a note of decoupling legal status from rights, but those statutes are weakly enforced because no one has standing to bring a claim, so status without standing would just relocate the capture problem.',
       reading: [
         {
           title: 'The Evidence for AI Consciousness Today - AI Frontiers',

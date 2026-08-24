@@ -80,7 +80,6 @@
   margin-bottom: 1.1rem;
 }
 
-.coursework-list,
 .open-questions-list,
 .log-reading-list {
   list-style: none;
@@ -90,22 +89,18 @@
   flex-direction: column;
 }
 
-.coursework-list { gap: 0.45rem; }
 .open-questions-list { gap: 0.65rem; }
 .log-reading-list { gap: 0.25rem; }
 
-.coursework-list li,
 .open-questions-list li,
 .log-reading-list li {
   position: relative;
   color: var(--string-color);
 }
 
-.coursework-list li { font-size: 0.9rem; padding-left: 1rem; }
 .open-questions-list li { font-size: 0.88rem; line-height: 1.6; padding-left: 1rem; }
 .log-reading-list li { font-size: 0.85rem; padding-left: 0.85rem; }
 
-.coursework-list li::before,
 .open-questions-list li::before,
 .log-reading-list li::before {
   position: absolute;
@@ -113,7 +108,6 @@
   color: var(--comment-color);
 }
 
-.coursework-list li::before { content: '—'; }
 .open-questions-list li::before { content: '?'; font-size: 0.78rem; }
 .log-reading-list li::before { content: '·'; }
 
