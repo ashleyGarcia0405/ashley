@@ -60,6 +60,43 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Aug 28, 2026',
+      content: 'Read Amodei\'s "The Adolescence of Technology." So many good points. Thought this paragraph was interesting: "The AI industry needs a healthier relationship with government—one based on substantive policy engagement rather than political alignment. Our choice to engage on policy substance rather than politics is sometimes read as a tactical error or failure to “read the room” rather than a principled decision, and that framing concerns me. In a healthy democracy, companies should be able to advocate for good policy for its own sake. Related to this, a public backlash against AI is brewing: this could be a corrective, but it’s currently unfocused. Much of it targets issues that aren’t actually problems (like datacenter water usage) and proposes solutions (like datacenter bans or poorly designed wealth taxes) that wouldn’t address the real concerns. The underlying issue that deserves attention is ensuring that AI development remains accountable to the public interest, not captured by any particular political or commercial alliance, and it seems important to focus the public discussion there." I believe people are being short-sighted (perhaps out of fear?) about how fast capabilities are moving, and policy is falling further behind because of it.',
+      reading: [
+        {
+          title: 'Physical AI: The Countdown to Robotics\' ChatGPT Moment - Sapphire Ventures',
+          url: 'https://sapphireventures.com/blog/physical-ai-chatgpt-moment/',
+          reflection: ''
+        },
+        {
+          title: 'The Urgency of Interpretability - Dario Amodei',
+          url: 'https://darioamodei.com/post/the-urgency-of-interpretability',
+          reflection: ''
+        },
+        {
+          title: 'The Adolescence of Technology - Dario Amodei',
+          url: 'https://darioamodei.com/essay/the-adolescence-of-technology',
+          reflection: ''
+        },
+        {
+          title: 'The AI Water Issue is Fake - Andy Masley',
+          url: 'https://blog.andymasley.com/p/the-ai-water-issue-is-fake',
+          reflection: ''
+        }
+      ]
+    },
+    {
+      date: 'Aug 25, 2026',
+      content: '',
+      reading: [
+        {
+          title: 'Six and a Half Intuitions for KL Divergence',
+          url: 'https://www.lesswrong.com/posts/no5jDTut5Byjqb4j5/six-and-a-half-intuitions-for-kl-divergence',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 23, 2026',
       content: '',
       reading: [
