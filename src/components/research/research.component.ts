@@ -60,6 +60,49 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Sep 5, 2026',
+      content: 'Read papers on robot manipulation data: DROID (Khazatsky et al.), and Data Quality in Imitation Learning (Belkhale et al., NeurIPS 2023). Started taking notes on papers in the same format I use for my Lincoln-Douglas debate briefs, seems like a good structure for presenting information to coworkers too. Getting more interested in spatial intelligence.',
+      reading: [
+        {
+          title: 'DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset - Khazatsky et al.',
+          url: 'https://arxiv.org/abs/2403.12945',
+          reflection: ''
+        },
+        {
+          title: 'Data Quality in Imitation Learning - Belkhale et al.',
+          url: 'https://proceedings.neurips.cc/paper_files/paper/2023/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html',
+          reflection: ''
+        }
+      ]
+    },
+    {
+      date: 'Sep 2, 2026',
+      content: 'RAND\'s rebuttal to the Superintelligence Strategy paper\'s MAIM concept (Mutual Assured AI Malfunction), an AI analog to nuclear MAD where a state\'s bid for AI dominance gets preventively sabotaged by rivals. RAND\'s sharpest point: MAD worked because neither side could execute a first strike and survive retaliation, that mutual helplessness was the whole point. MAIM requires the opposite, the actual capability to locate and disable a rival\'s AI program, which makes it a first-strike incentive. Also unconvinced states could ever agree on what counts as \'aggressive dominance\' cleanly enough to justify striking, unlike \'a nuke launched.\'',
+      reading: [
+        {
+          title: 'Seeking Stability in the Competition for AI Advantage - RAND',
+          url: 'https://www.rand.org/pubs/commentary/2025/03/seeking-stability-in-the-competition-for-ai-advantage.html',
+          reflection: ''
+        }
+      ]
+    },
+    {
+      date: 'Aug 31, 2026',
+      content: 'In the dynamism-vs-stasis frameworks Toner borrows, parts of the AI safety community lean "stasist" that instinctively reach for centralized control, fewer AI projects, nonproliferation, and licensing regimes as solutions (Bostrom\'s Vulnerable World Hypothesis proposes "ubiquitous real-time worldwide surveillance") are the extreme endpoint of that instinct. Toner herself prefers a more dynamist approach: transparency and whistleblower protections, third-party audit ecosystems, open-source, and "defensive acceleration" (racing to build defenses faster than harms).',
+      reading: [
+        {
+          title: 'Zoom In: An Introduction to Circuits - Chris Olah et al.',
+          url: 'https://distill.pub/2020/circuits/zoom-in/',
+          reflection: ''
+        },
+        {
+          title: 'Dynamism vs. Stasis - Helen Toner',
+          url: 'https://helentoner.substack.com/p/dynamism-vs-stasis',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Aug 28, 2026',
       content: 'Read Amodei\'s "The Adolescence of Technology." So many good points. Thought this paragraph was interesting: "The AI industry needs a healthier relationship with government—one based on substantive policy engagement rather than political alignment. Our choice to engage on policy substance rather than politics is sometimes read as a tactical error or failure to “read the room” rather than a principled decision, and that framing concerns me. In a healthy democracy, companies should be able to advocate for good policy for its own sake. Related to this, a public backlash against AI is brewing: this could be a corrective, but it’s currently unfocused. Much of it targets issues that aren’t actually problems (like datacenter water usage) and proposes solutions (like datacenter bans or poorly designed wealth taxes) that wouldn’t address the real concerns. The underlying issue that deserves attention is ensuring that AI development remains accountable to the public interest, not captured by any particular political or commercial alliance, and it seems important to focus the public discussion there." I believe people are being short-sighted (perhaps out of fear?) about how fast capabilities are moving, and policy is falling further behind because of it.',
       reading: [
@@ -235,11 +278,27 @@ export class ResearchComponent {
 
   papers: Paper[] = [
     {
+      title: 'DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset',
+      authors: 'Khazatsky et al.',
+      year: 2024,
+      url: 'https://arxiv.org/abs/2403.12945',
+      status: 'read',
+      tags: ['robotics', 'manipulation', 'datasets']
+    },
+    {
+      title: 'Data Quality in Imitation Learning',
+      authors: 'Belkhale et al.',
+      year: 2023,
+      url: 'https://proceedings.neurips.cc/paper_files/paper/2023/hash/fe692980c5d9732cf153ce27947653a7-Abstract-Conference.html',
+      status: 'read',
+      tags: ['robotics', 'imitation-learning', 'data-quality']
+    },
+    {
       title: 'Attention Is All You Need',
       authors: 'Vaswani et al.',
       year: 2017,
       url: 'https://arxiv.org/abs/1706.03762',
-      status: 'queued',
+      status: 'read',
       tags: ['transformers', 'foundations']
     },
     // { title: 'Proximal Policy Optimization Algorithms', authors: 'Schulman et al.', year: 2017, url: 'https://arxiv.org/abs/1707.06347', status: 'queued', tags: ['rl', 'policy-gradient'] },
