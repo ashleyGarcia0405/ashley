@@ -17,6 +17,11 @@ export const routes: Routes = [
     data: { seo: PAGE_SEO['projects'] },
   },
   {
+    path: 'lab',
+    loadComponent: () => import('../components/lab/lab.component').then((m) => m.LabComponent),
+    data: { seo: PAGE_SEO['lab'] },
+  },
+  {
     path: 'blog',
     loadComponent: () => import('../components/blog/blog.component').then((m) => m.BlogComponent),
     data: { seo: PAGE_SEO['blog'] },

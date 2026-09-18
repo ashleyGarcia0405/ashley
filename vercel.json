@@ -15,6 +15,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/lab/teleop", "destination": "/lab/teleop/index.html" },
     {
       "source": "/(.*)",
       "destination": "/index.html"

@@ -1,0 +1,19 @@
+<main class="main-lab-preview">
+  <div class="preview-header">
+    <h1>Lab</h1>
+    <p class="preview-subtitle">Fun interface experiments with AI.</p>
+  </div>
+
+  <div class="preview-list">
+    @for (exp of latest; track exp.href) {
+      <a class="preview-item" [href]="exp.href">
+        <span class="item-meta">{{ exp.series ?? exp.date }}</span>
+        <span class="item-title">{{ exp.title }} →</span>
+      </a>
+    }
+  </div>
+
+  <div class="preview-footer">
+    <a routerLink="/lab" class="hub-link">Open the lab →</a>
+  </div>
+</main>

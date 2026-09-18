@@ -26,6 +26,10 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       'Tools and systems I\'m building — AI pipelines, developer tooling, and interactive experiments.',
   },
+  lab: {
+    title: `Lab — ${SITE_NAME}`,
+    description: 'Fun interface experiments with AI — small, interactive demos you can play with in the browser.',
+  },
   research: {
     title: `Logbook — ${SITE_NAME}`,
     description: 'Reading notes and work in progress.',

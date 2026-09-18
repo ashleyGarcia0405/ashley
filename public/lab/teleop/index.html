@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teleop · Episode 01</title>
+<meta name="description" content="Drive a robot arm with your keyboard. The interactive demo for Episode 01 of Joystick to Neural Net.">
+<meta property="og:title" content="Teleop · Joystick to Neural Net, Episode 01">
+<meta property="og:description" content="The robot has no brain. You are the brain. Drive a robot arm from your browser.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090c;
+    --ink: #eceef2;
+    --dim: #8b909b;
+    --faint: #454955;
+    --silver: #cfd6e2;
+    --pop: #1e9fe0;     /* ice blue */
+    --red: #ff6b6b;
+    --panel: rgba(22, 24, 30, 0.5);
+    --line: rgba(255, 255, 255, 0.09);
+    --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif: 'Instrument Serif', Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--mono); overflow: hidden; -webkit-font-smoothing: antialiased; }
+  button, input { font: inherit; color: inherit; }
+  a { color: var(--pop); }
+
+  #c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); padding: 12px 14px; font-size: 11px; line-height: 1.5; border-radius: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 10px 40px rgba(0,0,0,0.35); }
+  .panel h2 { margin: 0 0 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; color: var(--silver); display: flex; justify-content: space-between; gap: 8px; }
+  .panel h2 span { color: var(--dim); letter-spacing: 0.08em; }
+
+  .hud { position: fixed; top: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 2; }
+  .hud-left { left: 16px; width: 260px; }
+  .hud-right { right: 16px; width: 290px; }
+
+  .feed { font-size: 11px; letter-spacing: 0.14em; display: flex; align-items: center; gap: 8px; color: var(--ink); text-shadow: 0 0 12px rgba(0,0,0,0.9); }
+  .rec { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red); animation: blink 1.4s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.15; } }
+  .feed small { color: var(--dim); letter-spacing: 0.1em; }
+
+  /* task */
+  .task-goal { font-size: 12px; color: var(--ink); margin-bottom: 8px; }
+  .task-goal b, .task-goal em { color: var(--pop); font-weight: 500; font-style: normal; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .stat { border-top: 1px solid var(--line); padding-top: 4px; }
+  .stat .k { color: var(--dim); font-size: 9px; letter-spacing: 0.14em; }
+  .stat .v { font-size: 15px; font-variant-numeric: tabular-nums; }
+  .demo-line { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--faint); color: var(--dim); font-size: 10px; }
+  .demo-line b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .linkbtn { background: none; border: 0; padding: 0; color: var(--pop); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; font-size: 10px; }
+
+  /* joints */
+  .joint { display: grid; grid-template-columns: 66px 1fr 44px; align-items: center; gap: 8px; margin: 3px 0; }
+  .joint .n { color: var(--dim); font-size: 10px; letter-spacing: 0.1em; }
+  .joint .n.live { color: var(--pop); }
+  .joint .val { text-align: right; font-variant-numeric: tabular-nums; }
+  .gauge { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.05); position: relative; }
+  .gauge i { position: absolute; top: -2px; width: 2px; height: 10px; border-radius: 1px; background: #fff; transform: translateX(-1px); }
+  .gauge s { position: absolute; top: 0; bottom: 0; background: rgba(30,159,224,0.55); border-radius: 3px; text-decoration: none; }
+  .contact { margin-top: 6px; font-size: 10px; letter-spacing: 0.12em; color: var(--faint); }
+  .contact.on { color: var(--red); }
+
+  /* link / latency */
+  .lat-row { display: flex; align-items: baseline; justify-content: space-between; }
+  .lat-val { font-size: 22px; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .lat-val small { font-size: 11px; color: var(--dim); }
+  input[type=range] { width: 100%; accent-color: var(--pop); margin: 6px 0 8px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 4px; }
+  .presets button { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; font-size: 10px; cursor: pointer; color: var(--dim); }
+  .presets button:hover { border-color: rgba(255,255,255,0.3); color: var(--ink); }
+  .presets button.on { border-color: var(--pop); color: #fff; background: rgba(30,159,224,0.25); }
+  .flight { margin-top: 8px; color: var(--dim); font-size: 10px; display: flex; gap: 8px; align-items: center; }
+  .pkts { flex: 1; height: 8px; display: flex; gap: 1px; overflow: hidden; }
+  .pkts i { width: 3px; border-radius: 1px; background: var(--pop); flex: none; }
+
+  /* command stream */
+  #log { list-style: none; margin: 0; padding: 0; height: 196px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; font-size: 10px; white-space: pre; }
+  #log li { color: var(--dim); }
+  #log li.tx { color: var(--ink); }
+  #log li.tx::before { content: '▸ '; color: var(--silver); }
+  #log li.rx { color: var(--pop); }
+  #log li.rx::before { content: '◂ '; }
+  #log li.ev { color: var(--silver); }
+  .legend { margin-top: 6px; color: var(--faint); font-size: 9px; letter-spacing: 0.06em; }
+
+  /* keys */
+  .keys { position: fixed; left: 16px; bottom: 16px; z-index: 2; width: 260px; }
+  .kgrid { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center; }
+  kbd { display: inline-block; min-width: 18px; padding: 1px 5px; border: 1px solid rgba(255,255,255,0.14); border-bottom-width: 2px; border-radius: 5px; background: rgba(255,255,255,0.04); font-family: var(--mono); font-size: 10px; text-align: center; color: var(--ink); margin-right: 2px; }
+  .kgrid span { color: var(--dim); font-size: 10px; }
+  .keys .foot { margin-top: 8px; font-size: 10px; color: var(--faint); display: flex; justify-content: space-between; }
+  .keys .foot a { color: var(--dim); text-decoration: none; }
+  .keys .foot a:hover { color: var(--pop); }
+
+  /* picture-in-picture wrist camera */
+  .pip { position: fixed; right: 16px; bottom: 16px; width: 260px; height: 172px; border: 1px solid rgba(255,255,255,0.14); border-radius: 3px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); z-index: 2; pointer-events: none; }
+  .pip span { position: absolute; left: 6px; top: 4px; font-size: 9px; letter-spacing: 0.16em; color: var(--ink); text-shadow: 0 0 6px #000; }
+  .pip::after { content: ''; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; }
+
+  /* toast */
+  #toast { position: fixed; left: 50%; top: 18px; transform: translate(-50%, -8px); opacity: 0; transition: opacity .2s, transform .2s; z-index: 3; font-size: 11px; letter-spacing: 0.16em; padding: 7px 14px; border-radius: 999px; background: rgba(22,24,30,0.6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.14); color: var(--ink); pointer-events: none; white-space: nowrap; }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+  #toast.good { border-color: var(--pop); color: var(--pop); }
+
+  /* intro */
+  #intro { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 16px; background: rgba(8,9,12,0.8); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: opacity .5s; overflow-y: auto; }
+  #intro.gone { opacity: 0; pointer-events: none; }
+  .card { max-width: 560px; width: 100%; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.3em; color: var(--dim); display: flex; align-items: center; gap: 10px; }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .card h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 9vw, 76px); line-height: 0.95; margin: 14px 0 20px; letter-spacing: -0.01em; }
+  .card h1 em { color: var(--pop); }
+  .card p { font-size: 13px; line-height: 1.7; color: #c3c7d0; margin: 0 0 14px; }
+  .card p strong { color: var(--ink); font-weight: 500; }
+  .card .mission { border-left: 2px solid var(--pop); padding-left: 12px; color: var(--ink); }
+  .go { margin-top: 10px; background: var(--pop); color: #fff; border: 0; border-radius: 999px; padding: 13px 24px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; cursor: pointer; }
+  .go:hover { background: #3cb2ee; }
+  .card .hint { font-size: 10px; color: var(--dim); margin-top: 10px; letter-spacing: 0.08em; }
+
+  /* touch gamepad */
+  .touchpad { display: none; }
+  @media (hover: none) and (pointer: coarse) {
+    .touchpad { display: flex; position: fixed; left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 4; justify-content: space-between; align-items: flex-end; gap: 8px; pointer-events: none; }
+    .dpad { display: grid; grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); pointer-events: auto; }
+    .dpad button, .gripbtn { background: rgba(22,24,30,0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; margin: 1px; color: var(--ink); font-size: 16px; touch-action: none; user-select: none; -webkit-user-select: none; }
+    .dpad button.held, .gripbtn.held { background: rgba(30,159,224,0.45); border-color: var(--pop); }
+    .dpad .u { grid-area: 1 / 2; } .dpad .l { grid-area: 2 / 1; } .dpad .r { grid-area: 2 / 3; } .dpad .d { grid-area: 3 / 2; }
+    .dpad .c { grid-area: 2 / 2; display: grid; place-items: center; font-size: 8px; color: var(--dim); letter-spacing: 0.08em; text-align: center; line-height: 1.2; }
+    .mid { display: flex; flex-direction: column; gap: 6px; align-items: center; pointer-events: auto; }
+    .gripbtn { width: 68px; height: 52px; font-size: 11px; letter-spacing: 0.14em; font-family: var(--mono); }
+    .mid .small { background: rgba(22,24,30,0.55); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; color: var(--dim); font-size: 9px; padding: 5px 8px; letter-spacing: 0.12em; }
+    .keys { display: none; }
+  }
+
+  @media (max-width: 760px) {
+    .hud-left { left: 8px; right: 8px; top: calc(8px + env(safe-area-inset-top)); width: auto; }
+    .hud-right { display: none; }
+    .joints-panel, .demo-line { display: none; }
+    .keys { display: none; }
+    .pip { width: 150px; height: 100px; right: 8px; bottom: 190px; }
+    .panel { padding: 8px 10px; }
+    .task-goal { font-size: 11px; margin-bottom: 6px; }
+    .mobile-lat { display: flex !important; }
+  }
+  .mobile-lat { display: none; margin-top: 8px; gap: 4px; align-items: center; font-size: 10px; color: var(--dim); flex-wrap: wrap; }
+  .mobile-lat button { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 10px; color: var(--dim); }
+  .mobile-lat button.on { border-color: var(--pop); color: #fff; background: rgba(30,159,224,0.25); }
+</style>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="c" tabindex="-1" aria-label="3D view of a robot arm you can drive with the keyboard"></canvas>
+
+<div class="hud hud-left">
+  <div class="feed"><i class="rec"></i> LIVE <small id="camLabel">CAM 01 / OVERVIEW</small></div>
+
+  <section class="panel">
+    <h2>TASK <span id="round">ROUND 1</span></h2>
+    <div class="task-goal">Pick up the <b>crystal</b>. Place it in the <em>ring</em>.</div>
+    <div class="stats">
+      <div class="stat"><div class="k">PLACED</div><div class="v" id="score">0</div></div>
+      <div class="stat"><div class="k">TIME</div><div class="v" id="timer">0.0s</div></div>
+      <div class="stat"><div class="k">BEST</div><div class="v" id="best">—</div></div>
+    </div>
+    <div class="mobile-lat" id="mobileLat">LATENCY
+      <button data-ms="0" class="on">0</button><button data-ms="150">150ms</button><button data-ms="300">300ms</button><button data-ms="1300">MOON</button>
+    </div>
+    <div class="demo-line">
+      Every move you make is logged: what the robot saw, and what you told it.
+      <b id="frames">0</b> frames so far. <button class="linkbtn" id="dl">download</button>
+    </div>
+  </section>
+
+  <section class="panel joints-panel">
+    <h2>JOINTS <span>RAD → DEG</span></h2>
+    <div id="joints"></div>
+    <div class="contact" id="contact">● CONTACT</div>
+  </section>
+</div>
+
+<div class="hud hud-right">
+  <section class="panel">
+    <h2>LINK <span>OPERATOR → ROBOT</span></h2>
+    <div class="lat-row"><div class="lat-val"><span id="latVal">0</span> <small>ms one-way</small></div></div>
+    <input type="range" id="lat" min="0" max="3000" step="10" value="0" aria-label="Link latency in milliseconds">
+    <div class="presets" id="presets">
+      <button data-ms="0" class="on">SAME ROOM</button>
+      <button data-ms="60">CROSS-COUNTRY</button>
+      <button data-ms="300">SATELLITE</button>
+      <button data-ms="1300">MOON</button>
+    </div>
+    <div class="flight">IN FLIGHT <div class="pkts" id="pkts"></div><span id="pktN">0</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>COMMAND STREAM <span>10 HZ SAMPLE</span></h2>
+    <ul id="log"></ul>
+    <div class="legend">▸ sent by you &nbsp; ◂ executed by robot</div>
+  </section>
+</div>
+
+<section class="panel keys">
+  <h2>CONTROLS <span id="padState">KEYBOARD</span></h2>
+  <div class="kgrid">
+    <div><kbd>A</kbd><kbd>D</kbd></div><span>base: swing left / right</span>
+    <div><kbd>W</kbd><kbd>S</kbd></div><span>shoulder: reach / pull back</span>
+    <div><kbd>↑</kbd><kbd>↓</kbd></div><span>elbow: raise / lower</span>
+    <div><kbd>←</kbd><kbd>→</kbd></div><span>wrist: tilt</span>
+    <div><kbd>SPACE</kbd></div><span>open / close gripper</span>
+    <div><kbd>C</kbd> <kbd>R</kbd></div><span>swap camera · reset</span>
+  </div>
+  <div class="foot"><span>drag to orbit · gamepad ok</span><a href="/lab">← lab</a></div>
+</section>
+
+<div class="pip" id="pip"><span id="pipLabel">WRIST CAM</span></div>
+<div id="toast"></div>
+
+<div class="touchpad" aria-hidden="true">
+  <div class="dpad">
+    <button class="u" data-j="1" data-d="1">▲</button>
+    <button class="l" data-j="0" data-d="-1">◀</button>
+    <div class="c">BASE<br>SHLDR</div>
+    <button class="r" data-j="0" data-d="1">▶</button>
+    <button class="d" data-j="1" data-d="-1">▼</button>
+  </div>
+  <div class="mid">
+    <button class="gripbtn" id="gripBtn">GRIP</button>
+    <button class="small" id="camBtn">CAMERA</button>
+  </div>
+  <div class="dpad">
+    <button class="u" data-j="2" data-d="-1">▲</button>
+    <button class="l" data-j="3" data-d="1">◀</button>
+    <div class="c">ELBOW<br>WRIST</div>
+    <button class="r" data-j="3" data-d="-1">▶</button>
+    <button class="d" data-j="2" data-d="1">▼</button>
+  </div>
+</div>
+
+<div id="intro">
+  <div class="card">
+    <div class="eyebrow">EPISODE 01</div>
+    <h1>Joystick to <em>Neural&nbsp;Net</em></h1>
+    <p>This arm has no brain. It won't move until you tell it to. Every motion starts as a keypress, travels down a wire as a command, and runs on the motors a moment later.</p>
+    <p>That's <strong>teleoperation</strong>: a human in the loop, watching, commanding, and correcting in real time. It's how robots get driven, and it's how they get taught.</p>
+    <p class="mission">Pick up the crystal and set it inside the ring. Then turn up the latency and try again.</p>
+    <button class="go" id="go">TAKE THE CONTROLS</button>
+    <div class="hint">WASD + ARROW KEYS · SPACE TO GRIP · GAMEPAD SUPPORTED</div>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { Reflector } from 'three/addons/objects/Reflector.js';
+
+const $ = (s) => document.querySelector(s);
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+// ---------- robot spec ----------
+const L1 = 0.55, L2 = 0.5;                  // upper arm, forearm (m)
+const CUBE = 0.08, H = CUBE / 2, PAD_R = 0.13;
+const FINGER_MIN = 0.018, FINGER_MAX = 0.1, FINGER_HOLD = H + 0.01, FINGER_SPEED = 0.22;
+const JOINTS = [
+  { name: 'BASE',     min: -Math.PI, max: Math.PI, speed: 1.1, home: 0 },
+  { name: 'SHOULDER', min: -0.7,     max: 1.7,     speed: 0.9, home: 0.45 },
+  { name: 'ELBOW',    min: -0.2,     max: 2.6,     speed: 1.1, home: 1.35 },
+  { name: 'WRIST',    min: -1.9,     max: 2.2,     speed: 1.6, home: 1.0 },
+];
+
+// ---------- renderer / scene ----------
+const canvas = $('#c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.95;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x08090c);
+scene.fog = new THREE.Fog(0x08090c, 3.2, 8.5);
+// a soft studio room for metal and glass to reflect
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+scene.add(new THREE.HemisphereLight(0xb8c2d6, 0x0c0d12, 0.35));
+const key = new THREE.DirectionalLight(0xf4f6ff, 2.2);
+key.position.set(2, 4, 2.5);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+Object.assign(key.shadow.camera, { left: -1.6, right: 1.6, top: 1.6, bottom: -1.6, near: 0.5, far: 10 });
+key.shadow.bias = -0.0004;
+key.shadow.normalBias = 0.02;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xbfdcff, 0.7);
+fill.position.set(-2.5, 2, -3);
+scene.add(fill);
+
+// glassy runway: a real mirror under a dark slate lacquer, so reflections read soft and deep
+const mirror = new Reflector(new THREE.PlaneGeometry(24, 24), {
+  textureWidth: 1024 * Math.min(devicePixelRatio, 2), textureHeight: 1024 * Math.min(devicePixelRatio, 2),
+  color: 0x8a94a6, clipBias: 0.003,
+});
+mirror.rotation.x = -Math.PI / 2; scene.add(mirror);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), new THREE.MeshStandardMaterial({
+  color: 0x131820, roughness: 1, metalness: 0, envMapIntensity: 0, transparent: true, opacity: 0.7,
+}));
+floor.rotation.x = -Math.PI / 2; floor.position.y = 0.0005; floor.receiveShadow = true; scene.add(floor);
+const grid = new THREE.GridHelper(12, 60, 0x2a303b, 0x1c2029);
+grid.position.y = 0.001; grid.material.transparent = true; grid.material.opacity = 0.35; scene.add(grid);
+const reach = new THREE.Mesh(new THREE.RingGeometry(1.0, 1.006, 128), new THREE.MeshBasicMaterial({ color: 0xc9d0dc, transparent: true, opacity: 0.18 }));
+reach.rotation.x = -Math.PI / 2; reach.position.y = 0.002; scene.add(reach);
+
+// ---------- the arm ----------
+// brushed aluminium links, glossy gunmetal joints, polished titanium fingers
+const shell  = new THREE.MeshPhysicalMaterial({ color: 0xd4d8df, metalness: 0.85, roughness: 0.36, clearcoat: 0.6, clearcoatRoughness: 0.2, envMapIntensity: 1.3 });
+const dark   = new THREE.MeshPhysicalMaterial({ color: 0x4a4e58, metalness: 0.8, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.06, envMapIntensity: 1.2 });
+const accent = new THREE.MeshPhysicalMaterial({ color: 0xdfe3ea, metalness: 1, roughness: 0.2, envMapIntensity: 1.4, iridescence: 0.7, iridescenceIOR: 1.35, iridescenceThicknessRange: [180, 520] });
+
+function mesh(geo, mat, parent, pos) {
+  const o = new THREE.Mesh(geo, mat); o.castShadow = o.receiveShadow = true;
+  if (pos) o.position.set(...pos); parent.add(o); return o;
+}
+function hub(parent, r, w) {
+  mesh(new THREE.CylinderGeometry(r, r, w, 32), dark, parent).rotation.z = Math.PI / 2;
+  mesh(new THREE.CylinderGeometry(r * 0.55, r * 0.55, w + 0.008, 24), accent, parent).rotation.z = Math.PI / 2;
+}
+function probe(parent, x, y, z) { const o = new THREE.Object3D(); o.position.set(x, y, z); parent.add(o); return o; }
+
+const arm = new THREE.Group(); scene.add(arm);
+mesh(new THREE.CylinderGeometry(0.2, 0.24, 0.08, 48), dark, arm, [0, 0.04, 0]);
+const yaw = new THREE.Group(); yaw.position.y = 0.08; arm.add(yaw);
+mesh(new THREE.CylinderGeometry(0.13, 0.15, 0.16, 40), shell, yaw, [0, 0.08, 0]);
+mesh(new THREE.CylinderGeometry(0.152, 0.152, 0.02, 40), accent, yaw, [0, 0.02, 0]);
+
+const shoulder = new THREE.Group(); shoulder.position.y = 0.22; yaw.add(shoulder);   // world y = 0.30
+hub(shoulder, 0.075, 0.2);
+mesh(new THREE.CapsuleGeometry(0.05, L1 - 0.1, 8, 20), shell, shoulder, [0, L1 / 2, 0]);
+
+const elbow = new THREE.Group(); elbow.position.y = L1; shoulder.add(elbow);
+hub(elbow, 0.064, 0.16);
+mesh(new THREE.CapsuleGeometry(0.042, L2 - 0.084, 8, 20), shell, elbow, [0, L2 / 2, 0]);
+
+const wrist = new THREE.Group(); wrist.position.y = L2; elbow.add(wrist);
+hub(wrist, 0.05, 0.12);
+mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.06, 20), shell, wrist, [0, 0.035, 0]);
+mesh(new THREE.BoxGeometry(0.22, 0.03, 0.07), dark, wrist, [0, 0.075, 0]);
+const fingerGeo = new THREE.BoxGeometry(0.02, 0.1, 0.05);
+const fingerL = mesh(fingerGeo, accent, wrist, [-FINGER_MAX, 0.14, 0]);
+const fingerR = mesh(fingerGeo, accent, wrist, [FINGER_MAX, 0.14, 0]);
+const grasp = probe(wrist, 0, 0.15, 0);
+
+// collision probes: finger tips + palm underside
+const probes = [
+  probe(fingerL, 0, 0.05, 0), probe(fingerR, 0, 0.05, 0),
+  probe(wrist, 0, 0.09, 0),
+  probe(wrist, -0.11, 0.09, -0.035), probe(wrist, 0.11, 0.09, -0.035),
+  probe(wrist, -0.11, 0.09, 0.035), probe(wrist, 0.11, 0.09, 0.035),
+];
+
+// wrist camera looks down the fingers, image-up = away from the base
+const wristCam = new THREE.PerspectiveCamera(72, 1.5, 0.01, 20);
+wristCam.position.set(0, 0.05, 0.07);
+wristCam.rotation.set(Math.PI / 2, 0, Math.PI);
+wrist.add(wristCam);
+
+// ---------- cube + pad ----------
+const cubeMat = new THREE.MeshPhysicalMaterial({
+  color: 0xe6f5ff, metalness: 0, roughness: 0.15, transmission: 1, thickness: 0.08, ior: 1.5,
+  attenuationColor: new THREE.Color(0x1e9fe0), attenuationDistance: 0.3,
+  emissive: 0x0b6fa3, emissiveIntensity: 0.6, envMapIntensity: 2, specularIntensity: 1,
+  clearcoat: 1, clearcoatRoughness: 0.03,
+});
+const cube = mesh(new THREE.BoxGeometry(CUBE, CUBE, CUBE), cubeMat, scene);
+cube.add(new THREE.LineSegments(new THREE.EdgesGeometry(cube.geometry), new THREE.LineBasicMaterial({ color: 0xbfe6ff, transparent: true, opacity: 0.8 })));
+
+const pad = new THREE.Group(); scene.add(pad);
+const padDisc = mesh(new THREE.CylinderGeometry(PAD_R, PAD_R, 0.01, 48), new THREE.MeshPhysicalMaterial({ color: 0x14151c, metalness: 0.3, roughness: 0.1, clearcoat: 1, emissive: 0x0a2a3d, emissiveIntensity: 0.6 }), pad, [0, 0.005, 0]);
+padDisc.castShadow = false;
+const ringMat = new THREE.MeshBasicMaterial({ color: 0x1e9fe0, transparent: true, opacity: 0.9 });
+const ring = new THREE.Mesh(new THREE.RingGeometry(PAD_R - 0.014, PAD_R, 64), ringMat);
+ring.rotation.x = -Math.PI / 2; ring.position.y = 0.0105; pad.add(ring);
+
+// ---------- cameras ----------
+const cam = new THREE.PerspectiveCamera(42, 1, 0.01, 50);
+cam.position.set(1.75, 1.3, 1.95);
+const controls = new OrbitControls(cam, canvas);
+controls.target.set(0, 0.3, 0.35);
+Object.assign(controls, { enableDamping: true, enablePan: false, minDistance: 0.9, maxDistance: 5, maxPolarAngle: Math.PI * 0.47 });
+let camSwap = false;
+
+// ---------- state ----------
+const q = JOINTS.map((j) => j.home);
+const qd = [0, 0, 0, 0];
+let fingerOff = FINGER_MAX;
+let held = false;
+const cubePhys = { vy: 0, resting: true };
+let started = false, score = 0, best = Infinity, round = 1, taskStart = 0, placing = false;
+let padFlash = 0;
+
+function applyPose() {
+  yaw.rotation.y = q[0]; shoulder.rotation.x = q[1]; elbow.rotation.x = q[2]; wrist.rotation.x = q[3];
+  fingerL.position.x = -fingerOff; fingerR.position.x = fingerOff;
+  arm.updateMatrixWorld(true);
+}
+
+// ---------- collision (floor + resting cube), as penetration depth ----------
+const _v = new THREE.Vector3(), _l = new THREE.Vector3(), _box = new THREE.Box3();
+function penetration() {
+  let p = 0;
+  const cubeSolid = !held && cubePhys.resting;
+  for (const pr of probes) {
+    pr.getWorldPosition(_v);
+    p += Math.max(0, 0.012 - _v.y);
+    if (cubeSolid) {
+      cube.worldToLocal(_l.copy(_v));
+      if (Math.abs(_l.x) < H + 0.008 && Math.abs(_l.z) < H + 0.008 && _l.y < H + 0.004 && _l.y > -H) p += H + 0.004 - _l.y;
+    }
+  }
+  wrist.getWorldPosition(_v); p += Math.max(0, 0.04 - _v.y);
+  elbow.getWorldPosition(_v); p += Math.max(0, 0.07 - _v.y);
+  if (held) { _box.setFromObject(cube); p += Math.max(0, 0.001 - _box.min.y); }
+  return p;
+}
+
+// ---------- operator input ----------
+const BIND = {
+  KeyA: [0, -1], KeyD: [0, 1],
+  KeyW: [1, 1],  KeyS: [1, -1],
+  ArrowUp: [2, -1], KeyI: [2, -1], ArrowDown: [2, 1], KeyK: [2, 1],
+  ArrowLeft: [3, 1], KeyJ: [3, 1], ArrowRight: [3, -1], KeyL: [3, -1],
+};
+const keys = new Set();
+const touches = new Map();
+let gripOpenCmd = true, gpPrev = false;
+
+function toggleGrip() { gripOpenCmd = !gripOpenCmd; }
+
+function readOperator() {
+  const u = [0, 0, 0, 0];
+  for (const k of keys) { const b = BIND[k]; if (b) u[b[0]] += b[1]; }
+  for (const [j, d] of touches.values()) u[j] += d;
+  const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+  let gripBtn = false;
+  for (const gp of pads) {
+    if (!gp) continue;
+    const dz = (v = 0) => (Math.abs(v) < 0.15 ? 0 : v);
+    u[0] += dz(gp.axes[0]); u[1] -= dz(gp.axes[1]);
+    u[2] += dz(gp.axes[3]); u[3] -= dz(gp.axes[2]);
+    gripBtn ||= gp.buttons[0]?.pressed || gp.buttons[5]?.pressed;
+  }
+  if (gripBtn && !gpPrev) toggleGrip();
+  gpPrev = gripBtn;
+  return u.map((v) => clamp(v, -1, 1));
+}
+
+addEventListener('keydown', (e) => {
+  if (!started && (e.code === 'Enter' || e.code === 'Space')) { e.preventDefault(); start(); return; }
+  if (document.activeElement?.type === 'range') document.activeElement.blur();
+  if (BIND[e.code] || e.code === 'Space') e.preventDefault();
+  if (e.repeat) return;
+  if (e.code === 'Space') toggleGrip();
+  else if (e.code === 'KeyC') swapCam();
+  else if (e.code === 'KeyR') reset();
+  else if (BIND[e.code]) keys.add(e.code);
+});
+addEventListener('keyup', (e) => keys.delete(e.code));
+addEventListener('blur', () => { keys.clear(); touches.clear(); });
+addEventListener('gamepadconnected', () => { $('#padState').textContent = 'GAMEPAD'; toast('GAMEPAD CONNECTED'); });
+document.addEventListener('click', (e) => e.target.closest?.('button')?.blur());
+
+for (const b of document.querySelectorAll('.dpad button')) {
+  const on = (e) => { e.preventDefault(); b.setPointerCapture?.(e.pointerId); touches.set(e.pointerId, [+b.dataset.j, +b.dataset.d]); b.classList.add('held'); };
+  const off = (e) => { touches.delete(e.pointerId); b.classList.remove('held'); };
+  b.addEventListener('pointerdown', on);
+  for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) b.addEventListener(ev, off);
+}
+$('#gripBtn').addEventListener('pointerdown', (e) => { e.preventDefault(); toggleGrip(); });
+$('#camBtn').addEventListener('click', () => swapCam());
+
+// ---------- the link: commands take `latency` ms to reach the robot ----------
+let latency = 0, seq = 0;
+const queue = [];
+let applied = { seq: 0, t: 0, u: [0, 0, 0, 0], open: true };
+const pendingRx = [];
+
+function setLatency(ms) {
+  latency = ms;
+  $('#lat').value = ms; $('#latVal').textContent = ms;
+  for (const b of document.querySelectorAll('[data-ms]')) b.classList.toggle('on', +b.dataset.ms === ms);
+}
+$('#lat').addEventListener('input', (e) => setLatency(+e.target.value));
+$('#lat').addEventListener('change', (e) => e.target.blur());
+for (const b of document.querySelectorAll('[data-ms]')) b.addEventListener('click', () => { setLatency(+b.dataset.ms); toast(`LATENCY ${b.dataset.ms} MS`); });
+
+// ---------- command stream log ----------
+const logEl = $('#log');
+function logLine(cls, text) {
+  const li = document.createElement('li'); li.className = cls; li.textContent = text; logEl.appendChild(li);
+  while (logEl.children.length > 16) logEl.firstChild.remove();
+}
+const sgn = (v) => (v > 0.005 ? '+' : v < -0.005 ? '-' : ' ') + Math.abs(v).toFixed(1);
+let lastTx = 0, lastTxOpen = true;
+
+// ---------- demonstration recording ----------
+const demo = [];
+let lastRec = 0;
+$('#dl').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify({
+    about: 'Teleoperation demonstrations from Joystick to Neural Net, episode 01. Each frame pairs the robot state with the operator action.',
+    fields: { q: 'joint angles (rad): base, shoulder, elbow, wrist', grip: 'finger offset (m)', cube: 'cube position (m)', pad: 'pad position x,z (m)', action: 'joint velocity commands in [-1,1] + gripper open(1)/close(0)' },
+    frames: demo,
+  })], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'teleop-demonstrations.json'; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+// ---------- HUD ----------
+const jointsEl = $('#joints');
+const gauges = JOINTS.map((j) => {
+  const row = document.createElement('div'); row.className = 'joint';
+  row.innerHTML = `<span class="n">${j.name}</span><div class="gauge"><s></s><i></i></div><span class="val"></span>`;
+  jointsEl.appendChild(row);
+  return { n: row.querySelector('.n'), fill: row.querySelector('s'), mark: row.querySelector('i'), val: row.querySelector('.val') };
+});
+{
+  const row = document.createElement('div'); row.className = 'joint';
+  row.innerHTML = `<span class="n">GRIPPER</span><div class="gauge"><s></s><i></i></div><span class="val"></span>`;
+  jointsEl.appendChild(row);
+  gauges.push({ n: row.querySelector('.n'), fill: row.querySelector('s'), mark: row.querySelector('i'), val: row.querySelector('.val') });
+}
+const zeroFrac = JOINTS.map((j) => (0 - j.min) / (j.max - j.min));
+function updateHud(now) {
+  JOINTS.forEach((j, i) => {
+    const g = gauges[i], f = (q[i] - j.min) / (j.max - j.min), z = zeroFrac[i];
+    g.mark.style.left = `${f * 100}%`;
+    g.fill.style.left = `${Math.min(f, z) * 100}%`; g.fill.style.width = `${Math.abs(f - z) * 100}%`;
+    g.val.textContent = `${Math.round(q[i] * 57.2958)}°`;
+    g.n.classList.toggle('live', Math.abs(qd[i]) > 0.02);
+  });
+  const gg = gauges[4], gf = (fingerOff - FINGER_MIN) / (FINGER_MAX - FINGER_MIN);
+  gg.mark.style.left = `${gf * 100}%`; gg.fill.style.left = '0%'; gg.fill.style.width = `${gf * 100}%`;
+  gg.val.textContent = held ? 'HOLD' : applied.open ? 'OPEN' : 'SHUT';
+  $('#timer').textContent = started ? `${(((placing ? placing : now) - taskStart) / 1000).toFixed(1)}s` : '0.0s';
+  $('#frames').textContent = demo.length.toLocaleString();
+  const n = queue.length;
+  $('#pktN').textContent = n;
+  const pk = $('#pkts'), want = Math.min(n, 60);
+  while (pk.children.length < want) pk.appendChild(document.createElement('i'));
+  while (pk.children.length > want) pk.lastChild.remove();
+}
+
+let toastTimer;
+function toast(msg, good = false) {
+  const t = $('#toast'); t.textContent = msg; t.classList.toggle('good', good); t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 1600);
+}
+
+// ---------- episode flow ----------
+function randomSpot(avoid) {
+  for (let k = 0; k < 50; k++) {
+    const a = (Math.random() - 0.5) * 3.6, r = 0.5 + Math.random() * 0.35;
+    const x = Math.sin(a) * r, z = Math.cos(a) * r;
+    if (!avoid || Math.hypot(x - avoid.x, z - avoid.z) > 0.42) return { x, z };
+  }
+  return { x: -0.5, z: 0.4 };
+}
+function respawn(first = false) {
+  if (held) { scene.attach(cube); held = false; }
+  const c = first ? { x: 0.12, z: 0.7 } : randomSpot();
+  const p = first ? { x: -0.55, z: 0.45 } : randomSpot(c);
+  cube.position.set(c.x, H, c.z); cube.rotation.set(0, Math.random() * Math.PI, 0);
+  cubePhys.resting = true; cubePhys.vy = 0;
+  pad.position.set(p.x, 0, p.z);
+  taskStart = performance.now(); placing = false;
+  $('#round').textContent = `ROUND ${round}`;
+}
+function reset() {
+  JOINTS.forEach((j, i) => { q[i] = j.home; qd[i] = 0; });
+  gripOpenCmd = true; fingerOff = FINGER_MAX; queue.length = 0;
+  applied = { seq, t: performance.now(), u: [0, 0, 0, 0], open: true };
+  pendingRx.length = 0;
+  respawn(); applyPose();
+  logLine('ev', '— reset —');
+}
+function succeed(now) {
+  placing = now; score++;
+  const secs = (now - taskStart) / 1000;
+  const pb = secs < best; best = Math.min(best, secs);
+  $('#score').textContent = score; $('#best').textContent = `${best.toFixed(1)}s`;
+  toast(`PLACED · ${secs.toFixed(1)}s${latency ? ` @ ${latency}ms` : ''}${pb ? ' · BEST' : ''}`, true);
+  logLine('ev', `✓ placed in ${secs.toFixed(1)}s`);
+  padFlash = 1;
+  setTimeout(() => { round++; respawn(); }, 1500);
+}
+function swapCam() {
+  camSwap = !camSwap; controls.enabled = !camSwap;
+  $('#camLabel').textContent = camSwap ? 'CAM 02 / WRIST' : 'CAM 01 / OVERVIEW';
+  $('#pipLabel').textContent = camSwap ? 'OVERVIEW' : 'WRIST CAM';
+}
+function start() {
+  if (started) return;
+  started = true; $('#intro').classList.add('gone');
+  taskStart = performance.now();
+  logLine('ev', '— link up —');
+}
+$('#go').addEventListener('click', start);
+if (matchMedia('(hover: none) and (pointer: coarse)').matches) $('.card .hint').textContent = 'LEFT PAD: BASE + SHOULDER · RIGHT PAD: ELBOW + WRIST · DRAG TO LOOK AROUND';
+
+// ---------- loop ----------
+const _q = new THREE.Quaternion(), _zero = new THREE.Vector3();
+let last = performance.now(), contactUntil = 0;
+
+function step(now, dt) {
+  // 1. operator samples the controls and sends a packet
+  const u = started ? readOperator() : [0, 0, 0, 0];
+  const pkt = { seq: ++seq, t: now, u, open: gripOpenCmd };
+  queue.push(pkt);
+
+  const active = u.some((v) => v !== 0);
+  if (started && ((active && now - lastTx > 100) || gripOpenCmd !== lastTxOpen)) {
+    logLine('tx', `#${String(pkt.seq).padStart(5, '0')}  B${sgn(u[0])} S${sgn(u[1])} E${sgn(u[2])} W${sgn(u[3])}  ${gripOpenCmd ? 'OPEN' : 'CLOSE'}`);
+    pendingRx.push(pkt);
+    lastTx = now; lastTxOpen = gripOpenCmd;
+  }
+
+  // 2. packets arrive `latency` ms later; robot runs the newest one that has landed
+  while (queue.length && queue[0].t <= now - latency) applied = queue.shift();
+  while (pendingRx.length && pendingRx[0].seq <= applied.seq) {
+    const p = pendingRx.shift();
+    logLine('rx', `#${String(p.seq).padStart(5, '0')}  exec   +${Math.round(now - p.t)}ms`);
+  }
+
+  // 3. motors: smooth toward commanded velocity, one joint at a time, refusing moves that dig into things
+  cube.updateMatrixWorld();
+  let blocked = false;
+  for (let i = 0; i < 4; i++) {
+    const j = JOINTS[i];
+    qd[i] += (applied.u[i] * j.speed - qd[i]) * Math.min(1, dt * 12);
+    if (Math.abs(qd[i]) < 1e-4) continue;
+    const before = penetration(), prev = q[i];
+    q[i] = clamp(q[i] + qd[i] * dt, j.min, j.max);
+    if (q[i] === j.min || q[i] === j.max) qd[i] = 0;
+    applyPose();
+    const after = penetration();
+    if (after > 1e-5 && after > before - 1e-6) { q[i] = prev; qd[i] = 0; applyPose(); blocked = true; }
+  }
+  if (blocked) contactUntil = now + 250;
+
+  // 4. gripper
+  const prevOff = fingerOff;
+  const target = applied.open ? FINGER_MAX : held ? FINGER_HOLD : FINGER_MIN;
+  fingerOff += clamp(target - fingerOff, -FINGER_SPEED * dt, FINGER_SPEED * dt);
+  if (!applied.open && !held && prevOff > FINGER_HOLD && fingerOff <= FINGER_HOLD && cubePhys.resting) {
+    grasp.worldToLocal(cube.getWorldPosition(_v));
+    // forgiving on purpose: keyboard driving is imprecise, and the cube snaps into the fingers
+    if (Math.abs(_v.x) < 0.06 && Math.abs(_v.y) < 0.06 && Math.abs(_v.z) < 0.06) {
+      grasp.attach(cube); held = true; fingerOff = FINGER_HOLD;
+      logLine('ev', '● grasped');
+    }
+  }
+  if (held && applied.open) {
+    scene.attach(cube); held = false;
+    const e = new THREE.Euler().setFromQuaternion(cube.quaternion, 'YXZ');
+    cube.rotation.set(0, e.y, 0);
+    cubePhys.resting = false; cubePhys.vy = 0;
+    logLine('ev', '○ released');
+  }
+  applyPose();
+
+  // 5. cube: settle into the fingers when held, fall when dropped
+  if (held) {
+    const k = 1 - Math.exp(-dt * 18);
+    cube.position.lerp(_zero, k); cube.quaternion.slerp(_q.identity(), k);
+  } else if (!cubePhys.resting) {
+    const onPad = Math.hypot(cube.position.x - pad.position.x, cube.position.z - pad.position.z) < PAD_R;
+    const floorY = H + (onPad ? 0.01 : 0);
+    cubePhys.vy -= 9.8 * dt; cube.position.y += cubePhys.vy * dt;
+    if (cube.position.y <= floorY) {
+      cube.position.y = floorY;
+      if (cubePhys.vy < -0.8) cubePhys.vy *= -0.25;
+      else { cubePhys.vy = 0; cubePhys.resting = true; }
+    }
+  }
+  if (!placing && !held && cubePhys.resting &&
+      Math.hypot(cube.position.x - pad.position.x, cube.position.z - pad.position.z) < PAD_R - 0.02) succeed(now);
+
+  // 6. record (state, action) pairs at 20 Hz while something is happening
+  if (started && now - lastRec > 50 && (active || held || prevOff !== fingerOff) && demo.length < 40000) {
+    lastRec = now;
+    const r4 = (v) => Math.round(v * 1e4) / 1e4;
+    const cw = cube.getWorldPosition(_v);
+    demo.push({ t: r4((now - taskStart) / 1000), round, latency_ms: latency, q: q.map(r4), grip: r4(fingerOff), held,
+      cube: [r4(cw.x), r4(cw.y), r4(cw.z)], pad: [r4(pad.position.x), r4(pad.position.z)], action: [...applied.u.map(r4), applied.open ? 1 : 0] });
+  }
+
+  $('#contact').classList.toggle('on', now < contactUntil);
+}
+
+const pipEl = $('#pip');
+function render(t) {
+  const w = innerWidth, h = innerHeight;
+  cam.fov = w / h < 1 ? 62 : 42;   // portrait phones need a wider lens to fit the arm
+  const [big, small] = camSwap ? [wristCam, cam] : [cam, wristCam];
+  renderer.setScissorTest(false);
+  renderer.setViewport(0, 0, w, h);
+  big.aspect = w / h; big.updateProjectionMatrix();
+  renderer.render(scene, big);
+  const r = pipEl.getBoundingClientRect();
+  if (r.width > 0) {
+    const y = h - r.bottom;
+    renderer.setScissorTest(true);
+    renderer.setScissor(r.left, y, r.width, r.height);
+    renderer.setViewport(r.left, y, r.width, r.height);
+    small.aspect = r.width / r.height; small.updateProjectionMatrix();
+    renderer.render(scene, small);
+    renderer.setScissorTest(false);
+  }
+}
+
+function resize() { renderer.setSize(innerWidth, innerHeight, false); }
+addEventListener('resize', resize);
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  step(now, dt);
+  padFlash = Math.max(0, padFlash - dt * 0.8);
+  ringMat.opacity = 0.7 + 0.25 * Math.sin(now / 320) + padFlash * 0.3;
+  ringMat.color.setHex(padFlash > 0.02 ? 0xffffff : 0x1e9fe0);
+    controls.update();
+  updateHud(now);
+  render(now);
+  requestAnimationFrame(frame);
+}
+
+if (new URLSearchParams(location.search).has('debug')) {
+  window.teleop = { THREE, q, cube, grasp, pad, probes, applyPose, penetration, get held() { return held; }, get fingerOff() { return fingerOff; } };
+}
+
+resize();
+respawn(true);
+applyPose();
+logLine('ev', '— waiting for operator —');
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

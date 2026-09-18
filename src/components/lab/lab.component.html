@@ -1,0 +1,37 @@
+<div class="lab">
+
+  <header class="lab-header">
+    <a routerLink="/" class="back-link">← home</a>
+  </header>
+
+  <div class="lab-title-block">
+    <h1>Lab</h1>
+    <p class="lab-description">
+      Fun interface experiments I've been building with AI. Small, interactive, and mostly an
+      excuse to try things. Each one opens in its own little world.
+    </p>
+  </div>
+
+  <div class="experiment-list">
+    @for (exp of experiments; track exp.href) {
+      <article class="experiment">
+        <div class="experiment-meta">
+          @if (exp.series) {
+            <span>{{ exp.series }}</span>
+            <span class="dot">·</span>
+          }
+          <span>{{ exp.date }}</span>
+        </div>
+        <h2>{{ exp.title }}</h2>
+        <p>{{ exp.description }}</p>
+        <div class="experiment-links">
+          <a [href]="exp.href" class="experiment-link">Open experiment →</a>
+          @if (exp.postUrl) {
+            <a [routerLink]="exp.postUrl" class="experiment-link secondary">Read the episode</a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+</div>
