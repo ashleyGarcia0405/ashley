@@ -80,7 +80,7 @@
   .speeds button.on { border-color: var(--pop); color: #fff; background: rgba(30,159,224,0.25); }
 
   .track { position: relative; height: 92px; cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none; }
-  .strip { position: absolute; left: 0; right: 0; top: 0; height: 44px; border-radius: 6px; background: #111318 url('filmstrip.jpg') 0 0 / 100% 100% no-repeat; opacity: 0.75; }
+  .strip { position: absolute; left: 0; right: 0; top: 0; height: 44px; border-radius: 6px; background: #111318 url('/lab/anatomy/filmstrip.jpg') 0 0 / 100% 100% no-repeat; opacity: 0.75; }
   .lane { position: absolute; left: 0; right: 0; top: 50px; height: 18px; }
   .lane canvas { width: 100%; height: 100%; display: block; }
   .lane-name { position: absolute; left: 0; top: 50px; font-family: var(--mono); font-size: 9px; color: var(--dim); transform: translateY(-1px); pointer-events: none; }
@@ -195,9 +195,9 @@
   <div class="layout">
     <div class="viewer">
       <div class="cams">
-        <div class="cam"><video id="v0" src="cam-exterior-1.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_1_left</span><span class="dims">180×320×3</span></div>
-        <div class="cam"><video id="v1" src="cam-exterior-2.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_2_left</span><span class="dims">180×320×3</span></div>
-        <div class="cam"><video id="v2" src="cam-wrist.mp4" muted playsinline preload="auto"></video><span class="tag">wrist_left</span><span class="dims">180×320×3</span></div>
+        <div class="cam"><video id="v0" src="/lab/anatomy/cam-exterior-1.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_1_left</span><span class="dims">180×320×3</span></div>
+        <div class="cam"><video id="v1" src="/lab/anatomy/cam-exterior-2.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_2_left</span><span class="dims">180×320×3</span></div>
+        <div class="cam"><video id="v2" src="/lab/anatomy/cam-wrist.mp4" muted playsinline preload="auto"></video><span class="tag">wrist_left</span><span class="dims">180×320×3</span></div>
         <div class="framecard panel">
           <div class="label">FRAME</div>
           <div class="big"><span id="fBig">000</span><small>/ <span id="fTotal">157</span></small></div>
@@ -272,7 +272,16 @@
   const pad = (n, w = 3) => String(n).padStart(w, '0');
   const fmt = (v, d = 3) => (v < 0 ? '−' : ' ') + Math.abs(v).toFixed(d);
 
-  const D = await fetch('episode-869.json').then((r) => r.json());
+  // absolute path: the page is served at /lab/anatomy (no trailing slash), so relative URLs would resolve to /lab/
+  let D;
+  try {
+    const res = await fetch('/lab/anatomy/episode-869.json');
+    if (!res.ok) throw new Error(res.status);
+    D = await res.json();
+  } catch (err) {
+    $('#loading').textContent = 'COULD NOT LOAD THE EPISODE DATA. TRY REFRESHING.';
+    throw err;
+  }
   const FPS = D.meta.fps, N = D.meta.length;
   const col = (a) => (Array.isArray(a[0]) ? a : a.map((v) => [v]));
 
