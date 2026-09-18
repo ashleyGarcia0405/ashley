@@ -13,6 +13,14 @@ export interface LabExperiment {
 // Newest first.
 export const LAB_EXPERIMENTS: LabExperiment[] = [
   {
+    title: 'Anatomy of a Robot Dataset',
+    series: 'Joystick to Neural Net · Episode 02',
+    date: 'Sep 2026',
+    description:
+      'Scrub through a real teleoperation episode from DROID. Three camera feeds sit on top; the joint angles, gripper, and the operator\'s commands update underneath as you drag, so you can see exactly what one row of robot training data contains.',
+    href: '/lab/anatomy',
+  },
+  {
     title: 'Teleop',
     series: 'Joystick to Neural Net · Episode 01',
     date: 'Sep 2026',

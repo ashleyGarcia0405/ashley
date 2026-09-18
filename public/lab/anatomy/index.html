@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anatomy of a Robot Dataset</title>
+<meta name="description" content="Scrub through a real teleoperation episode from the DROID robot dataset: camera frames on top, proprioceptive state and action vectors underneath.">
+<meta property="og:title" content="Anatomy of a Robot Dataset · Joystick to Neural Net">
+<meta property="og:description" content="One real teleop episode from DROID, pulled apart frame by frame.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎞️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090c;
+    --ink: #eceef2;
+    --dim: #8b909b;
+    --faint: #454955;
+    --silver: #cfd6e2;
+    --pop: #1e9fe0;     /* ice blue */
+    --panel: rgba(22, 24, 30, 0.5);
+    --line: rgba(255, 255, 255, 0.09);
+    --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif: 'Instrument Serif', Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; }
+  button { font: inherit; color: inherit; }
+  a { color: var(--pop); }
+  code { font-family: var(--mono); }
+
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 20px 24px 64px; }
+
+  /* header */
+  .top { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: 0.14em; color: var(--dim); margin-bottom: 28px; }
+  .top a { color: var(--dim); text-decoration: none; }
+  .top a:hover { color: var(--pop); }
+  .intro { display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: end; margin-bottom: 28px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; color: var(--dim); margin-bottom: 12px; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 6vw, 72px); line-height: 0.95; margin: 0 0 16px; letter-spacing: -0.01em; }
+  h1 em { color: var(--pop); }
+  .lede { max-width: 640px; margin: 0; font-size: 15px; line-height: 1.6; color: #c3c7d0; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .facts { display: grid; grid-template-columns: auto auto; gap: 4px 18px; font-family: var(--mono); font-size: 11px; color: var(--dim); }
+  .facts b { color: var(--ink); font-weight: 400; }
+  .facts .ok { color: var(--pop); }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
+  .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--silver); }
+
+  /* two-column layout: the "sensor" column stays pinned while the data scrolls */
+  .layout { display: grid; grid-template-columns: minmax(440px, 46%) 1fr; gap: 20px; align-items: start; }
+  .viewer { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+  .cams { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cam { position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #111318; border: 1px solid var(--line); }
+  .cam video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cam .tag { position: absolute; left: 8px; top: 7px; font-family: var(--mono); font-size: 10px; color: #fff; text-shadow: 0 0 6px #000, 0 0 2px #000; }
+  .cam .dims { position: absolute; right: 8px; bottom: 6px; font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.7); text-shadow: 0 0 4px #000; }
+  .framecard { aspect-ratio: 16 / 9; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .framecard .big { font-family: var(--serif); font-size: 52px; line-height: 0.9; font-variant-numeric: tabular-nums; }
+  .framecard .big small { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-left: 4px; }
+  .framecard .sub { font-family: var(--mono); font-size: 11px; color: var(--dim); display: flex; gap: 14px; flex-wrap: wrap; }
+  .framecard .sub b { color: var(--ink); font-weight: 400; }
+  .framecard .phase { font-size: 13px; color: var(--ink); }
+  .framecard .phase span { color: var(--pop); }
+
+  /* scrubber */
+  .scrub { padding: 12px 14px 10px; }
+  .scrub-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .play { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--pop); color: #fff; cursor: pointer; display: grid; place-items: center; flex: none; }
+  .play:hover { background: #3cb2ee; }
+  .play svg { width: 14px; height: 14px; }
+  .readout { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .readout span { color: var(--dim); }
+  .speeds { margin-left: auto; display: flex; gap: 4px; }
+  .speeds button { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; font-family: var(--mono); font-size: 10px; color: var(--dim); cursor: pointer; }
+  .speeds button.on { border-color: var(--pop); color: #fff; background: rgba(30,159,224,0.25); }
+
+  .track { position: relative; height: 92px; cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none; }
+  .strip { position: absolute; left: 0; right: 0; top: 0; height: 44px; border-radius: 6px; background: #111318 url('filmstrip.jpg') 0 0 / 100% 100% no-repeat; opacity: 0.75; }
+  .lane { position: absolute; left: 0; right: 0; top: 50px; height: 18px; }
+  .lane canvas { width: 100%; height: 100%; display: block; }
+  .lane-name { position: absolute; left: 0; top: 50px; font-family: var(--mono); font-size: 9px; color: var(--dim); transform: translateY(-1px); pointer-events: none; }
+  .ticks { position: absolute; left: 0; right: 0; top: 72px; height: 20px; font-family: var(--mono); font-size: 9px; color: var(--faint); }
+  .ticks i { position: absolute; top: 0; width: 1px; height: 4px; background: var(--faint); }
+  .ticks span { position: absolute; top: 6px; transform: translateX(-50%); }
+  .marker { position: absolute; top: 44px; height: 30px; width: 1px; background: var(--silver); opacity: 0.6; pointer-events: none; }
+  .marker span { position: absolute; top: 24px; left: 4px; font-family: var(--mono); font-size: 9px; color: var(--silver); white-space: nowrap; }
+  .marker.end span { left: auto; right: 4px; }
+  .marker.in span { top: 4px; color: #fff; }
+  .marker em { font-style: normal; }
+  .playhead { position: absolute; top: -4px; height: 78px; width: 2px; margin-left: -1px; background: var(--pop); pointer-events: none; }
+  .playhead::before { content: ''; position: absolute; top: -4px; left: -5px; width: 12px; height: 12px; border-radius: 50%; background: var(--pop); box-shadow: 0 0 0 3px var(--bg); }
+  .hint { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 2px; }
+
+  /* data column */
+  .data { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+  .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 4px 2px 10px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+  .group-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 30px; }
+  .group-head p { margin: 0; font-size: 12px; color: var(--dim); text-align: right; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { padding: 12px 14px 10px; min-width: 0; }
+  .card.wide { grid-column: 1 / -1; }
+  .card-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .card-head code { font-size: 12px; color: var(--ink); }
+  .card-head code b { color: var(--dim); font-weight: 400; }
+  .shape { font-family: var(--mono); font-size: 10px; color: var(--pop); border: 1px solid rgba(30,159,224,0.4); border-radius: 4px; padding: 0 5px; }
+  .unit { font-family: var(--mono); font-size: 10px; color: var(--dim); margin-left: auto; }
+  .blurb { font-size: 12px; line-height: 1.5; color: var(--dim); margin: 6px 0 10px; }
+  .rows { display: grid; gap: 3px; }
+  .row { display: grid; grid-template-columns: 44px 1fr 62px; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; cursor: default; border-radius: 4px; }
+  .row .n { color: var(--dim); }
+  .row .v { text-align: right; font-variant-numeric: tabular-nums; }
+  .row:hover .n, .row.hl .n { color: var(--pop); }
+  .bar { position: relative; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; }
+  .bar s { position: absolute; top: 0; bottom: 0; background: rgba(30,159,224,0.45); border-radius: 3px; text-decoration: none; }
+  .bar i { position: absolute; top: -2px; width: 2px; height: 10px; margin-left: -1px; background: #fff; border-radius: 1px; }
+  .bar u { position: absolute; top: -3px; width: 8px; height: 12px; margin-left: -4px; border: 1px solid var(--silver); border-radius: 2px; opacity: 0.55; }
+  .spark { width: 100%; height: 64px; display: block; margin-top: 10px; cursor: ew-resize; touch-action: none; }
+  .spark-note { font-family: var(--mono); font-size: 9px; color: var(--faint); margin-top: 3px; }
+
+  /* bottom panels */
+  .extras { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .extra { padding: 14px; }
+  .extra h3 { margin: 0 0 10px; }
+  .instr { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .instr li { font-family: var(--serif); font-size: 20px; line-height: 1.2; }
+  .instr li small { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; color: var(--dim); margin-bottom: 2px; }
+  .instr mark { background: none; color: var(--pop); border-bottom: 1px solid var(--pop); }
+  .note { font-size: 12px; line-height: 1.5; color: var(--dim); margin: 12px 0 0; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; font-family: var(--mono); font-size: 11px; }
+  .kv dt { color: var(--dim); }
+  .kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .kv dd.on { color: var(--pop); }
+  .raw { grid-column: 1 / -1; }
+  .raw-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .raw-head button { background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-family: var(--mono); font-size: 10px; color: var(--dim); cursor: pointer; }
+  .raw-head button:hover { color: var(--ink); border-color: rgba(255,255,255,0.3); }
+  pre { margin: 0; font-family: var(--mono); font-size: 11px; line-height: 1.55; color: var(--ink); white-space: pre-wrap; word-break: break-word; max-height: 360px; overflow: auto; }
+  pre .k { color: var(--silver); }
+  pre .s { color: var(--pop); }
+  pre .c { color: var(--faint); }
+
+  footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.6; color: var(--dim); }
+  footer a { color: var(--dim); }
+
+  .loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--dim); z-index: 10; transition: opacity .3s; }
+  .loading.gone { opacity: 0; pointer-events: none; }
+
+  @media (max-width: 1100px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .wrap { padding: 14px 16px 48px; }
+    .intro { grid-template-columns: 1fr; }
+    .layout { grid-template-columns: 1fr; }
+    .viewer { z-index: 5; top: 0; margin: 0 -16px; padding: 8px 16px 10px; background: var(--bg); border-bottom: 1px solid var(--line); gap: 8px; }
+    .cams { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .cam .dims, .framecard { display: none; }
+    .cam .tag { font-size: 8px; left: 5px; top: 4px; }
+    .scrub { padding: 8px 10px; }
+    .scrub-top { margin-bottom: 6px; }
+    .track { height: 74px; }
+    .strip { height: 30px; }
+    .lane, .lane-name { top: 34px; }
+    .marker { top: 30px; height: 24px; }
+    .marker span { top: 18px; }
+    .ticks { top: 56px; }
+    .playhead { height: 60px; }
+    .hint, .marker em, .readout > span:last-child { display: none; }
+    .extras { grid-template-columns: 1fr; }
+    .group-head { flex-direction: column; align-items: flex-start; }
+    .group-head p { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="loading" id="loading">LOADING EPISODE…</div>
+
+<div class="wrap">
+  <div class="top"><a href="/lab">← LAB</a><span>JOYSTICK TO NEURAL NET</span></div>
+
+  <div class="intro">
+    <div>
+      <div class="eyebrow">EPISODE 02</div>
+      <h1>Anatomy of a <em>Robot Dataset</em></h1>
+      <p class="lede">This is one real episode from <strong>DROID</strong>, a dataset of 76,000 robot demonstrations collected by people teleoperating a Franka arm with a VR controller. Every row pairs <strong>what the robot sensed</strong> with <strong>what the human told it to do</strong>. Drag the timeline to walk through it frame by frame.</p>
+    </div>
+    <dl class="facts" id="facts"></dl>
+  </div>
+
+  <div class="layout">
+    <div class="viewer">
+      <div class="cams">
+        <div class="cam"><video id="v0" src="cam-exterior-1.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_1_left</span><span class="dims">180×320×3</span></div>
+        <div class="cam"><video id="v1" src="cam-exterior-2.mp4" muted playsinline preload="auto"></video><span class="tag">exterior_2_left</span><span class="dims">180×320×3</span></div>
+        <div class="cam"><video id="v2" src="cam-wrist.mp4" muted playsinline preload="auto"></video><span class="tag">wrist_left</span><span class="dims">180×320×3</span></div>
+        <div class="framecard panel">
+          <div class="label">FRAME</div>
+          <div class="big"><span id="fBig">000</span><small>/ <span id="fTotal">157</span></small></div>
+          <div class="phase" id="phase"></div>
+          <div class="sub"><span>t <b id="fT">0.00</b>s</span><span>reward <b id="fR">0</b></span></div>
+        </div>
+      </div>
+
+      <div class="scrub panel">
+        <div class="scrub-top">
+          <button class="play" id="play" aria-label="Play">
+            <svg id="icoPlay" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>
+            <svg id="icoPause" viewBox="0 0 16 16" fill="currentColor" style="display:none"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+          </button>
+          <div class="readout">frame <b id="rF">000</b> <span>·</span> <b id="rT">0.00</b>s <span>/ <span id="rDur">10.47</span>s</span></div>
+          <div class="speeds" id="speeds">
+            <button data-s="0.25">¼×</button><button data-s="0.5">½×</button><button data-s="1" class="on">1×</button>
+          </div>
+        </div>
+        <div class="track" id="track" role="slider" tabindex="0" aria-label="Episode timeline" aria-valuemin="0">
+          <div class="strip"></div>
+          <div class="lane"><canvas id="lane"></canvas></div>
+          <div class="lane-name">gripper</div>
+          <div class="ticks" id="ticks"></div>
+          <div id="markers"></div>
+          <div class="playhead" id="playhead"></div>
+        </div>
+        <div class="hint">drag · ← → step a frame · shift+← → a second · space play</div>
+      </div>
+    </div>
+
+    <div class="data">
+      <section>
+        <div class="group-head"><h2>Observation</h2><p><code>observation.state.*</code> · what the robot senses</p></div>
+        <div class="cards" id="obsCards"></div>
+      </section>
+      <section>
+        <div class="group-head"><h2>Action</h2><p><code>action.*</code> · what the operator commanded</p></div>
+        <div class="cards" id="actCards"></div>
+      </section>
+      <section>
+        <div class="group-head"><h2>Everything else</h2><p>labels, rewards, and the raw row</p></div>
+        <div class="extras">
+          <div class="extra panel">
+            <h3 class="label">LANGUAGE INSTRUCTIONS</h3>
+            <ul class="instr" id="instr"></ul>
+            <p class="note">Three annotators wrote their own description of the same ten seconds. Two of them call the block orange. Language labels are noisy, and models trained on them have to cope.</p>
+          </div>
+          <div class="extra panel">
+            <h3 class="label">EPISODE SIGNALS</h3>
+            <dl class="kv" id="signals"></dl>
+            <p class="note">The reward is 0 on every frame except the last, where it becomes 1. That single bit is all the "success" signal a learning algorithm gets from this episode.</p>
+          </div>
+          <div class="extra panel raw">
+            <div class="raw-head"><h3 class="label" style="margin:0">RAW ROW · FRAME <span id="rawF">0</span></h3><button id="copy">copy json</button></div>
+            <pre id="raw"></pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    Data: <a href="https://droid-dataset.github.io/" target="_blank" rel="noopener">DROID</a> (Khazatsky et al., 2024), episode 869, collected at UC Berkeley (BAIR). Licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, accessed through <a href="https://huggingface.co/datasets/lerobot/droid_1.0.1" target="_blank" rel="noopener">lerobot/droid_1.0.1</a> on Hugging Face. Videos re-encoded to H.264 for the browser; numbers are unchanged apart from rounding to four decimals.
+  </footer>
+</div>
+
+<script>
+(async function () {
+  const $ = (s) => document.querySelector(s);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const pad = (n, w = 3) => String(n).padStart(w, '0');
+  const fmt = (v, d = 3) => (v < 0 ? '−' : ' ') + Math.abs(v).toFixed(d);
+
+  const D = await fetch('episode-869.json').then((r) => r.json());
+  const FPS = D.meta.fps, N = D.meta.length;
+  const col = (a) => (Array.isArray(a[0]) ? a : a.map((v) => [v]));
+
+  // ---------- episode events, read straight from the data ----------
+  const gcmd = D.act.gripper_position;
+  const grasp = gcmd.findIndex((v) => v > 0.5);
+  const release = gcmd.findIndex((v, i) => i > grasp && v < 0.5);
+
+  // ---------- field definitions ----------
+  const J = ['j0', 'j1', 'j2', 'j3', 'j4', 'j5', 'j6'];
+  const POSE = ['x', 'y', 'z', 'roll', 'pitch', 'yaw'];
+  // Franka Panda joint limits (rad), from the manufacturer's datasheet
+  const JLO = [-2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973];
+  const JHI = [2.8973, 1.7628, 2.8973, -0.0698, 2.8973, 3.7525, 2.8973];
+
+  const FIELDS = {
+    obs: [
+      { key: 'observation.state.joint_position', data: D.obs.joint_position, labels: J, unit: 'rad', dtype: 'float32 [7]', range: 'limits', wide: true,
+        blurb: 'Seven joint angles read from the arm\'s encoders. Each bar spans that joint\'s full range of motion on a Franka Panda.' },
+      { key: 'observation.state.gripper_position', data: D.obs.gripper_position, labels: ['grip'], unit: '0 open · 1 shut', dtype: 'float32 [1]', range: 'unit',
+        blurb: 'How closed the gripper is. It stalls around 0.34 instead of reaching 1, because the block is in the way.' },
+      { key: 'observation.state.cartesian_position', data: D.obs.cartesian_position, labels: POSE, unit: 'm · rad', dtype: 'float32 [6]', range: 'pose',
+        blurb: 'Where the gripper is in space, relative to the robot\'s base: position in meters, orientation in radians.' },
+    ],
+    act: [
+      { key: 'action', sub: '[:7]', data: D.act.joint_position, labels: J, unit: 'rad', dtype: 'float32 [8]', range: 'limits', wide: true, ghost: D.obs.joint_position,
+        blurb: 'The joint angles the robot is told to reach next (the 8th value is the gripper). Hollow boxes mark the current state, so you can see the command pulling the arm along.' },
+      { key: 'action.gripper_position', data: D.act.gripper_position, labels: ['grip'], unit: '0 open · 1 shut', dtype: 'float32 [1]', range: 'unit', ghost: D.obs.gripper_position,
+        blurb: `The operator's trigger. Squeezed at frame ${grasp}, released at frame ${release}. Compare it with the observed gripper, which lags and stops short.` },
+      { key: 'action.joint_velocity', data: D.act.joint_velocity, labels: J, unit: 'rad/s', dtype: 'float32 [7]', range: 'sym',
+        blurb: 'The same command expressed as joint speeds.' },
+      { key: 'action.cartesian_velocity', data: D.act.cartesian_velocity, labels: POSE, unit: 'm/s · rad/s', dtype: 'float32 [6]', range: 'sym',
+        blurb: 'How fast the operator was moving their hand through space, in the robot\'s frame.' },
+      { key: 'action.original', data: D.act.original, labels: [...POSE, 'grip'], unit: 'm · rad · 0–1', dtype: 'float32 [7]', range: 'pose', wide: true,
+        blurb: 'The command as the VR controller produced it: a target pose for the gripper plus the trigger. The joint targets above are solved from poses like this one.' },
+    ],
+  };
+
+  // ---------- per-channel ranges ----------
+  function unwrap(xs) { // for chart lines only, so ±π flips don't draw as cliffs
+    const out = [xs[0]];
+    for (let i = 1; i < xs.length; i++) {
+      let d = xs[i] - xs[i - 1];
+      d -= 2 * Math.PI * Math.round(d / (2 * Math.PI));
+      out.push(out[i - 1] + d);
+    }
+    return out;
+  }
+  function prep(f) {
+    f.rows = col(f.data);
+    f.ghostRows = f.ghost ? col(f.ghost) : null;
+    f.C = f.rows[0].length;
+    f.series = []; f.ranges = [];
+    const symMax = f.range === 'sym' ? Math.max(...f.rows.flat().map(Math.abs)) || 1 : 0;
+    for (let c = 0; c < f.C; c++) {
+      let s = f.rows.map((r) => r[c]);
+      const isAngle = f.range === 'pose' && c >= 3 && c <= 5;
+      if (isAngle) s = unwrap(s);
+      f.series.push(s);
+      let lo, hi, origin;
+      if (f.range === 'limits') { lo = JLO[c]; hi = JHI[c]; origin = clamp(0, lo, hi); }
+      else if (f.range === 'unit' || (f.range === 'pose' && c === 6)) { lo = 0; hi = 1; origin = 0; }
+      else if (f.range === 'sym') { lo = -symMax; hi = symMax; origin = 0; }
+      else if (isAngle) { lo = -Math.PI; hi = Math.PI; origin = 0; }
+      else { const mn = Math.min(...s), mx = Math.max(...s), p = (mx - mn) * 0.15 || 0.05; lo = mn - p; hi = mx + p; origin = lo; }
+      f.ranges.push({ lo, hi, origin });
+    }
+  }
+  FIELDS.obs.forEach(prep); FIELDS.act.forEach(prep);
+
+  // ---------- build cards ----------
+  function buildCard(f, parent) {
+    const el = document.createElement('section');
+    el.className = 'card panel' + (f.wide ? ' wide' : '');
+    const name = f.key.replace(/^(observation\.state\.|action\.)/, (m) => `<b>${m}</b>`);
+    el.innerHTML = `
+      <div class="card-head"><code>${name}${f.sub ? `<b>${f.sub}</b>` : ''}</code><span class="shape">${f.dtype}</span><span class="unit">${f.unit}</span></div>
+      <p class="blurb">${f.blurb}</p>
+      <div class="rows"></div>
+      <canvas class="spark"></canvas>
+      <div class="spark-note">whole episode · each line scaled to its own range · hover a row to trace it</div>`;
+    const rowsEl = el.querySelector('.rows');
+    f.rowEls = f.labels.map((lab, c) => {
+      const r = document.createElement('div');
+      r.className = 'row';
+      r.innerHTML = `<span class="n">${lab}</span><div class="bar"><s></s>${f.ghostRows ? '<u></u>' : ''}<i></i></div><span class="v"></span>`;
+      r.addEventListener('mouseenter', () => { f.hl = c; r.classList.add('hl'); drawSpark(f); });
+      r.addEventListener('mouseleave', () => { f.hl = -1; r.classList.remove('hl'); drawSpark(f); });
+      rowsEl.appendChild(r);
+      return { fill: r.querySelector('s'), mark: r.querySelector('i'), ghost: r.querySelector('u'), val: r.querySelector('.v') };
+    });
+    f.canvas = el.querySelector('canvas');
+    f.hl = -1;
+    bindSeek(f.canvas);
+    parent.appendChild(el);
+  }
+  FIELDS.obs.forEach((f) => buildCard(f, $('#obsCards')));
+  FIELDS.act.forEach((f) => buildCard(f, $('#actCards')));
+
+  const pct = (v, r) => ((clamp(v, r.lo, r.hi) - r.lo) / (r.hi - r.lo)) * 100;
+  function updateCard(f, i) {
+    const row = f.rows[i], g = f.ghostRows && f.ghostRows[i];
+    for (let c = 0; c < f.C; c++) {
+      const r = f.ranges[c], el = f.rowEls[c], v = row[c];
+      const a = pct(r.origin, r), b = pct(v, r);
+      el.fill.style.left = Math.min(a, b) + '%';
+      el.fill.style.width = Math.abs(b - a) + '%';
+      el.mark.style.left = b + '%';
+      if (el.ghost) el.ghost.style.left = pct(g[c], r) + '%';
+      el.val.textContent = fmt(v);
+    }
+  }
+
+  // ---------- sparklines ----------
+  const DPR = () => Math.min(devicePixelRatio || 1, 2);
+  function sizeCanvas(cv) {
+    const w = cv.clientWidth, h = cv.clientHeight, d = DPR();
+    if (cv.width !== Math.round(w * d) || cv.height !== Math.round(h * d)) { cv.width = Math.round(w * d); cv.height = Math.round(h * d); }
+    const g = cv.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0); return [g, w, h];
+  }
+  function drawSpark(f) {
+    const [g, w, h] = sizeCanvas(f.canvas);
+    g.clearRect(0, 0, w, h);
+    const X = (i) => (i / (N - 1)) * (w - 2) + 1;
+    // grasp window
+    g.fillStyle = 'rgba(30,159,224,0.07)';
+    g.fillRect(X(grasp), 0, X(release) - X(grasp), h);
+    g.strokeStyle = 'rgba(255,255,255,0.06)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(0, h - 0.5); g.lineTo(w, h - 0.5); g.stroke();
+    const norm = f.series.map((s) => { const mn = Math.min(...s), mx = Math.max(...s); return { mn, span: mx - mn || 1 }; });
+    const Y = (c, v) => { const n = norm[c]; return h - 4 - ((v - n.mn) / n.span) * (h - 8); };
+    const order = [...Array(f.C).keys()].filter((c) => c !== f.hl);
+    if (f.hl >= 0) order.push(f.hl);
+    for (const c of order) {
+      const on = c === f.hl;
+      g.strokeStyle = on ? '#1e9fe0' : f.hl >= 0 ? 'rgba(207,214,226,0.18)' : 'rgba(207,214,226,0.5)';
+      g.lineWidth = on ? 2 : 1.1;
+      g.beginPath();
+      f.series[c].forEach((v, i) => (i ? g.lineTo(X(i), Y(c, v)) : g.moveTo(X(i), Y(c, v))));
+      g.stroke();
+    }
+    const x = X(frame);
+    g.fillStyle = '#1e9fe0'; g.fillRect(x - 1, 0, 2, h);
+    for (let c = 0; c < f.C; c++) {
+      g.fillStyle = c === f.hl ? '#1e9fe0' : '#eceef2';
+      g.beginPath(); g.arc(x, Y(c, f.series[c][frame]), c === f.hl ? 3.5 : 2, 0, Math.PI * 2); g.fill();
+    }
+  }
+
+  // ---------- scrubber track ----------
+  const track = $('#track'), playhead = $('#playhead');
+  track.setAttribute('aria-valuemax', N - 1);
+  function buildTrack() {
+    const ticks = $('#ticks'); ticks.innerHTML = '';
+    for (let s = 0; s * FPS < N; s++) {
+      const x = ((s * FPS) / (N - 1)) * 100;
+      ticks.insertAdjacentHTML('beforeend', `<i style="left:${x}%"></i>` + (s % 2 === 0 ? `<span style="left:${x}%">${s}s</span>` : ''));
+    }
+    const markers = [
+      { f: grasp, label: `grasp<em> · ${grasp}</em>`, cls: 'in' },
+      { f: release, label: `release<em> · ${release}</em>`, cls: 'in end' },
+      { f: N - 1, label: 'is_last<em> · reward 1</em>', cls: 'end' },
+    ];
+    $('#markers').innerHTML = markers.map((m) =>
+      `<div class="marker ${m.cls}" style="left:${(m.f / (N - 1)) * 100}%"><span>${m.label}</span></div>`).join('');
+  }
+  function drawLane() {
+    const [g, w, h] = sizeCanvas($('#lane'));
+    g.clearRect(0, 0, w, h);
+    const obs = D.obs.gripper_position, mx = Math.max(...obs) || 1;
+    g.fillStyle = 'rgba(30,159,224,0.55)';
+    g.beginPath(); g.moveTo(0, h);
+    obs.forEach((v, i) => g.lineTo((i / (N - 1)) * w, h - (v / mx) * (h - 2)));
+    g.lineTo(w, h); g.closePath(); g.fill();
+  }
+  function bindSeek(el) {
+    const seekAt = (e) => {
+      const r = el.getBoundingClientRect();
+      setFrame(Math.round(clamp((e.clientX - r.left) / r.width, 0, 1) * (N - 1)));
+    };
+    el.addEventListener('pointerdown', (e) => { el.setPointerCapture(e.pointerId); stop(); seekAt(e); });
+    el.addEventListener('pointermove', (e) => { if (el.hasPointerCapture(e.pointerId)) seekAt(e); });
+  }
+  bindSeek(track);
+
+  // ---------- video sync: every clip is all-keyframe, so seeking is instant ----------
+  const vids = [$('#v0'), $('#v1'), $('#v2')];
+  for (const v of vids) {
+    v.addEventListener('seeked', () => {
+      if (v._want != null && Math.abs(v.currentTime - v._want) > 1e-3) v.currentTime = v._want;
+    });
+  }
+  function seekVideos(i) {
+    const t = (i + 0.5) / FPS;
+    for (const v of vids) { v._want = t; if (!v.seeking) v.currentTime = t; }
+  }
+
+  // ---------- extras ----------
+  const facts = [
+    ['dataset', D.meta.dataset], ['episode', D.meta.episode_index], ['lab', 'UC Berkeley (' + D.meta.building + ')'],
+    ['robot', 'Franka Panda'], ['rate', FPS + ' Hz'], ['frames', N], ['success', '<span class="ok">✓ true</span>'],
+  ];
+  $('#facts').innerHTML = facts.map(([k, v]) => `<dt>${k}</dt><dd style="margin:0"><b>${v}</b></dd>`).join('');
+  $('#fTotal').textContent = pad(N - 1);
+  $('#rDur').textContent = ((N - 1) / FPS).toFixed(2);
+  const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+  $('#instr').innerHTML = D.meta.instructions.map((s, k) =>
+    `<li><small>language_instruction${k ? '_' + (k + 1) : ''}</small>${esc(s).replace(/\b(red|orange)\b/gi, '<mark>$1</mark>')}</li>`).join('');
+
+  function phaseOf(i) {
+    if (i < grasp) return 'reaching for the block';
+    if (i < release) return '<span>holding</span> the block, carrying it over';
+    return 'released, backing away';
+  }
+  function signals(i) {
+    const rows = [
+      ['reward', D.reward[i].toFixed(1), D.reward[i] > 0],
+      ['discount', D.discount[i].toFixed(1), false],
+      ['is_first', String(D.is_first[i]), D.is_first[i]],
+      ['is_last', String(D.is_last[i]), D.is_last[i]],
+      ['is_episode_successful', 'true', false],
+    ];
+    $('#signals').innerHTML = rows.map(([k, v, on]) => `<dt>${k}</dt><dd class="${on ? 'on' : ''}">${v}</dd>`).join('');
+  }
+
+  // the row as it sits in the dataset, one line per column
+  function rawRow(i) {
+    const arr = (a) => '[' + a.map((v) => v.toFixed(4)).join(', ') + ']';
+    const A = D.act, O = D.obs;
+    const lines = [
+      ['episode_index', D.meta.episode_index], ['frame_index', i], ['timestamp', D.t[i].toFixed(4)],
+      ['observation.images.exterior_1_left', '"<video frame 180×320×3>"'],
+      ['observation.images.exterior_2_left', '"<video frame 180×320×3>"'],
+      ['observation.images.wrist_left', '"<video frame 180×320×3>"'],
+      ['observation.state', arr([...O.joint_position[i], O.gripper_position[i]])],
+      ['observation.state.joint_position', arr(O.joint_position[i])],
+      ['observation.state.gripper_position', O.gripper_position[i].toFixed(4)],
+      ['observation.state.cartesian_position', arr(O.cartesian_position[i])],
+      ['action', arr([...A.joint_position[i], A.gripper_position[i]])],
+      ['action.gripper_position', A.gripper_position[i].toFixed(4)],
+      ['action.joint_velocity', arr(A.joint_velocity[i])],
+      ['action.cartesian_velocity', arr(A.cartesian_velocity[i])],
+      ['action.original', arr(A.original[i])],
+      ['language_instruction', JSON.stringify(D.meta.instructions[0])],
+      ['reward', D.reward[i].toFixed(1)], ['discount', D.discount[i].toFixed(1)],
+      ['is_first', D.is_first[i]], ['is_last', D.is_last[i]],
+    ];
+    const text = '{\n' + lines.map(([k, v]) => `  "${k}": ${v}`).join(',\n') + '\n}';
+    const html = '{\n' + lines.map(([k, v]) => {
+      const vs = String(v);
+      const cls = vs.startsWith('"<') ? 'c' : vs.startsWith('"') ? 's' : '';
+      return `  <span class="k">"${k}"</span>: ${cls ? `<span class="${cls}">${esc(vs)}</span>` : esc(vs)}`;
+    }).join(',\n') + '\n}';
+    return { text, html };
+  }
+  $('#copy').addEventListener('click', async (e) => {
+    try { await navigator.clipboard.writeText(rawRow(frame).text); e.target.textContent = 'copied'; }
+    catch { e.target.textContent = 'copy failed'; }
+    setTimeout(() => (e.target.textContent = 'copy json'), 1200);
+  });
+
+  // ---------- frame state ----------
+  let frame = 0;
+  function setFrame(i) {
+    frame = clamp(i | 0, 0, N - 1);
+    const t = D.t[frame];
+    playhead.style.left = (frame / (N - 1)) * 100 + '%';
+    track.setAttribute('aria-valuenow', frame);
+    $('#rF').textContent = pad(frame); $('#rT').textContent = t.toFixed(2);
+    $('#fBig').textContent = pad(frame); $('#fT').textContent = t.toFixed(2); $('#fR').textContent = D.reward[frame];
+    $('#phase').innerHTML = phaseOf(frame);
+    $('#rawF').textContent = frame;
+    $('#raw').innerHTML = rawRow(frame).html;
+    signals(frame);
+    for (const f of [...FIELDS.obs, ...FIELDS.act]) { updateCard(f, frame); drawSpark(f); }
+    seekVideos(frame);
+  }
+
+  // ---------- playback ----------
+  let playing = false, speed = 1, acc = 0, last = 0;
+  function play() {
+    if (frame >= N - 1) setFrame(0);
+    playing = true; acc = 0; last = performance.now();
+    $('#icoPlay').style.display = 'none'; $('#icoPause').style.display = '';
+    requestAnimationFrame(tick);
+  }
+  function stop() {
+    playing = false;
+    $('#icoPlay').style.display = ''; $('#icoPause').style.display = 'none';
+  }
+  function tick(now) {
+    if (!playing) return;
+    acc += ((now - last) / 1000) * FPS * speed; last = now;
+    if (acc >= 1) {
+      const step = Math.floor(acc); acc -= step;
+      if (frame + step >= N - 1) { setFrame(N - 1); stop(); return; }
+      setFrame(frame + step);
+    }
+    requestAnimationFrame(tick);
+  }
+  $('#play').addEventListener('click', () => (playing ? stop() : play()));
+  for (const b of document.querySelectorAll('#speeds button')) {
+    b.addEventListener('click', () => {
+      speed = +b.dataset.s;
+      document.querySelectorAll('#speeds button').forEach((x) => x.classList.toggle('on', x === b));
+    });
+  }
+  addEventListener('keydown', (e) => {
+    if (e.target.closest && e.target.closest('button') && e.code === 'Space') return;
+    if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+      e.preventDefault(); stop();
+      setFrame(frame + (e.code === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? FPS : 1));
+    } else if (e.code === 'Space') { e.preventDefault(); playing ? stop() : play(); }
+    else if (e.code === 'Home') { stop(); setFrame(0); }
+    else if (e.code === 'End') { stop(); setFrame(N - 1); }
+  });
+
+  function redrawAll() { drawLane(); for (const f of [...FIELDS.obs, ...FIELDS.act]) drawSpark(f); }
+  addEventListener('resize', redrawAll);
+
+  buildTrack();
+  drawLane();
+  setFrame(0);
+  const ready = () => $('#loading').classList.add('gone');
+  Promise.race([
+    Promise.all(vids.map((v) => (v.readyState >= 2 ? 1 : new Promise((r) => v.addEventListener('loadeddata', r, { once: true }))))),
+    new Promise((r) => setTimeout(r, 4000)),
+  ]).then(() => { seekVideos(frame); ready(); });
+})();
+</script>
+</body>
+</html>
