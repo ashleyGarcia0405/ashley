@@ -10,6 +10,9 @@
     "serve:ssr:ashley": "node dist/ashley/server/server.mjs"
   },
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@angular/common": "^18.2.14",
     "@angular/compiler": "^18.2.14",
