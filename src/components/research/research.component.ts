@@ -60,6 +60,63 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Sep 9, 2026',
+      content: 'Kept going on interp. Grokking (Power et al.): train a one-layer transformer on modular addition, it memorizes the training data, test performance stays terrible, and then much later it suddenly generalizes. The nice part is you can see why — the embedding is full of structure, and a Fourier transform shows the model learned modular addition as rotations around a circle. Also went back over transformer anatomy: residual stream as a running total that each layer adds to, attention heads moving information between tokens, MLPs processing it once it has arrived. Induction heads are the cleanest circuit writeup I have found (check if the current token appeared before, copy what followed it), and they explain why in-context learning gets better deeper into a sequence.',
+      reading: [
+        {
+          title: 'Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets - Power et al.',
+          url: 'https://arxiv.org/abs/2201.02177',
+          reflection: ''
+        },
+        {
+          title: 'In-context Learning and Induction Heads - Olsson et al.',
+          url: 'https://arxiv.org/abs/2209.11895',
+          reflection: ''
+        },
+        {
+          title: 'Induction Heads - Illustrated',
+          url: 'https://www.lesswrong.com/posts/TvrfY4c9eaGLeyDkE/induction-heads-illustrated',
+          reflection: ''
+        },
+        {
+          title: 'Eliciting Latent Knowledge - Christiano et al.',
+          url: 'https://arxiv.org/html/2312.01037v1',
+          reflection: ''
+        },
+        {
+          title: 'Discovering Latent Knowledge in Language Models Without Supervision - Burns et al.',
+          url: 'https://arxiv.org/abs/2212.03827',
+          reflection: ''
+        }
+      ]
+    },
+    {
+      date: 'Sep 8, 2026',
+      content: 'Finally followed up on the note I left myself in August about mechanistic interpretability. The frame is features (concepts a network encodes, usually sitting in one layer) connected into circuits (how those get combined into more complex representations across layers). What gets in the way is polysemanticity, one neuron carrying several features at once, which Elhage et al. argue comes from superposition — the model wants more features than it has dimensions, so it crams them in, and it is much more willing to do that when the features are sparse. Two ways around it: train models not to superimpose, which works in toy settings but would be expensive and cost performance at scale, or train a sparse autoencoder to pull the polysemantic neurons apart. Scaling Monosemanticity is what convinced me this is not just toy-model work — they pulled safety-relevant features (deception, discrimination, misuse) out of a production model and made early attempts at steering them.',
+      reading: [
+        {
+          title: 'Towards Monosemanticity: Decomposing Language Models With Dictionary Learning - Bricken et al.',
+          url: 'https://transformer-circuits.pub/2023/monosemantic-features/index.html',
+          reflection: ''
+        },
+        {
+          title: 'Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet',
+          url: 'https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html',
+          reflection: 'The feature steering results are the part to come back to.'
+        },
+        {
+          title: 'Toy Models of Superposition - Elhage et al.',
+          url: 'https://arxiv.org/abs/2209.10652',
+          reflection: ''
+        },
+        {
+          title: 'Multimodal Neurons in Artificial Neural Networks - Goh et al.',
+          url: 'https://distill.pub/2021/multimodal-neurons/',
+          reflection: ''
+        }
+      ]
+    },
+    {
       date: 'Sep 5, 2026',
       content: 'Read papers on robot manipulation data: DROID (Khazatsky et al.), and Data Quality in Imitation Learning (Belkhale et al., NeurIPS 2023). Started taking notes on papers in the same format I use for my Lincoln-Douglas debate briefs, seems like a good structure for presenting information to coworkers too. Getting more interested in spatial intelligence.',
       reading: [
@@ -300,6 +357,78 @@ export class ResearchComponent {
       url: 'https://arxiv.org/abs/1706.03762',
       status: 'read',
       tags: ['transformers', 'foundations']
+    },
+    {
+      title: 'Zoom In: An Introduction to Circuits',
+      authors: 'Olah et al.',
+      year: 2020,
+      url: 'https://distill.pub/2020/circuits/zoom-in/',
+      status: 'read',
+      tags: ['interpretability', 'circuits', 'foundations']
+    },
+    {
+      title: 'Multimodal Neurons in Artificial Neural Networks',
+      authors: 'Goh et al.',
+      year: 2021,
+      url: 'https://distill.pub/2021/multimodal-neurons/',
+      status: 'read',
+      tags: ['interpretability', 'features']
+    },
+    {
+      title: 'Toy Models of Superposition',
+      authors: 'Elhage et al.',
+      year: 2022,
+      url: 'https://arxiv.org/abs/2209.10652',
+      status: 'read',
+      tags: ['interpretability', 'superposition']
+    },
+    {
+      title: 'Towards Monosemanticity: Decomposing Language Models With Dictionary Learning',
+      authors: 'Bricken et al.',
+      year: 2023,
+      url: 'https://transformer-circuits.pub/2023/monosemantic-features/index.html',
+      status: 'read',
+      tags: ['interpretability', 'sparse-autoencoders', 'superposition']
+    },
+    {
+      title: 'Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet',
+      authors: 'Templeton et al.',
+      year: 2024,
+      url: 'https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html',
+      status: 'read',
+      tags: ['interpretability', 'sparse-autoencoders', 'safety']
+    },
+    {
+      title: 'Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets',
+      authors: 'Power et al.',
+      year: 2022,
+      url: 'https://arxiv.org/abs/2201.02177',
+      status: 'read',
+      tags: ['grokking', 'generalization']
+    },
+    {
+      title: 'In-context Learning and Induction Heads',
+      authors: 'Olsson et al.',
+      year: 2022,
+      url: 'https://arxiv.org/abs/2209.11895',
+      status: 'read',
+      tags: ['interpretability', 'circuits', 'in-context-learning']
+    },
+    {
+      title: 'Discovering Latent Knowledge in Language Models Without Supervision',
+      authors: 'Burns et al.',
+      year: 2022,
+      url: 'https://arxiv.org/abs/2212.03827',
+      status: 'queued',
+      tags: ['alignment', 'elk', 'probing']
+    },
+    {
+      title: 'Eliciting Latent Knowledge',
+      authors: 'Christiano et al.',
+      year: 2023,
+      url: 'https://arxiv.org/html/2312.01037v1',
+      status: 'queued',
+      tags: ['alignment', 'elk']
     },
     // { title: 'Proximal Policy Optimization Algorithms', authors: 'Schulman et al.', year: 2017, url: 'https://arxiv.org/abs/1707.06347', status: 'queued', tags: ['rl', 'policy-gradient'] },
     // { title: 'High-Dimensional Continuous Control Using Generalized Advantage Estimation', authors: 'Schulman et al.', year: 2015, url: 'https://arxiv.org/abs/1506.02438', status: 'queued', tags: ['rl', 'policy-gradient'] },
