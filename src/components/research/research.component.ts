@@ -462,6 +462,11 @@ export class ResearchComponent {
 
   experiments: Experiment[] = [
     {
+      date: 'Oct 4, 2026',
+      what: 'Built approximate nearest neighbor search from scratch in Python and NumPy: flat search, IVF, and HNSW. Benchmarked recall, query latency, and build time against FAISS and pgvector on 100,000 SIFT vectors.',
+      result: 'IVF reached 99.2% recall at about 9 times the throughput of flat search. At the same recall, FAISS IVF was another 9 times faster. Python graph traversal slowed HNSW, while database round-trip time dominated the fastest pgvector queries.'
+    },
+    {
       date: 'Jun 22, 2026',
       what: 'Implemented a toy backprop pass from scratch in numpy following the micrograd walkthrough.',
       result: 'ez'
