@@ -60,6 +60,16 @@ export class ResearchComponent {
 
   logEntries: LogEntry[] = [
     {
+      date: 'Sep 17, 2026',
+      content: 'some light reading',
+      reading: [
+        {
+          title: 'How Much Computational Power Does It Take to Match the Human Brain? - Joseph Carlsmith',
+          url: 'https://coefficientgiving.org/research/how-much-computational-power-does-it-take-to-match-the-human-brain/'
+        }
+      ]
+    },
+    {
       date: 'Sep 9, 2026',
       content: 'Kept going on interp. Grokking (Power et al.): train a one-layer transformer on modular addition, it memorizes the training data, test performance stays terrible, and then much later it suddenly generalizes. The nice part is you can see why — the embedding is full of structure, and a Fourier transform shows the model learned modular addition as rotations around a circle. Also went back over transformer anatomy: residual stream as a running total that each layer adds to, attention heads moving information between tokens, MLPs processing it once it has arrived. Induction heads are the cleanest circuit writeup I have found (check if the current token appeared before, copy what followed it), and they explain why in-context learning gets better deeper into a sequence.',
       reading: [
