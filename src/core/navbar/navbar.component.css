@@ -36,3 +36,18 @@ nav a:hover {
 .icon:hover {
     transform: scale(1.1) rotate(5deg);
 }
+
+/* The bar is 7 fixed-width icons, so at desktop padding it measures 448px and
+   overhangs a 375px screen. Below 600px the padding scales with the viewport
+   and the gap closes, which keeps it inside the screen down to ~280px without
+   shrinking the icons themselves. */
+@media (max-width: 600px) {
+    nav {
+        gap: 0;
+        padding: 0.45rem clamp(0.35rem, 2vw, 0.8rem);
+    }
+
+    nav a {
+        padding: clamp(0.35rem, 2.2vw, 0.7rem);
+    }
+}

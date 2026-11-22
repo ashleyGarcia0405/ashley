@@ -36,40 +36,26 @@
 
 .intro-body {
   display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 2.75rem;
-  align-items: start;
+  grid-template-columns: 1fr;
   width: 100%;
 }
 
+/* The hero photo only exists in the mobile layout. */
 .intro-photo-wrap {
-  display: block;
-  width: 100%;
+  display: none;
 }
 
 .intro-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
+  object-position: center 65%;
   border-radius: 2px;
-  /* Holds a neutral block while <picture> swaps sources at the breakpoint,
-     so the img is never a transparent hole mid-load. */
+  /* Holds a neutral block while the photo loads, so the img is never a
+     transparent hole mid-download. */
   background-color: var(--hover-background);
   filter: saturate(0.9);
-  /* Paired shadows fake a hairline outline offset behind the photo:
-     the background-colored one masks the interior of the darker one. */
-  box-shadow:
-    15px 15px 0 -1px var(--background-color),
-    15px 15px 0 0 var(--border-color);
-  transition: filter 0.4s ease, box-shadow 0.4s ease;
-}
-
-.intro-photo:hover {
-  filter: saturate(1);
-  box-shadow:
-    8px 8px 0 -1px var(--background-color),
-    8px 8px 0 0 var(--border-color);
 }
 
 @media (max-width: 600px) {
@@ -79,8 +65,12 @@
   }
 
   .intro-body {
-    grid-template-columns: 1fr;
     gap: 1.75rem;
+  }
+
+  .intro-photo-wrap {
+    display: block;
+    width: 100%;
   }
 
   .intro-text {
@@ -89,13 +79,6 @@
 
   .content-intro h1 {
     font-size: 1.6rem;
-  }
-
-  .intro-photo,
-  .intro-photo:hover {
-    aspect-ratio: 3 / 2;
-    object-position: center 65%;
-    box-shadow: none;
   }
 }
 

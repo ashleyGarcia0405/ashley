@@ -1,9 +1,11 @@
 <main class="main-home">
   <div class="content-intro fade-in">
     <div class="intro-body">
+      <!-- Photo is mobile-only. Above 600px no <source> matches, so the <img>
+           falls back to an inert 1px data URI and nothing is downloaded. -->
       <picture class="intro-photo-wrap">
         <source media="(max-width: 600px)" srcset="/ashley-wide.webp" />
-        <img class="intro-photo" src="/ashley-portrait.webp" alt="Ashley Garcia" fetchpriority="high" />
+        <img class="intro-photo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ashley Garcia" fetchpriority="high" />
       </picture>
       <div class="intro-text">
     <h1>Ashley Garcia<svg class="hero-flags" viewBox="0 0 70 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A and G in maritime signal flags">
