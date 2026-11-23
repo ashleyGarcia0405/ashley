@@ -32,6 +32,8 @@
   margin: 0 0 1.25rem 0;
   letter-spacing: -0.01em;
   color: var(--function-color);
+  /* Name and flags centre as one lockup; the paragraphs below stay left. */
+  text-align: center;
 }
 
 .intro-body {
